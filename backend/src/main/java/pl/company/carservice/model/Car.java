@@ -10,16 +10,16 @@ public class Car {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long id;
+        private Long id;
         private String brand;
         private String model;
-        private int year;
+        private Integer year;
         private String vinNumber;
         private String registrationNumber;
-        private int capacity;
+        private Integer capacity;
         private String fuelType;
-        private int power;
-        private int tourqe;
+        private Integer power;
+        private Integer tourqe;
 
         public long getId() {
                 return id;
