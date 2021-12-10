@@ -1,2 +1,4 @@
-package pl.company.carservice.model;public class Part {
+package pl.company.carservice.model;
+
+public class Part {
 }
