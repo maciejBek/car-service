@@ -21,11 +21,15 @@ public class Car {
         private Integer power;
         private Integer tourqe;
 
-        public long getId() {
+        public Car() {
+
+        }
+
+        public Long getId() {
                 return id;
         }
 
-        public void setId(long id) {
+        public void setId(Long id) {
                 this.id = id;
         }
 
@@ -45,11 +49,11 @@ public class Car {
                 this.model = model;
         }
 
-        public int getYear() {
+        public Integer getYear() {
                 return year;
         }
 
-        public void setYear(int year) {
+        public void setYear(Integer year) {
                 this.year = year;
         }
 
@@ -69,11 +73,11 @@ public class Car {
                 this.registrationNumber = registrationNumber;
         }
 
-        public int getCapacity() {
+        public Integer getCapacity() {
                 return capacity;
         }
 
-        public void setCapacity(int capacity) {
+        public void setCapacity(Integer capacity) {
                 this.capacity = capacity;
         }
 
@@ -85,19 +89,19 @@ public class Car {
                 this.fuelType = fuelType;
         }
 
-        public int getPower() {
+        public Integer getPower() {
                 return power;
         }
 
-        public void setPower(int power) {
+        public void setPower(Integer power) {
                 this.power = power;
         }
 
-        public int getTourqe() {
+        public Integer getTourqe() {
                 return tourqe;
         }
 
-        public void setTourqe(int tourqe) {
+        public void setTourqe(Integer tourqe) {
                 this.tourqe = tourqe;
         }
 }
