@@ -17,12 +17,19 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public Long addCar(Car car) {
-        return this.carRepository.save(car).getId();
-    }
-
     public Optional<Car> getCar(Long id) {
         return this.carRepository.findById(id);
     }
 
+    public Long addCar(Car car) {
+        return this.carRepository.save(car).getId();
+    }
+
+    public void deleteCar(Long id) {
+        this.carRepository.deleteById(id);
+    }
+
+    public boolean ifExists(Long id) {
+        return this.carRepository.existsById(id);
+    }
 }
