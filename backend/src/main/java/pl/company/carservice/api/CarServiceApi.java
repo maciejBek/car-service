@@ -35,4 +35,11 @@ public class CarServiceApi {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
         }
     }
+
+    @PostMapping("/cars")
+    public Map<String, Long> addCar(@RequestBody Car car) {
+        return Map.of("id", carService.addCar(car));
+    }
+
+
 }
