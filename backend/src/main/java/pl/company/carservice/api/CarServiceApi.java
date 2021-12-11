@@ -41,5 +41,14 @@ public class CarServiceApi {
         return Map.of("id", carService.addCar(car));
     }
 
-
+    @DeleteMapping("/cars/{id}")
+    public ResponseEntity<String> deleteCar(@PathVariable Long id) {
+        if (carService.ifExists(id)) {
+            carService.deleteCar(id);
+            return ResponseEntity.status(HttpStatus.OK).body("");
+        } else {
+            String errorResponse = StringToJson.parse("error", "Car with specified id does not exist!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+        }
+    }
 }
