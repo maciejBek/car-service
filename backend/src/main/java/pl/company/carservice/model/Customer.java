@@ -14,8 +14,6 @@ public class Customer {
     private String name;
     private String surname;
     private String phoneNumber;
-    private String pesel;
-    private String idNumber;
 
     public Customer() {
 
@@ -51,21 +49,5 @@ public class Customer {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getPesel() {
-        return pesel;
-    }
-
-    public void setPesel(String pesel) {
-        this.pesel = pesel;
-    }
-
-    public String getIdNumber() {
-        return idNumber;
-    }
-
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
     }
 }
