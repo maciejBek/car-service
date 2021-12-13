@@ -1,0 +1,142 @@
+body{
+    background-image: url("pictures/bmwm4.jpg");
+    background-size: cover;
+}
+#strona{
+
+}
+#pole{
+    background-repeat:no-repeat;
+    position: absolute;
+    left: 73%;
+    top: 16%;
+    background-color: #FFD70B;
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+}
+
+#logo{
+    margin-top: 20px;
+    margin-left: 20px;
+    background-image: url("pictures/wrench.png");
+    background-size: 80px 80px;
+    width: 80px;
+    height: 80px;
+}
+
+
+#logowanie{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7) ;
+    height: 600px;
+    width: 600px;
+    left: 34%;
+    top: 16%;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10em black;
+}
+
+.text{
+    padding-top: 20px;
+    padding-left: 15px;
+    color: white;
+    font-size: 60px;
+}
+
+#poz{
+    margin-top: 60px;
+}
+
+.pasek{
+    background-color: #FFD70B;
+    height:52px;
+    margin-left: 50px;
+    margin-top: 20px;
+    width: 500px;
+    border-radius: 5px;
+}
+.input{
+    float: right;
+    height: 50px;
+    width: 420px;
+    padding-left: 20px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 0px;
+    font-size: 20px;
+}
+
+#zdj1{
+    margin-top: 8px;
+    margin-left: 8px;
+    float: left;
+    background-image: url("pictures/login.png");
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+}
+#zdj2{
+    margin-top: 8px;
+    margin-left: 8px;
+    float: left;
+    background-image: url("pictures/key.png");
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+}
+
+#zdj3{
+    margin-top: 8px;
+    margin-left: 8px;
+    float: left;
+    background-image: url("pictures/email.png");
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+}
+#zdj4{
+    margin-top: 8px;
+    margin-left: 8px;
+    float: left;
+    background-image: url("pictures/key2.png");
+    background-size: 40px 40px;
+    width: 40px;
+    height: 40px;
+}
+
+#przycisk{
+    float: right;
+    margin-right: 30px;
+    margin-top: 70px;
+}
+
+#przycisk1{
+    background-color: #FFD70B;
+    border: 0px;
+    height: 45px;
+    width: 150px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+#przycisk1:hover{
+    background-color: #FFF20B;
+    border: 0px;
+    height: 45px;
+    width: 150px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+#rej{
+    color: white;
+    margin-top: 130px;
+    margin-left: 40px;
+}
+
+#reje{
+    padding-left: 5px;
+    color: #FFD70B;
+}
+

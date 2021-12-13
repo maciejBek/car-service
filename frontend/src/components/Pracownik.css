@@ -1,0 +1,10 @@
+body{
+    background-image: url("pictures/bmwm4.jpg");
+    background-size: cover;
+}
+
+#glowny{
+    height: 1000px;
+    width: 100px;
+    background-color: white;
+}
