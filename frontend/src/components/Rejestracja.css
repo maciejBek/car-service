@@ -27,13 +27,12 @@ body{
 
 
 #logowanie{
+    position: absolute;
     background-color: rgba(0, 0, 0, 0.7) ;
     height: 600px;
     width: 600px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom: 0px;
-    margin-top: 8%;
+    left: 34%;
+    top: 16%;
     border-radius: 7px;
     box-shadow: 0px 0px 10em black;
 }
@@ -46,14 +45,14 @@ body{
 }
 
 #poz{
-    width: 600px;
     margin-top: 60px;
 }
 
 .pasek{
     background-color: #FFD70B;
     height:52px;
-    margin: 20px auto 0 auto;
+    margin-left: 50px;
+    margin-top: 20px;
     width: 500px;
     border-radius: 5px;
 }
@@ -141,10 +140,3 @@ body{
     color: #FFD70B;
 }
 
-#blad{
-    float: left;
-    color: red;
-    margin-left: 50px;
-    margin-top: 30px;
-    display: none;
-}
