@@ -106,8 +106,6 @@ class Form extends React.Component {
 
             </div>
 
-
-
         </form>
       );
     }
