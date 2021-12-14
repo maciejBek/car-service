@@ -1,0 +1,39 @@
+body{
+    background-image: url("pictures/bmwm4.jpg");
+    background-size: cover;
+}
+
+.wprowadzanie{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7) ;
+    left: 15%;
+    top: 13%;
+    height: 500px;
+    width: 450px;
+    border-width: 200px;
+    box-shadow: 0px 0px 10em black;
+}
+
+.pole{
+    color: white;
+    margin: auto;
+    width: 410px;
+    padding: 15px 5px 10px 10px;
+}
+
+.input{
+    float: right;
+    height: 25px;
+    text-align: right;
+}
+
+#przycisk{
+    margin-top: 27px;
+    margin-right: 40px;
+    float: right;
+}
+
+#przycisk2{
+    width: 100px;
+    height: 30px;
+}

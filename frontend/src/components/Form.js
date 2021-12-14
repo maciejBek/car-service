@@ -1,6 +1,7 @@
 // import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
+import './Form.css';
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/cars';
 
@@ -61,17 +62,52 @@ class Form extends React.Component {
     render() {
       return (
         <form id="carForm" onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Marka" id="brand" name="brand" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Model" id="model" name="model" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Rok" id="year" name="year" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Numer VIN" id="vinNumber" name="vinNumber" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Numer rejestracyjny" id="registrationNumber" name="registrationNumber" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Pojemność" id="capacity" name="capacity" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Typ paliwa" id="fuelType" name="fuelType" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Moc" id="power" name="power" value={this.state.value} onChange={this.handleChange} />
-            <input type="text" placeholder="Moment obrotowy" id="torque" name="tourqe" value={this.state.value} onChange={this.handleChange} />
-            
-            <input type="submit" value="Wyślij" />
+
+            <div className="wprowadzanie">
+                <div className="pole">
+                    podaj marke:
+                    <input type="text" placeholder="Marka" id="brand" name="brand" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj model:
+                    <input type="text" placeholder="Model" id="model" name="model" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj rok producji:
+                    <input type="text" placeholder="Rok" id="year" name="year" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj nr Vin:
+                    <input type="text" placeholder="Numer VIN" id="vinNumber" name="vinNumber" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj nr rejestracyjny:
+                    <input type="text" placeholder="Numer rejestracyjny" id="registrationNumber" name="registrationNumber" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj pojemność:
+                    <input type="text" placeholder="Pojemność" id="capacity" name="capacity" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj typ paliwa:
+                    <input type="text" placeholder="Typ paliwa" id="fuelType" name="fuelType" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj moc:
+                    <input type="text" placeholder="Moc" id="power" name="power" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div className="pole">
+                    podaj moment obrotowy:
+                    <input type="text" placeholder="Moment obrotowy" id="torque" name="tourqe" className="input" value={this.state.value} onChange={this.handleChange} />
+                </div>
+                <div id="przycisk">
+                <input id="przycisk2" type="submit" value="Wyślij" />
+                </div>
+
+            </div>
+
+
+
         </form>
       );
     }
