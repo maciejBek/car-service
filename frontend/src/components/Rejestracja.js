@@ -31,43 +31,40 @@ class Rejestracja extends React.Component {
         // getting data from form and putting to json string to body array
         let account = document.getElementById('account');
         let formData = new FormData(account);
+        let password1 = document.getElementById('haslo1').innerHTML
 
         var data = {};
         formData.forEach(function(value, key){
             data[key] = value;
         });
 
+        console.log(password1)
+
+
         let body = JSON.stringify(data);
 
-        //walidacja
-        let haslo1 =document.getElementById('haslo1').value
-        let haslo2 =document.getElementById('haslo2').value
-        if(haslo1 != haslo2){
-            console.log("hasla sie roznia")
-            document.getElementById('pasek1').style.border="3px solid red";
-            document.getElementById('pasek2').style.border="3px solid red";
-            document.getElementById('blad').style.display="inline";
-
-        }else{
-            console.log("hasla zgodne")
-            document.getElementById('pasek1').style.border="0px solid red";
-            document.getElementById('pasek2').style.border="0px solid red";
-            document.getElementById('blad').style.display="none";
-
-            // add car to database with post method
-            axios({
-                method: "post",
-                url: CAR_REST_API_URL,
-                data: body,
-                headers: { "Content-Type": "application/JSON" },
+        // add car to database with post method
+        axios({
+            method: "post",
+            url: CAR_REST_API_URL,
+            data: body,
+            headers: { "Content-Type": "application/JSON" },
+        })
+            .then(function (response) {
+                //handle success
+                console.log(response);
             })
+
                 .then(function (response) {
                     //handle success
                 })
                 .catch(function (response) {
                     console.log(response.response.data);
-                });
-        }
+                }) .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+
 
         event.preventDefault();
     }
@@ -94,18 +91,15 @@ class Rejestracja extends React.Component {
                         <div id="zdj1"></div>
                         <input className="input" type="text" name="username" placeholder="Login" value={this.state.value} onChange={this.handleChange}/>
                     </div>
-                    <div className="pasek" id="pasek1">
+                    <div className="pasek">
                         <div id="zdj2"></div>
                         <input className="input" id="haslo1" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
                     </div>
-                    <div className="pasek" id="pasek2">
+                    <div className="pasek">
                         <div id="zdj4"></div>
                         <input className="input" id="haslo2" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
                     </div>
                 </div>
-                    <div id="blad">
-                        podane hasła się różnią!
-                    </div>
                 <div id="przycisk">
                     <input id="przycisk1" type="submit" value="Zarejestruj się" />
                 </div>
