@@ -40,6 +40,20 @@ class Rejestracja extends React.Component {
 
         console.log(password1)
 
+        let haslo1 =document.getElementById('haslo1').value
+        let haslo2 =document.getElementById('haslo2').value
+        if(haslo1 != haslo2){
+            console.log("hasla sie roznia")
+            document.getElementById('pasek1').style.border="3px solid red";
+            document.getElementById('pasek2').style.border="3px solid red";
+            document.getElementById('blad').style.display="inline";
+
+        }else {
+            console.log("hasla zgodne")
+            document.getElementById('pasek1').style.border = "0px solid red";
+            document.getElementById('pasek2').style.border = "0px solid red";
+            document.getElementById('blad').style.display = "none";
+        }
 
         let body = JSON.stringify(data);
 
@@ -50,10 +64,6 @@ class Rejestracja extends React.Component {
             data: body,
             headers: { "Content-Type": "application/JSON" },
         })
-            .then(function (response) {
-                //handle success
-                console.log(response);
-            })
 
             .then(function (response) {
                 //handle success
