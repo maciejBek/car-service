@@ -82,11 +82,32 @@ class Rejestracja extends React.Component {
                     Rejestracja
                 </div>
                 <form id="account" onSubmit={this.handleSubmit}>
-                <div id="poz">
-                    <div className="pasek">
-                        <div id="zdj3"></div>
-                        <input className="input" type="text" name="emailAddress" placeholder="E-mail" value={this.state.value} onChange={this.handleChange}/>
+                    <div id="poz">
+                        <div className="pasek">
+                            <div id="zdj3"></div>
+                            <input className="input" type="text" name="emailAddress" placeholder="E-mail" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
+                        <div className="pasek">
+                            <div id="zdj1"></div>
+                            <input className="input" type="text" name="username" placeholder="Login" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
+                        <div className="pasek" id="pasek1">
+                            <div id="zdj2"></div>
+                            <input className="input" id="haslo1" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
+                        <div className="pasek" id="pasek2">
+                            <div id="zdj4"></div>
+                            <input className="input" id="haslo2" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
                     </div>
+<<<<<<< HEAD
+                    <div id="blad">
+                        podane hasła się różnią!
+                    </div>
+                    <div id="przycisk">
+                        <input id="przycisk1" type="submit" value="Zarejestruj się" />
+                    </div>
+=======
                     <div className="pasek">
                         <div id="zdj1"></div>
                         <input className="input" type="text" name="username" placeholder="Login" value={this.state.value} onChange={this.handleChange}/>
@@ -103,6 +124,7 @@ class Rejestracja extends React.Component {
                 <div id="przycisk">
                     <input id="przycisk1" type="submit" value="Zarejestruj się" />
                 </div>
+>>>>>>> 1af5cbea92abfbba9a3100f5de3949e2eb2fc294
                 </form>
             </div>
             //</div>
