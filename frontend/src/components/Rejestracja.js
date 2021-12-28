@@ -2,7 +2,7 @@ import React from 'react';
 import './Rejestracja.css';
 import axios from "axios";
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/accounts';
+const CAR_REST_API_URL = 'http://localhost:8080/api/accounts/register';
 
 class Rejestracja extends React.Component {
 
