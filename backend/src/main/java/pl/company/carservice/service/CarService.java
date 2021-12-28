@@ -3,6 +3,7 @@ package pl.company.carservice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.model.Car;
+import pl.company.carservice.model.Customer;
 import pl.company.carservice.repository.CarRepository;
 
 import java.util.Optional;
@@ -22,6 +23,13 @@ public class CarService {
     }
 
     public Long addCar(Car car) {
+        Customer customer = new Customer("Mariusz", "Kowalski", "543723812");
+        car.setCustomer(customer);
+        return this.carRepository.save(car).getId();
+    }
+
+    public Long addCar(Car car, Customer customer) {
+        car.setCustomer(customer);
         return this.carRepository.save(car).getId();
     }
 

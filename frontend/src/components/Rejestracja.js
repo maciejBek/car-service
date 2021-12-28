@@ -2,7 +2,7 @@ import React from 'react';
 import './Rejestracja.css';
 import axios from "axios";
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/accounts/register';
+const CAR_REST_API_URL = 'http://localhost:8080/api/accounts';
 
 class Rejestracja extends React.Component {
 
@@ -55,15 +55,15 @@ class Rejestracja extends React.Component {
                 console.log(response);
             })
 
-                .then(function (response) {
-                    //handle success
-                })
-                .catch(function (response) {
-                    console.log(response.response.data);
-                }) .catch(function (response) {
-                //handle error
-                console.log(response);
-            });
+            .then(function (response) {
+                //handle success
+            })
+            .catch(function (response) {
+                console.log(response.response.data);
+            }) .catch(function (response) {
+            //handle error
+            console.log(response);
+        });
 
 
         event.preventDefault();
@@ -82,27 +82,31 @@ class Rejestracja extends React.Component {
                     Rejestracja
                 </div>
                 <form id="account" onSubmit={this.handleSubmit}>
-                <div id="poz">
-                    <div className="pasek">
-                        <div id="zdj3"></div>
-                        <input className="input" type="text" name="emailAddress" placeholder="E-mail" value={this.state.value} onChange={this.handleChange}/>
+                    <div id="poz">
+                        <div className="pasek">
+                            <div id="zdj3"></div>
+                            <input className="input" type="text" name="emailAddress" placeholder="E-mail" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
+                        <div className="pasek">
+                            <div id="zdj1"></div>
+                            <input className="input" type="text" name="username" placeholder="Login" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
+                        <div className="pasek" id="pasek1">
+                            <div id="zdj2"></div>
+                            <input className="input" id="haslo1" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
+                        <div className="pasek" id="pasek2">
+                            <div id="zdj4"></div>
+                            <input className="input" id="haslo2" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
+                        </div>
                     </div>
-                    <div className="pasek">
-                        <div id="zdj1"></div>
-                        <input className="input" type="text" name="username" placeholder="Login" value={this.state.value} onChange={this.handleChange}/>
+                    <div id="blad">
+                        podane hasła się różnią!
                     </div>
-                    <div className="pasek">
-                        <div id="zdj2"></div>
-                        <input className="input" id="haslo1" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
+                    <div id="przycisk">
+                        <input id="przycisk1" type="submit" value="Zarejestruj się" />
                     </div>
-                    <div className="pasek">
-                        <div id="zdj4"></div>
-                        <input className="input" id="haslo2" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
-                    </div>
-                </div>
-                <div id="przycisk">
-                    <input id="przycisk1" type="submit" value="Zarejestruj się" />
-                </div>
+
                 </form>
             </div>
             //</div>
