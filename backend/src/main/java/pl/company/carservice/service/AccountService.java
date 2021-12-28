@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.AccountRegistrationDto;
 import pl.company.carservice.model.Account;
+import pl.company.carservice.model.AccountKind;
 import pl.company.carservice.repository.AccountRepository;
+import pl.company.carservice.model.AccountKind.PermissionLevel;
 
 import java.util.Map;
 import java.util.Optional;
@@ -42,6 +44,7 @@ public class AccountService {
         }
     }
 
+    //TODO: test this function
     public ResponseEntity<?> login(AccountRegistrationDto accountRegistrationDto) {
         String password = accountRegistrationDto.password();
         String retypePassword = accountRegistrationDto.retypePassword();
@@ -75,7 +78,10 @@ public class AccountService {
             return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
         }
         // TODO: make DTO
+        AccountKind accountKind = new AccountKind(2L, PermissionLevel.CUSTOMER);
+        account.setAccountKind(accountKind);
         Account addedAccount = this.accountRepository.save(account);
+
         return new ResponseEntity<>(Map.of("id", addedAccount.getId()), HttpStatus.OK);
     }
 }
