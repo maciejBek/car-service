@@ -1,20 +1,36 @@
 package pl.company.carservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class AccountKind {
 
+    public enum PermissionLevel {
+        ADMIN, EMPLOYEE, CUSTOMER, SUPPLIER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String permissionLevel;
+
+    @Enumerated(EnumType.STRING)
+    private PermissionLevel permissionLevel;
+
+    @OneToMany(mappedBy = "accountKind")
+    private Set<Account> accounts;
 
     public AccountKind() {
 
+    }
+
+    public AccountKind(PermissionLevel permissionLevel) {
+        this.permissionLevel = permissionLevel;
+    }
+
+    public AccountKind(Long id, PermissionLevel permissionLevel) {
+        this.id = id;
+        this.permissionLevel = permissionLevel;
     }
 
     public Long getId() {
@@ -25,11 +41,12 @@ public class AccountKind {
         this.id = id;
     }
 
-    public String getPermissionLevel() {
+    public PermissionLevel getPermissionLevel() {
         return permissionLevel;
     }
 
-    public void setPermissionLevel(String permissionLevel) {
+    public void setPermissionLevel(PermissionLevel permissionLevel) {
         this.permissionLevel = permissionLevel;
     }
+
 }
