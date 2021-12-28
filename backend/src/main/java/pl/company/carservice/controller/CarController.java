@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.StringToJson;
 import pl.company.carservice.model.Car;
+import pl.company.carservice.model.Customer;
 import pl.company.carservice.service.CarService;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -25,20 +27,27 @@ public class CarController {
     }
 
     @GetMapping(value = "/cars/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object getCar(@PathVariable Long id) {
+    public ResponseEntity<?> getCar(@PathVariable Long id) {
         Optional<Car> fetchedCar = carService.getCar(id);
 
         if (fetchedCar.isPresent()) {
-            return fetchedCar.get();
+            Car car = fetchedCar.get();
+            return new ResponseEntity<>(car, HttpStatus.OK);
         } else {
             String errorResponse = StringToJson.parse("error", "Car with specified id does not exist!");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/cars")
     public Map<String, Long> addCar(@RequestBody Car car) {
         return Map.of("id", carService.addCar(car));
+    }
+
+    //TODO: change to DTO
+    public static class CarCustomer {
+        public Car car;
+        public Customer customer;
     }
 
     @DeleteMapping("/cars/{id}")
