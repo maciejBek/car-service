@@ -3,7 +3,7 @@ package pl.company.carservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.company.carservice.dto.AccountRegistrationDto;
+import pl.company.carservice.dto.AccountLoginDto;
 import pl.company.carservice.model.Account;
 import pl.company.carservice.service.AccountService;
 
@@ -31,8 +31,8 @@ public class AccountController {
     }
 
     @PostMapping("/accounts/login")
-    public ResponseEntity<?> login(@RequestBody AccountRegistrationDto accountRegistrationDto) {
-        return this.accountService.login(accountRegistrationDto);
+    public ResponseEntity<?> login(@RequestBody AccountLoginDto accountLoginDto) {
+        return this.accountService.login(accountLoginDto);
     }
 
     @PostMapping("/accounts/register")
