@@ -141,9 +141,19 @@ body{
     color: #FFD70B;
 }
 
-#blad{
+.blad{
+    position: absolute;
     float: left;
     color: red;
+    margin-left: 50px;
+    margin-top: 30px;
+    display: none;
+}
+
+#dobrze{
+    position: absolute;
+    float: left;
+    color: forestgreen;
     margin-left: 50px;
     margin-top: 30px;
     display: none;
