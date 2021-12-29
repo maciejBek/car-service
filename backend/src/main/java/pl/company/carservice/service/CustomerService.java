@@ -9,6 +9,7 @@ import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.model.Customer;
 import pl.company.carservice.repository.CustomerRepository;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -32,12 +33,16 @@ public class CustomerService {
         }
     }
 
-    public Long addCustomer(Customer customer) {
-        return this.customerRepository.save(customer).getId();
-    }
-
-    public void deleteCar(Long id) {
+    public ResponseEntity<?> deleteCustomer(Long id) {
         this.customerRepository.deleteById(id);
+
+        if (this.customerRepository.existsById(id)) {
+            this.customerRepository.deleteById(id);
+            return new ResponseEntity<>(Map.of("id", id), HttpStatus.OK);
+        } else {
+            ErrorResponse errorResponse = new ErrorResponse("customer-does-not-exist");
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
     }
 
     public boolean ifExists(Long id) {

@@ -3,6 +3,8 @@ package pl.company.carservice.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import pl.company.carservice.model.Account;
 
+import java.util.Optional;
+
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     boolean existsByEmailAddress(String emailAddress);
@@ -11,5 +13,5 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     boolean existsByPassword(String password);
 
-    boolean existsByUsernameIsContainingAndPassword(String username, String password);
+    Optional<Account> findByUsernameAndPassword(String username, String password);
 }

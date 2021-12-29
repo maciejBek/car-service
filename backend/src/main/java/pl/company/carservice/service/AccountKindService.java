@@ -18,11 +18,12 @@ public class AccountKindService {
         this.accountKindRepository = accountKindRepository;
     }
 
-    @EventListener(classes = ApplicationStartedEvent.class )
-    public void listenToStart(ApplicationStartedEvent event) {
-        this.accountKindRepository.save(new AccountKind(PermissionLevel.ADMIN));
-        this.accountKindRepository.save(new AccountKind(PermissionLevel.CUSTOMER));
-        this.accountKindRepository.save(new AccountKind(PermissionLevel.EMPLOYEE));
-        this.accountKindRepository.save(new AccountKind(PermissionLevel.SUPPLIER));
-    }
+    //TODO: uncomment at the end
+//    @EventListener(classes = ApplicationStartedEvent.class)
+//    public void addAcountKindData(ApplicationStartedEvent event) {
+//        this.accountKindRepository.save(new AccountKind(PermissionLevel.ADMIN));
+//        this.accountKindRepository.save(new AccountKind(PermissionLevel.CUSTOMER));
+//        this.accountKindRepository.save(new AccountKind(PermissionLevel.EMPLOYEE));
+//        this.accountKindRepository.save(new AccountKind(PermissionLevel.SUPPLIER));
+//    }
 }

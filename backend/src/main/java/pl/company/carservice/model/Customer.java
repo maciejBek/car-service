@@ -10,8 +10,12 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //TODO: change to one way binding
     @OneToMany(mappedBy = "customer")
     private Set<Car> cars;
+
+    @OneToOne
+    private Account account;
     private String name;
     private String surname;
     private String phoneNumber;
@@ -23,7 +27,15 @@ public class Customer {
     public Customer(String name, String surname, String phoneNumber) {
         this.name = name;
         this.surname = surname;
-        this. phoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Long getId() {

@@ -34,10 +34,4 @@ public class AccountController {
     public ResponseEntity<?> login(@RequestBody AccountLoginDto accountLoginDto) {
         return this.accountService.login(accountLoginDto);
     }
-
-    @PostMapping("/accounts/register")
-    public ResponseEntity<?> register(@RequestBody Account account) {
-        return this.accountService.register(account);
-    }
-
 }
