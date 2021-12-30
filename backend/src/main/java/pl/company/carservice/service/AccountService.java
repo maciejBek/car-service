@@ -33,8 +33,8 @@ public class AccountService {
     }
 
     public ResponseEntity<?> deleteAccount(Long id) {
-        if (accountRepository.existsById(id)) {
-            accountRepository.deleteById(id);
+        if (this.accountRepository.existsById(id)) {
+            this.accountRepository.deleteById(id);
             return new ResponseEntity<>(Map.of("id", id), HttpStatus.OK);
         } else {
             ErrorResponse errorResponse = new ErrorResponse("account-does-not-exist");
