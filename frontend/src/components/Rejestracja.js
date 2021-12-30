@@ -83,6 +83,7 @@ class Rejestracja extends React.Component {
             console.log("hasla zgodne")
 
 
+            console.log(data)
 
             let body = JSON.stringify(data);
 
