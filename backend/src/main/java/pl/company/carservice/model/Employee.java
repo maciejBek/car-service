@@ -1,9 +1,7 @@
 package pl.company.carservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Employee {
@@ -11,6 +9,9 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    private Account account;
     private String name;
     private String surname;
     private String phoneNumber;
@@ -21,12 +22,28 @@ public class Employee {
 
     }
 
+    public Employee(String name, String surname, String phoneNumber, String pesel, String idNumber) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.pesel = pesel;
+        this.idNumber = idNumber;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getName() {
