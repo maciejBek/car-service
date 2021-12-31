@@ -1,17 +1,20 @@
 package pl.company.carservice.service;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.controller.error.ErrorResponse;
-import pl.company.carservice.dto.AccountCustomerDto;
+import pl.company.carservice.dto.*;
 import pl.company.carservice.model.Account;
 import pl.company.carservice.model.AccountKind;
 import pl.company.carservice.model.Customer;
+import pl.company.carservice.model.Employee;
 import pl.company.carservice.repository.AccountRepository;
 import pl.company.carservice.repository.CustomerRepository;
+import pl.company.carservice.repository.EmployeeRepository;
 
 import java.util.Map;
 
@@ -20,19 +23,28 @@ public class RegistrationService {
 
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
-    public RegistrationService(AccountRepository accountRepository, CustomerRepository customerRepository) {
+    public RegistrationService(AccountRepository accountRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
         this.accountRepository = accountRepository;
         this.customerRepository = customerRepository;
+        this.employeeRepository = employeeRepository;
     }
 
-    public ResponseEntity<?> register(AccountCustomerDto accountCustomerDto) {
+
+    public ResponseEntity<?> register(Map<String, Object>  accountAndUser) {
         // add account
-        Account account = accountCustomerDto.account();
-        Customer customer = accountCustomerDto.customer();
-        System.out.println("username: " + account.getUsername());
-        System.out.println("name: " + customer.getName());
+            // mapping object
+            // TODO: use mapper MapStruct
+        ObjectMapper objectMapper = new ObjectMapper();
+        AccountRegistrationDto accountRegistrationDto = objectMapper.convertValue(accountAndUser.get("account"), AccountRegistrationDto.class);
+        String username = accountRegistrationDto.username();
+        String password = accountRegistrationDto.password();
+        String emailAddress = accountRegistrationDto.emailAddress();
+
+        Account account = new Account(username, password, emailAddress);
+
         if (this.accountRepository.existsByUsername(account.getUsername())) {
             if (this.accountRepository.existsByEmailAddress(account.getEmailAddress())) {
                 ErrorResponse errorResponse = new ErrorResponse("email-address-and-username-exist");
@@ -46,14 +58,47 @@ public class RegistrationService {
             ErrorResponse errorResponse = new ErrorResponse("email-address-exists");
             return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
         }
-        // TODO: make DTO
-        AccountKind accountKind = new AccountKind(2L, AccountKind.PermissionLevel.CUSTOMER);
+
+        // checking if user is customer or employee
+        Customer customer = null;
+        Employee employee =  null;
+        AccountKind accountKind = null;
+        if (accountAndUser.get("customer") != null) {
+            accountKind = new AccountKind(2L, AccountKind.PermissionLevel.CUSTOMER);
+            // TODO: use mapper MapStruct
+            CustomerRegistrationDto customerRegistrationDto = objectMapper.convertValue(accountAndUser.get("customer"), CustomerRegistrationDto.class);
+            String name = customerRegistrationDto.name();
+            String surname = customerRegistrationDto.surname();
+            String phoneNumber = customerRegistrationDto.phoneNumber();
+
+            customer = new Customer(name, surname, phoneNumber);
+        }
+        if (accountAndUser.get("employee") != null) {
+            accountKind = new AccountKind(3L, AccountKind.PermissionLevel.EMPLOYEE);
+            EmployeeRegistrationDto employeeRegistrationDto = objectMapper.convertValue(accountAndUser.get("employee"), EmployeeRegistrationDto.class);
+            String name = employeeRegistrationDto.name();
+            String surname = employeeRegistrationDto.surname();
+            String phoneNumber = employeeRegistrationDto.phoneNumber();
+            String pesel = employeeRegistrationDto.pesel();
+            String idNumber = employeeRegistrationDto.idNumber();
+
+            employee = new Employee(name, surname, phoneNumber, pesel, idNumber);
+        }
+
         account.setAccountKind(accountKind);
+        //saving account to database
         Account addedAccount = this.accountRepository.save(account);
 
-        // add customer
-        customer.setAccount(account);
-        this.customerRepository.save(customer);
+        // adding customer
+        if (customer != null) {
+            customer.setAccount(account);
+            this.customerRepository.save(customer);
+        }
+
+        if (employee != null) {
+            employee.setAccount(account);
+            this.employeeRepository.save(employee);
+        }
 
         return new ResponseEntity<>(Map.of("id", addedAccount.getId()), HttpStatus.OK);
     }

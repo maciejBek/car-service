@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.AccountLoginDto;
-import pl.company.carservice.model.Account;
 import pl.company.carservice.service.AccountService;
 
 @CrossOrigin(origins = "http://localhost:3000")
