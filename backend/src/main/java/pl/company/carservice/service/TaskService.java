@@ -36,6 +36,13 @@ public class TaskService {
         }
     }
 
+    public ResponseEntity<?> getTasks() {
+//        return this.taskService.getTasks().stream()
+//                .map(task -> new TaskDto(task.getField(), ...))
+//	.collect(Collectors.toList());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     //TODO: test this function
     public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
 
