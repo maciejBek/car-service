@@ -152,7 +152,7 @@ class Rejestracja extends React.Component {
                         </div>
                         <div className="pasek" id="pasek3">
                             <div id="zdj4"></div>
-                            <input className="input" id="haslo2" type="password" name="password" placeholder="Hasło" value={this.state.value} onChange={this.handleChange}/>
+                            <input className="input" id="haslo2" type="password" name="password" placeholder="Powtórz hasło" value={this.state.value} onChange={this.handleChange}/>
                         </div>
                     </div>
                     <div className="blad" id="blad">
