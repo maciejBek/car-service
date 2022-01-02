@@ -37,6 +37,18 @@ body{
     background-image: url("pictures/add.png");
 }
 
+#add1{
+    background-image: url("pictures/add1.png");
+}
+
+#done{
+    background-image: url("pictures/basic-tick.png");
+}
+
+#urlop{
+    background-image: url("pictures/sunset.png");
+}
+
 #kratka{
     margin-top: 30px;
     margin-left: 30px;

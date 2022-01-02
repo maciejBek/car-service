@@ -1,8 +1,16 @@
 import React from 'react';
 import './Logowanie.css';
 import axios from "axios";
+//import { Link } from 'react-router-dom';
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/accounts/login';
+
+const Linkk = () =>{
+    return(
+        console.log("strona")
+        //<Link to="/123">Dołącz do nas</Link>
+    )
+}
 
 class Logowanie extends React.Component {
 
@@ -101,7 +109,13 @@ class Logowanie extends React.Component {
                 <div id="przycisk">
                     <input id="przycisk1" type="submit" value="Zaloguj" />
                 </div>
-                <div id="rej">Nie masz jeszcze konta? <a id="reje" href="...">Dołącz do nas </a></div>
+                <div id="rej">Nie masz jeszcze konta?
+
+                    
+                    <a id="reje" href="123">Dołącz do nas </a>
+                    
+                
+                </div>
                 </form>
             </div>
             //</div>
