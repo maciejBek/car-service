@@ -35,7 +35,7 @@ public class CarService {
             Car car = fetchedCar.get();
             return new ResponseEntity<>(car, HttpStatus.OK);
         } else {
-            String errorResponse = StringToJson.parse("error", "Car with specified id does not exist!");
+            String errorResponse = StringToJson.parse("error", "car-does-not-exist");
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
     }

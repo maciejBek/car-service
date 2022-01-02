@@ -24,6 +24,12 @@ public class TaskController {
         return taskService.getTask(id);
     }
 
+    //TODO: get tasks with pagination
+    @GetMapping(value = "/tasks/{id}", produces = "application/json")
+    public ResponseEntity<?> getTasks() {
+        return new ResponseEntity<>(HttpStatus.OK);
+    };
+
     @PostMapping("/tasks")
     public ResponseEntity<?> addTask(@RequestBody TaskAdditionDto taskAdditionDto) {
         return this.taskService.addTask(taskAdditionDto);
@@ -33,11 +39,5 @@ public class TaskController {
     public ResponseEntity<?> deleteTask(@PathVariable Long id) {
         return this.taskService.deleteTask(id);
     }
-
-    //TODO: get tasks with pagination (PATCH METHOD)
-    @PatchMapping("/tasks/{id}")
-    public ResponseEntity<?> getTasks() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    };
 
 }

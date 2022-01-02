@@ -3,7 +3,7 @@ package pl.company.carservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.company.carservice.dto.CarCustomerIdDto;
+import pl.company.carservice.model.Bill;
 import pl.company.carservice.service.BillService;
 
 @RestController
@@ -22,8 +22,8 @@ public class BillController {
     }
 
     @PostMapping("/bills")
-    public ResponseEntity<?> addBill(@RequestBody CarCustomerIdDto carCustomerIdDto) {
-        return this.billService.addBill(carCustomerIdDto);
+    public ResponseEntity<?> addBill(@RequestBody Bill bill) {
+        return this.billService.addBill(bill);
     }
 
     @DeleteMapping("/bills/{id}")
