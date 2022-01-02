@@ -87,7 +87,7 @@ public class RegistrationService {
 
         account.setAccountKind(accountKind);
         //saving account to database
-        Account addedAccount = this.accountRepository.save(account);
+        Long addedAccountId = this.accountRepository.save(account).getId();
 
         // adding customer
         if (customer != null) {
@@ -100,6 +100,6 @@ public class RegistrationService {
             this.employeeRepository.save(employee);
         }
 
-        return new ResponseEntity<>(Map.of("id", addedAccount.getId()), HttpStatus.OK);
+        return new ResponseEntity<>(Map.of("id", addedAccountId), HttpStatus.OK);
     }
 }

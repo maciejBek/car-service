@@ -28,6 +28,18 @@ public class Car {
 
         }
 
+        public Car(String brand, String model, Integer year, String vinNumber, String registrationNumber, Integer capacity, String fuelType, Integer power, Integer tourqe) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+                this.vinNumber = vinNumber;
+                this.registrationNumber = registrationNumber;
+                this.capacity = capacity;
+                this.fuelType = fuelType;
+                this.power = power;
+                this.tourqe = tourqe;
+        }
+
         public Long getId() {
                 return id;
         }

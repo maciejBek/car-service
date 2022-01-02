@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.StringToJson;
+import pl.company.carservice.dto.CarCustomerIdDto;
 import pl.company.carservice.model.Car;
 import pl.company.carservice.model.Customer;
 import pl.company.carservice.service.CarService;
@@ -26,38 +27,18 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping(value = "/cars/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/cars/{id}", produces = "application/json")
     public ResponseEntity<?> getCar(@PathVariable Long id) {
-        Optional<Car> fetchedCar = carService.getCar(id);
-
-        if (fetchedCar.isPresent()) {
-            Car car = fetchedCar.get();
-            return new ResponseEntity<>(car, HttpStatus.OK);
-        } else {
-            String errorResponse = StringToJson.parse("error", "Car with specified id does not exist!");
-            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-        }
+        return this.carService.getCar(id);
     }
 
     @PostMapping("/cars")
-    public Map<String, Long> addCar(@RequestBody Car car) {
-        return Map.of("id", carService.addCar(car));
-    }
-
-    //TODO: change to DTO
-    public static class CarCustomer {
-        public Car car;
-        public Customer customer;
+    public ResponseEntity<?> addCar(@RequestBody CarCustomerIdDto carCustomerIdDto) {
+        return this.carService.addCar(carCustomerIdDto);
     }
 
     @DeleteMapping("/cars/{id}")
-    public ResponseEntity<String> deleteCar(@PathVariable Long id) {
-        if (carService.ifExists(id)) {
-            carService.deleteCar(id);
-            return ResponseEntity.status(HttpStatus.OK).body("");
-        } else {
-            String errorResponse = StringToJson.parse("error", "Car with specified id does not exist!");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        }
+    public ResponseEntity<?> deleteCar(@PathVariable Long id) {
+        return this.carService.deleteCar(id);
     }
 }

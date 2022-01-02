@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.sql.Date;
 
 @Entity
-public class Assignment {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class Assignment {
     private Date date;
     private Double totalPrice;
 
-    public Assignment() {
+    public Order() {
 
     }
 
