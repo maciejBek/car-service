@@ -110,7 +110,7 @@ class Logowanie extends React.Component {
                 </div>
                 <div id="rej">Nie masz jeszcze konta?
 
-                    
+                    <Linkk></Linkk>
                     <a id="reje" href="123">Dołącz do nas </a>
                     
                 
