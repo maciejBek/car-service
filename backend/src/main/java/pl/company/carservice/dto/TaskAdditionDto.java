@@ -7,6 +7,7 @@ public record TaskAdditionDto(
         Long carId,
         Long customerId,
         Date acceptationDate,
+        Date completionDate,
         String serviceDescription,
         String problemDescription) {
 }

@@ -42,13 +42,13 @@ public class AccountService {
         }
     }
 
-    //TODO: test this function
     public ResponseEntity<?> login(AccountLoginDto accountLoginDto) {
         String username = accountLoginDto.username();
         String password = accountLoginDto.password();
 
         boolean isCorrectData = this.accountRepository.findByUsernameAndPassword(username, password).isPresent();
         if (isCorrectData) {
+            //TODO: JWT authentication token
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             ErrorResponse errorResponse = new ErrorResponse("invalid-data");

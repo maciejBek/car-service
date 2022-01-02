@@ -1,9 +1,6 @@
 package pl.company.carservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -12,13 +9,22 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Date acceptanceDate;
     private Date completionDate;
+
     private String serviceDescription;
     private String problemDescription;
 
     public Task() {
 
+    }
+
+    public Task(Date acceptanceDate, Date completionDate, String serviceDescription, String problemDescription) {
+        this.acceptanceDate = acceptanceDate;
+        this.completionDate = completionDate;
+        this.serviceDescription = serviceDescription;
+        this.problemDescription = problemDescription;
     }
 
     public Long getId() {

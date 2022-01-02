@@ -1,6 +1,5 @@
 package pl.company.carservice.service;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,7 +32,7 @@ public class RegistrationService {
     }
 
 
-    public ResponseEntity<?> register(Map<String, Object>  accountAndUser) {
+    public ResponseEntity<?> register(Map<String, Object> accountAndUser) {
         // add account
             // mapping object
             // TODO: use mapper MapStruct
