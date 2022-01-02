@@ -1,14 +1,13 @@
 import React from 'react';
 import './Logowanie.css';
 import axios from "axios";
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/accounts/login';
 
 const Linkk = () =>{
     return(
-        console.log("strona")
-        //<Link to="/123">Dołącz do nas</Link>
+        <Link to="/123">Dołącz do nas</Link>
     )
 }
 

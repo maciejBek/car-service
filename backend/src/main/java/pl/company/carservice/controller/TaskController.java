@@ -1,11 +1,15 @@
 package pl.company.carservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.TaskAdditionDto;
+import pl.company.carservice.model.Task;
 import pl.company.carservice.service.TaskService;
+
+import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -29,6 +33,14 @@ public class TaskController {
     public ResponseEntity<?> getTasks() {
         return new ResponseEntity<>(HttpStatus.OK);
     };
+
+    public ResponseEntity<List<Task>> getTasks(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        return new ResponseEntity<List<Task>>(taskService.getTasks(pageNo, pageSize, sortBy),
+                new HttpHeaders(), HttpStatus.OK);
+    }
 
     @PostMapping("/tasks")
     public ResponseEntity<?> addTask(@RequestBody TaskAdditionDto taskAdditionDto) {

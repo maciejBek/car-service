@@ -18,12 +18,12 @@ public class Bill {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private String paymentMethod;
+    private PaymentMethod paymentMethod;
     private Boolean isPaid;
     private Double amount;
 
     @Enumerated(EnumType.STRING)
-    private String transactionType;
+    private TransactionType transactionType;
 
     public Bill() {
 
@@ -37,11 +37,11 @@ public class Bill {
         this.id = id;
     }
 
-    public String getPaymentMethod() {
+    public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -61,11 +61,11 @@ public class Bill {
         this.amount = amount;
     }
 
-    public String getTransactionType() {
+    public TransactionType getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(String transactionType) {
+    public void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 }
