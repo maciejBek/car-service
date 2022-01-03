@@ -1,15 +1,10 @@
 package pl.company.carservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.TaskAdditionDto;
-import pl.company.carservice.model.Task;
 import pl.company.carservice.service.TaskService;
-
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -29,17 +24,13 @@ public class TaskController {
     }
 
     //TODO: get tasks with pagination
-    @GetMapping(value = "/tasks/{id}", produces = "application/json")
-    public ResponseEntity<?> getTasks() {
-        return new ResponseEntity<>(HttpStatus.OK);
-    };
-
-    public ResponseEntity<List<Task>> getTasks(
+    @GetMapping(value = "/tasks", produces = "application/json")
+    public ResponseEntity<?> getTasks(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy) {
-        return new ResponseEntity<List<Task>>(taskService.getTasks(pageNo, pageSize, sortBy),
-                new HttpHeaders(), HttpStatus.OK);
+
+        return this.taskService.getTasks(pageNo, pageSize, sortBy);
     }
 
     @PostMapping("/tasks")

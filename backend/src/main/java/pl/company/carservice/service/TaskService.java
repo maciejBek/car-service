@@ -13,8 +13,9 @@ import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.TaskRepository;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,28 +39,41 @@ public class TaskService {
         }
     }
 
-    public ResponseEntity<?> getTasks() {
-//        return this.taskService.getTasks().stream()
-//                .map(task -> new TaskDto(task.getField(), ...))
-//	.collect(Collectors.toList());
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    public ResponseEntity<?> getTasks(Integer pageNo, Integer pageSize, String sortBy) {
+        if (pageSize > 100 || !("acceptationDate".equals(sortBy) || "completionDate".equals(sortBy))) {
+            ErrorResponse errorResponse = new ErrorResponse("invalid-parameter");
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        }
 
-    public List<Task> getTasks(Integer pageNo, Integer pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-
         Page<Task> pagedResult = taskRepository.findAll(paging);
 
         if (pagedResult.hasContent()) {
-            return pagedResult.getContent();
+            return new ResponseEntity<>(pagedResult.getContent(), HttpStatus.OK);
         } else {
-            return new ArrayList<Task>();
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
     }
 
     //TODO: test this function
     public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
+        Long serviceId = taskAdditionDto.serviceId();
+        Long carId = taskAdditionDto.carId();
+        Long customerId = taskAdditionDto.customerId();
+        LocalDateTime acceptationDate = taskAdditionDto.acceptationDate();
+        LocalDateTime completionDateDate = taskAdditionDto.completionDate();
+        String serviceDescription = taskAdditionDto.serviceDescription();
+        String problemDescription = taskAdditionDto.problemDescription();
 
+        Task task = new Task(acceptationDate, completionDateDate, serviceDescription, problemDescription);
+
+        this.taskRepository.save(task);
+
+        // TODO: sprawdzic czy nie ma nulli, ale najpierw dac not null na kolumny entity i sprawdzic jak baza dostarcza blad do springboota, pewnie trzeba bedzie na try{} zrobic
+//        if (serviceId == null || carId == null || customerId == null ) {
+//            ErrorResponse errorResponse = new ErrorResponse("invalid-data");
+//            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+//        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
