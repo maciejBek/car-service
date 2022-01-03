@@ -1,8 +1,6 @@
 package pl.company.carservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.TaskAdditionDto;
@@ -31,7 +29,8 @@ public class TaskController {
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy) {
-        return new ResponseEntity<>(taskService.getTasks(pageNo, pageSize, sortBy), new HttpHeaders(), HttpStatus.OK);
+
+        return this.taskService.getTasks(pageNo, pageSize, sortBy);
     }
 
     @PostMapping("/tasks")

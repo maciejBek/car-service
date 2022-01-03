@@ -14,6 +14,7 @@ import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.TaskRepository;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -59,8 +60,8 @@ public class TaskService {
         Long serviceId = taskAdditionDto.serviceId();
         Long carId = taskAdditionDto.carId();
         Long customerId = taskAdditionDto.customerId();
-        Date acceptationDate = taskAdditionDto.acceptationDate();
-        Date completionDateDate = taskAdditionDto.completionDate();
+        LocalDateTime acceptationDate = taskAdditionDto.acceptationDate();
+        LocalDateTime completionDateDate = taskAdditionDto.completionDate();
         String serviceDescription = taskAdditionDto.serviceDescription();
         String problemDescription = taskAdditionDto.problemDescription();
 

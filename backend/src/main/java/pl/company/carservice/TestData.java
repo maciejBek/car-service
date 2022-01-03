@@ -17,6 +17,7 @@ import pl.company.carservice.repository.AccountKindRepository;
 import pl.company.carservice.repository.TaskRepository;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,22 +70,22 @@ public class TestData {
         this.registrationController.register(accountEmployee);
 
         // Tasks data
-        Date acceptationDate1 = new Date(1641135266);
-        Date acceptationDate2 = new Date(1641155266);
-        Date acceptationDate3 = new Date(1641455266);
-        Date acceptationDate4 = new Date(1641155266);
-        Date acceptationDate5 = new Date(1641155266);
-        Date acceptationDate6 = new Date(1641155266);
-        Date acceptationDate7 = new Date(1641155266);
-        Date acceptationDate8 = new Date(1641155266);
-        Date acceptationDate9 = new Date(1641155266);
-        Date acceptationDate10 = new Date(1641155266);
-        Date acceptationDate11 = new Date(1641155266);
-        Date acceptationDate12 = new Date(1641155266);
-        Date acceptationDate13 = new Date(1641155266);
-        Date acceptationDate14 = new Date(1641155266);
-        Date acceptationDate15 = new Date(1641155266);
-        Date completionDate = new Date(1641155266);
+        LocalDateTime acceptationDate1 = LocalDateTime.of(2021, 12, 8, 10, 45, 20, 3353);
+        LocalDateTime acceptationDate2 = LocalDateTime.of(2021, 12, 9, 12, 45, 20, 3353);
+        LocalDateTime acceptationDate3 = LocalDateTime.of(2021, 12, 10, 15, 45, 20, 3353);
+        LocalDateTime acceptationDate4 = LocalDateTime.of(2021, 12, 11, 18, 45, 20, 3353);
+        LocalDateTime acceptationDate5 = LocalDateTime.of(2021, 12, 12, 11, 45, 20, 3353);
+        LocalDateTime acceptationDate6 = LocalDateTime.of(2021, 12, 13, 11, 45, 20, 3353);
+        LocalDateTime acceptationDate7 = LocalDateTime.of(2021, 12, 15, 15, 45, 20, 3353);
+        LocalDateTime acceptationDate8 = LocalDateTime.of(2021, 12, 17, 13, 45, 20, 3353);
+        LocalDateTime acceptationDate9 = LocalDateTime.of(2021, 12, 20, 14, 45, 20, 3353);
+        LocalDateTime acceptationDate10 = LocalDateTime.of(2021, 12, 21, 16, 45, 20, 3353);
+        LocalDateTime acceptationDate11 = LocalDateTime.of(2021, 12, 23, 17, 45, 20, 3353);
+        LocalDateTime acceptationDate12 = LocalDateTime.of(2021, 12, 25, 8, 45, 20, 3353);
+        LocalDateTime acceptationDate13 = LocalDateTime.of(2021, 12, 27, 9, 45, 20, 3353);
+        LocalDateTime acceptationDate14 = LocalDateTime.of(2021, 12, 29, 8, 45, 20, 3353);
+        LocalDateTime acceptationDate15 = LocalDateTime.of(2021, 12, 30, 10, 45, 20, 3353);
+        LocalDateTime completionDate = LocalDateTime.of(2022, 1, 2, 13, 45, 20, 3353);
         TaskAdditionDto taskAdditionDto1 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate1, completionDate, "opis", "opis2");
         TaskAdditionDto taskAdditionDto2 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate2, completionDate, "opis", "opis2");
         TaskAdditionDto taskAdditionDto3 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate3, completionDate, "opis", "opis2");
