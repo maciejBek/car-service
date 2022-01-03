@@ -29,6 +29,13 @@ public class Account {
         this.emailAddress = emailAddress;
     }
 
+    public Account(String username, String password, String emailAddress, AccountKind accountKind) {
+        this.username = username;
+        this.password = password;
+        this.emailAddress = emailAddress;
+        this.accountKind = accountKind;
+    }
+
     public Long getId() {
         return id;
     }
