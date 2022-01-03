@@ -7,7 +7,7 @@ const CAR_REST_API_URL = 'http://localhost:8080/api/accounts/login';
 
 const Linkk = () =>{
     return(
-        <Link to="/123">Dołącz do nas</Link>
+        <Link id="reje" to="/Rejestracja">Dołącz do nas</Link>
     )
 }
 
@@ -84,35 +84,33 @@ class Logowanie extends React.Component {
               //  <div id="pole" >
                 //    <div id="logo"></div>
                 //</div>
-            <div id="logowanie">
-                <div className="text">
+            <div id="logowaniel">
+                <div className="textl">
                 Logowanie
                 </div>
-                <form id="account" onSubmit={this.handleSubmit}>
-                <div id="poz">
-                <div className="pasek" id="pasek0">
-                    <div id="zdj1"></div>
-                    <input className="input" type="text" name="username" placeholder="Login"/>
+                <form id="accountl" onSubmit={this.handleSubmit}>
+                <div id="pozl">
+                <div className="pasekl" id="pasek0">
+                    <div id="zdj1l"></div>
+                    <input className="inputl" type="text" name="username" placeholder="Login"/>
                 </div>
-                <div className="pasek" id="pasek1">
-                    <div id="zdj2"></div>
-                    <input className="input" type="password" name="password" placeholder="Hasło"/>
+                <div className="pasekl" id="pasek1">
+                    <div id="zdj2l"></div>
+                    <input className="inputl" type="password" name="password" placeholder="Hasło"/>
                 </div>
                 </div>
-                    <div id="dobrze">
+                    <div id="dobrzel">
                         zalogowano!
                     </div>
-                    <div id="blad">
+                    <div id="bladl">
                         Wprowadzono zle dane!
                     </div>
-                <div id="przycisk">
-                    <input id="przycisk1" type="submit" value="Zaloguj" />
+                <div id="przyciskl">
+                    <input id="przycisk1l" type="submit" value="Zaloguj" />
                 </div>
-                <div id="rej">Nie masz jeszcze konta?
+                <div id="rejl">Nie masz jeszcze konta?
 
                     <Linkk></Linkk>
-                    <a id="reje" href="123">Dołącz do nas </a>
-                    
                 
                 </div>
                 </form>

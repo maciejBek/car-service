@@ -3,14 +3,14 @@ body{
     background-size: cover;
 }
 
-#glowny{
+#glownyk{
     background-color: rgba(255, 255, 255, 0.8) ;
-    height: 440px;
+    height: 220px;
     width: 720px;
     margin-left:auto;
     margin-right:auto;
     margin-bottom: 0px;
-    margin-top: 10%;
+    margin-top: 16%;
     border-radius: 7px;
     box-shadow: 0px 0px 10em black;
 }
@@ -25,36 +25,20 @@ body{
     background-size: cover;
 }
 
-#wrench{
-    background-image: url("pictures/wrench.png");
+#history{
+    background-image: url("pictures/history.png");
 }
 
 #kalendarz{
     background-image: url("pictures/schedule.png");
 }
 
-#add{
-    background-image: url("pictures/add.png");
+#opinia{
+    background-image: url("pictures/opinia.png");
 }
 
-#add1{
-    background-image: url("pictures/add1.png");
-}
-
-#done{
-    background-image: url("pictures/basic-tick.png");
-}
-
-#urlop{
-    background-image: url("pictures/sunset.png");
-}
-
-#add2{
-    background-image: url("pictures/add2.png");
-}
-
-#remove{
-    background-image: url("pictures/delete.png");
+#visit{
+    background-image: url("pictures/visit.png");
 }
 
 #kratka{

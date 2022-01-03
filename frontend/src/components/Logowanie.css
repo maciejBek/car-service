@@ -2,10 +2,8 @@ body{
     background-image: url("pictures/bmwm4.jpg");
     background-size: cover;
 }
-#strona{
 
-}
-#pole{
+#polel{
     background-repeat:no-repeat;
     position: absolute;
     left: 73%;
@@ -16,7 +14,7 @@ body{
     border-radius: 30px;
 }
 
-#logo{
+#logol{
     margin-top: 20px;
     margin-left: 20px;
     background-image: url("pictures/wrench.png");
@@ -26,29 +24,30 @@ body{
 }
 
 
-#logowanie{
-    position: absolute;
+#logowaniel{
     background-color: rgba(0, 0, 0, 0.7) ;
     height: 500px;
     width: 600px;
-    left: 34%;
-    top: 23%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 0px;
+    margin-top: 8%;
     border-radius: 7px;
     box-shadow: 0px 0px 10em black;
 }
 
-.text{
+.textl{
     padding-top: 20px;
     padding-left: 15px;
     color: white;
     font-size: 60px;
 }
 
-#poz{
+#pozl{
     margin-top: 110px;
 }
 
-.pasek{
+.pasekl{
     background-color: #FFD70B;
     height:52px;
     margin-left: 50px;
@@ -56,7 +55,7 @@ body{
     width: 500px;
     border-radius: 5px;
 }
-.input{
+.inputl{
     float: right;
     height: 50px;
     width: 420px;
@@ -67,7 +66,7 @@ body{
     font-size: 20px;
 }
 
-#zdj1{
+#zdj1l{
     margin-top: 8px;
     margin-left: 8px;
     float: left;
@@ -76,7 +75,7 @@ body{
     width: 40px;
     height: 40px;
 }
-#zdj2{
+#zdj2l{
     margin-top: 8px;
     margin-left: 8px;
     float: left;
@@ -86,13 +85,13 @@ body{
     height: 40px;
 }
 
-#przycisk{
+#przyciskl{
     float: right;
     margin-right: 30px;
     margin-top: 70px;
 }
 
-#przycisk1{
+#przycisk1l{
     background-color: #FFD70B;
     border: 0px;
     height: 45px;
@@ -101,7 +100,7 @@ body{
     font-size: 20px;
 }
 
-#przycisk1:hover{
+#przycisk1l:hover{
     background-color: #FFF20B;
     border: 0px;
     height: 45px;
@@ -110,18 +109,18 @@ body{
     font-size: 20px;
 }
 
-#rej{
+#rejl{
     color: white;
     margin-top: 130px;
     margin-left: 40px;
 }
 
-#reje{
+#rejel{
     padding-left: 5px;
     color: #FFD70B;
 }
 
-#blad{
+#bladl{
     position: absolute;
     float: left;
     color: red;
@@ -130,7 +129,7 @@ body{
     display: none;
 }
 
-#dobrze{
+#dobrzel{
     position: absolute;
     float: left;
     color: forestgreen;

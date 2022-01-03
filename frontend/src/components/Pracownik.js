@@ -25,7 +25,7 @@ class Pracownik extends React.Component {
             <div id="glowny">
                 <Kratka
                     zdj="wrench"
-                    tekst="Usługi"
+                    tekst="Nowe zlecenie"
                     url="....."/>
                 <Kratka
                     zdj="kalendarz"
@@ -42,6 +42,12 @@ class Pracownik extends React.Component {
                 <Kratka
                     zdj="urlop"
                     tekst="Urlop"/>
+                <Kratka
+                    zdj="add2"
+                    tekst="Dodanie przedmiotu"/>
+                <Kratka
+                    zdj="remove"
+                    tekst="Usunięcie przedmiotu"/>
             </div>
         );
     }
