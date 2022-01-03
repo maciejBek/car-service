@@ -4,16 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import pl.company.carservice.controller.AccountController;
-import pl.company.carservice.controller.CustomerController;
-import pl.company.carservice.controller.RegistrationController;
-import pl.company.carservice.controller.TaskController;
+import pl.company.carservice.controller.*;
 import pl.company.carservice.dto.*;
-import pl.company.carservice.model.Account;
-import pl.company.carservice.model.AccountKind;
-import pl.company.carservice.model.Customer;
-import pl.company.carservice.model.Employee;
+import pl.company.carservice.model.*;
 import pl.company.carservice.repository.AccountKindRepository;
+import pl.company.carservice.repository.CarRepository;
+import pl.company.carservice.repository.CustomerRepository;
 import pl.company.carservice.repository.TaskRepository;
 
 import java.sql.Date;
@@ -26,16 +22,23 @@ public class TestData {
 
     private RegistrationController registrationController;
     private CustomerController customerController;
+    private CustomerRepository customerRepository;
     private AccountKindRepository accountKindRepository;
     private TaskController taskController;
+    private CarController carController;
+    private CarRepository carRepository;
 
     @Autowired
     public TestData(RegistrationController registrationController, CustomerController customerController,
-                    AccountKindRepository accountKindRepository, TaskController taskController) {
+                    AccountKindRepository accountKindRepository, TaskController taskController, CarController carController, CarRepository carRepository,
+                    CustomerRepository customerRepository) {
         this.registrationController = registrationController;
         this.customerController = customerController;
         this.accountKindRepository = accountKindRepository;
         this.taskController = taskController;
+        this.carController = carController;
+        this.carRepository = carRepository;
+        this.customerRepository = customerRepository;
     }
 
     @EventListener(classes = ApplicationStartedEvent.class)
@@ -51,25 +54,35 @@ public class TestData {
         Map<String, Object> accountCustomer = new HashMap<>();
         accountCustomer.put("account", accountRegistrationDto);
         accountCustomer.put("customer", customerRegistrationDto);
-        this.registrationController.register(accountCustomer);
+//        Long customerId = this.registrationController.register(accountCustomer).;
 
         // TODO: delete below
-        AccountRegistrationDto accountRegistrationDto1 = new AccountRegistrationDto("nowak12", "1234", "nowak55@o2.pl");
-        CustomerRegistrationDto customerRegistrationDto1 =  new CustomerRegistrationDto("Marian", "Nowak", "553273653");
-        Map<String, Object> accountCustomer1 = new HashMap<>();
-        accountCustomer1.put("account", accountRegistrationDto1);
-        accountCustomer1.put("customer", customerRegistrationDto1);
-        this.registrationController.register(accountCustomer1);
+//        AccountRegistrationDto accountRegistrationDto1 = new AccountRegistrationDto("nowak12", "1234", "nowak55@o2.pl");
+//        CustomerRegistrationDto customerRegistrationDto1 =  new CustomerRegistrationDto("Marian", "Nowak", "553273653");
+//        Map<String, Object> accountCustomer1 = new HashMap<>();
+//        accountCustomer1.put("account", accountRegistrationDto1);
+//        accountCustomer1.put("customer", customerRegistrationDto1);
+//        this.registrationController.register(accountCustomer1);
+//
+//        // keep Employee Account data
+//        AccountRegistrationDto accountRegistrationDto2 = new AccountRegistrationDto("mariusz523", "1234", "mariusz32@o2.pl");
+//        EmployeeRegistrationDto employeeRegistrationDto = new EmployeeRegistrationDto("Mariusz", "Kowal", "523723623", "91212321", "CD1234");
+//        Map<String, Object> accountEmployee = new HashMap<>();
+//        accountEmployee.put("account", accountRegistrationDto2);
+//        accountEmployee.put("employee", employeeRegistrationDto);
+//        this.registrationController.register(accountEmployee);
 
-        // keep Employee Account data
-        AccountRegistrationDto accountRegistrationDto2 = new AccountRegistrationDto("mariusz523", "1234", "mariusz32@o2.pl");
-        EmployeeRegistrationDto employeeRegistrationDto = new EmployeeRegistrationDto("Mariusz", "Kowal", "523723623", "91212321", "CD1234");
-        Map<String, Object> accountEmployee = new HashMap<>();
-        accountEmployee.put("account", accountRegistrationDto2);
-        accountEmployee.put("employee", employeeRegistrationDto);
-        this.registrationController.register(accountEmployee);
+        // Car data
+//        Customer customer = this.customerController.getCustomer(customerRegistrationDto.)
+        Car car1 = new Car("BMW", "M3", 2012, "1HGBH41JXMN109186", "RKR 50123", 3999, "gasoline", 420, 400);
+        car1.setCustomer(this.customerRepository.getById(1L));
+        this.carRepository.save(car1);
+        Car car2 = new Car("BMW", "M4", 2012, "1HGBH41JXAN109186", "RKR 50123", 3999, "gasoline", 420, 400);
+        car2.setCustomer(this.customerRepository.getById(1L));
+        this.carRepository.save(car2);
 
-        // Tasks data
+
+        // Task data
         LocalDateTime acceptationDate1 = LocalDateTime.of(2021, 12, 8, 10, 45, 20, 3353);
         LocalDateTime acceptationDate2 = LocalDateTime.of(2021, 12, 9, 12, 45, 20, 3353);
         LocalDateTime acceptationDate3 = LocalDateTime.of(2021, 12, 10, 15, 45, 20, 3353);

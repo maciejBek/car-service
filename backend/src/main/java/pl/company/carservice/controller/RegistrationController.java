@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.AccountCustomerDto;
 import pl.company.carservice.dto.AccountEmployeeDto;
+import pl.company.carservice.dto.AccountRegistrationDto;
 import pl.company.carservice.dto.AccountUserDtoInterface;
 import pl.company.carservice.service.RegistrationService;
 
@@ -25,7 +26,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Map<String, Object> accountAndUser) {
-        return this.registrationService.register(accountAndUser);
+    public ResponseEntity<?> register(@RequestBody AccountRegistrationDto accountRegistrationDto) {
+        return this.registrationService.register(accountRegistrationDto);
     }
 }
