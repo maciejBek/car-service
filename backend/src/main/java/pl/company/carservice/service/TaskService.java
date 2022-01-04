@@ -40,7 +40,8 @@ public class TaskService {
     }
 
     public ResponseEntity<?> getTasks(Integer pageNo, Integer pageSize, String sortBy) {
-        if (pageSize > 100 || !("acceptationDate".equals(sortBy) || "completionDate".equals(sortBy))) {
+        System.out.println("sortBy:" + sortBy + ".");
+        if (pageSize > 100 || !("acceptationDate".equals(sortBy) || "completionDate".equals(sortBy)) || "id".equals(sortBy) || "".equals(sortBy)) {
             ErrorResponse errorResponse = new ErrorResponse("invalid-parameter");
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }

@@ -1,5 +1,8 @@
 package pl.company.carservice.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -10,9 +13,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //TODO: change to one way binding
-    @OneToMany(mappedBy = "customer")
-    private Set<Car> cars;
+    // TODO: check it
+//    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<Car> cars;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Address address;
 
     @OneToOne
     private Account account;
@@ -30,14 +37,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
     public Long getId() {
         return id;
     }
@@ -46,12 +45,20 @@ public class Customer {
         this.id = id;
     }
 
-    public Set<Car> getCars() {
-        return cars;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setCars(Set<Car> cars) {
-        this.cars = cars;
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String getName() {

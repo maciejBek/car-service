@@ -1,6 +1,11 @@
 package pl.company.carservice.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Car {
@@ -11,7 +16,13 @@ public class Car {
         private Long id;
 
         @ManyToOne
+        @OnDelete(action = OnDeleteAction.CASCADE)
         private Customer customer;
+
+//        @ManyToOne
+//        @OnDelete(action = OnDeleteAction.CASCADE)
+//        private List<Service> services = new ArrayList<>();
+
         private String brand;
         private String model;
         private Integer year;
@@ -40,6 +51,20 @@ public class Car {
                 this.tourqe = tourqe;
         }
 
+//        public Car(Customer customer, Service service, String brand, String model, Integer year, String vinNumber, String registrationNumber, Integer capacity, String fuelType, Integer power, Integer tourqe) {
+//                this.customer = customer;
+//                this.service = service;
+//                this.brand = brand;
+//                this.model = model;
+//                this.year = year;
+//                this.vinNumber = vinNumber;
+//                this.registrationNumber = registrationNumber;
+//                this.capacity = capacity;
+//                this.fuelType = fuelType;
+//                this.power = power;
+//                this.tourqe = tourqe;
+//        }
+
         public Long getId() {
                 return id;
         }
@@ -55,6 +80,14 @@ public class Car {
         public void setCustomer(Customer customer) {
                 this.customer = customer;
         }
+
+//        public Service getService() {
+//                return service;
+//        }
+//
+//        public void setService(Service service) {
+//                this.service = service;
+//        }
 
         public String getBrand() {
                 return brand;
