@@ -70,3 +70,8 @@ body{
     text-align: center;
     box-shadow: 0px 0px 0.3em black;
 }
+
+#kratka:hover{
+    background-color: #FFD70B;
+    transition-duration: 0.5s;
+}
