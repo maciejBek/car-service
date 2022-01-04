@@ -26,7 +26,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AccountRegistrationDto accountRegistrationDto) {
-        return this.registrationService.register(accountRegistrationDto);
+    public ResponseEntity<?> register(@RequestBody Map<String, Object> accountAndUser) {
+        return this.registrationService.regisgter(accountAndUser);
     }
 }
