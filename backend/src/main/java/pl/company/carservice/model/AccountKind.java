@@ -17,9 +17,6 @@ public class AccountKind {
     @Enumerated(EnumType.STRING)
     private PermissionLevel permissionLevel;
 
-    @OneToMany(mappedBy = "accountKind")
-    private Set<Account> accounts;
-
     public AccountKind() {
 
     }
