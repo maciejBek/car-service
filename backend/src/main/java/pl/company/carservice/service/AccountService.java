@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.AccountLoginDto;
 import pl.company.carservice.model.Account;
+import pl.company.carservice.model.AccountKind;
 import pl.company.carservice.repository.AccountRepository;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -50,28 +52,10 @@ public class AccountService {
         boolean isCorrectData = accountOptional.isPresent();
         if (isCorrectData) {
             //TODO: JWT authentication token
-            
-            int accountId = accountOptional.get().getId().intValue();
-            String accountKind = "";
-            switch (accountId) {
-                case 1:
-                    accountKind = "admin";
-                    break;
-                case 2:
-                    accountKind = "customer";
-                    break;
-                case 3:
-                    accountKind = "employee";
-                    break;
-                case 4:
-                    accountKind = "supplier";
-                    break;
-                default: {
-                    System.out.println("default");
-                }
-            }
+            AccountKind accountKind = accountOptional.get().getAccountKind();
+            String accountKindString = accountKind.getPermissionLevel().toString().toLowerCase(Locale.ROOT);
 
-            return new ResponseEntity<>(Map.of("accountKind", accountKind), HttpStatus.OK);
+            return new ResponseEntity<>(Map.of("accountKind", accountKindString), HttpStatus.OK);
         } else {
             ErrorResponse errorResponse = new ErrorResponse("invalid-data");
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
