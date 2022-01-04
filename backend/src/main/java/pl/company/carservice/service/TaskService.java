@@ -13,7 +13,6 @@ import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.TaskRepository;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class TaskService {
 
     public ResponseEntity<?> getTasks(Integer pageNo, Integer pageSize, String sortBy) {
         System.out.println("sortBy:" + sortBy + ".");
-        if (pageSize > 100 || !("acceptationDate".equals(sortBy) || "completionDate".equals(sortBy) || "id".equals(sortBy))) {
+        if (pageSize > 100 || !("acceptanceDate".equals(sortBy) || "completionDate".equals(sortBy) || "id".equals(sortBy))) {
             ErrorResponse errorResponse = new ErrorResponse("invalid-parameter");
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
