@@ -7,7 +7,7 @@ const CAR_REST_API_URL = 'http://localhost:8080/api/accounts/login';
 
 const Linkk = () =>{
     return(
-        <Link id="reje" to="/Rejestracja">Dołącz do nas</Link>
+        <Link id="reje" to="Rejestracja">Dołącz do nas</Link>
     )
 }
 
@@ -67,15 +67,15 @@ class Logowanie extends React.Component {
                 })
 
                     .then(function (response) {
-                        const error =(response.response.data);
-                        console.log(error.error)
+                        const data =(response.response.data);
+                        console.log(data.accountKind)
                         document.getElementById('dobrzel').style.display = "inline";
-                        Linkk2(error.error)
-                        document.getElementById('panel').click();
+
+                        
                     })
                     .catch(function (response) {
-                        const error =(response.response.data);
-                        console.log(error.error)
+                        const errorData =(response.response.data);
+                        console.log(errorData.accountKind)
                         document.getElementById('pasek0').style.border="3px solid red";
                         document.getElementById('pasek1').style.border="3px solid red";
                         document.getElementById('bladl').style.display = "inline";
