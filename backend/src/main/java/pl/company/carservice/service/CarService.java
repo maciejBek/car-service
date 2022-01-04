@@ -60,7 +60,7 @@ public class CarService {
             Integer power = carCustomerIdDto.power();
             Integer tourqe = carCustomerIdDto.tourqe();
             Car car = new Car(brand, model, year, vinNumber, registrationNumber, capacity, fuelType, power, tourqe);
-            car.setCustomer(customer.get());
+//            car.setCustomer(customer.get());
 
             Long addedCarId = this.carRepository.save(car).getId();
 
