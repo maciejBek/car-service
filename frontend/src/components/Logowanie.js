@@ -11,6 +11,12 @@ const Linkk = () =>{
     )
 }
 
+const Linkk2 = (rel) =>{
+    return(
+        <Link id="panel" to={rel}></Link>
+    )
+}
+
 class Logowanie extends React.Component {
 
     constructor(props) {
@@ -64,6 +70,8 @@ class Logowanie extends React.Component {
                         const error =(response.response.data);
                         console.log(error.error)
                         document.getElementById('dobrzel').style.display = "inline";
+                        Linkk2(error.error)
+                        document.getElementById('panel').click();
                     })
                     .catch(function (response) {
                         const error =(response.response.data);
@@ -109,12 +117,13 @@ class Logowanie extends React.Component {
                     </div>
                 <div id="przyciskl">
                     <input id="przycisk1l" type="submit" value="Zaloguj" />
+                    <Linkk2/>
                 </div>
                 </form>
                 <div id="rejl">Nie masz jeszcze konta?
 
                     <Linkk></Linkk>
-                
+
                 </div>
                 
             </div>
