@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import './Rejestracja2.css';
+import Rejestracja from './Rejestracja';
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/cars';
 
@@ -43,6 +44,14 @@ const Przycisk = (values) =>{
 
 class Form extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state={
+            value:this.props.location.state,
+        }
+
+    }
+
     render() {
         return (
             <form id="Rejestracja2" onSubmit={console.log("klik")}>
@@ -72,6 +81,8 @@ class Form extends React.Component {
                 dom = "Nr Domu"/>
                 </div>
                 <Przycisk/>
+
+                {console.log(this.props.location.state.id)}
 
 
                 
