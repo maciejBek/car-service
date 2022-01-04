@@ -46,10 +46,13 @@ public class AccountService {
         String username = accountLoginDto.username();
         String password = accountLoginDto.password();
 
-        boolean isCorrectData = this.accountRepository.findByUsernameAndPassword(username, password).isPresent();
+        Optional<Account> accountOptional = this.accountRepository.findByUsernameAndPassword(username, password);
+        boolean isCorrectData = accountOptional.isPresent();
         if (isCorrectData) {
             //TODO: JWT authentication token
-            return new ResponseEntity<>(HttpStatus.OK);
+            
+            Long accountId = accountOptional.get().getId();
+            return new ResponseEntity<>(Map.of("accountKind", accountId), HttpStatus.OK);
         } else {
             ErrorResponse errorResponse = new ErrorResponse("invalid-data");
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
