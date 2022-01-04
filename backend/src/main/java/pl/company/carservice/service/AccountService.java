@@ -51,8 +51,27 @@ public class AccountService {
         if (isCorrectData) {
             //TODO: JWT authentication token
             
-            Long accountId = accountOptional.get().getId();
-            return new ResponseEntity<>(Map.of("accountKind", accountId), HttpStatus.OK);
+            int accountId = accountOptional.get().getId().intValue();
+            String accountKind = "";
+            switch (accountId) {
+                case 1:
+                    accountKind = "admin";
+                    break;
+                case 2:
+                    accountKind = "customer";
+                    break;
+                case 3:
+                    accountKind = "employee";
+                    break;
+                case 4:
+                    accountKind = "supplier";
+                    break;
+                default: {
+                    System.out.println("default");
+                }
+            }
+
+            return new ResponseEntity<>(Map.of("accountKind", accountKind), HttpStatus.OK);
         } else {
             ErrorResponse errorResponse = new ErrorResponse("invalid-data");
             return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
