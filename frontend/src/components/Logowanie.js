@@ -36,7 +36,7 @@ class Logowanie extends React.Component {
 
     handleSubmit(event) {
         // getting data from form and putting to json string to body array
-        let account = document.getElementById('account');
+        let account = document.getElementById('accountl');
         let formData = new FormData(account);
 
 
@@ -47,8 +47,8 @@ class Logowanie extends React.Component {
             console.log(data)
         document.getElementById('pasek0').style.border = "0px solid red";
         document.getElementById('pasek1').style.border = "0px solid red";
-        document.getElementById('blad').style.display = "none";
-        document.getElementById('dobrze').style.display = "none";
+        document.getElementById('bladl').style.display = "none";
+        document.getElementById('dobrzel').style.display = "none";
 
         let body = JSON.stringify(data);
 
@@ -61,14 +61,16 @@ class Logowanie extends React.Component {
                 })
 
                     .then(function (response) {
-                        document.getElementById('dobrze').style.display = "inline";
+                        const error =(response.response.data);
+                        console.log(error.error)
+                        document.getElementById('dobrzel').style.display = "inline";
                     })
                     .catch(function (response) {
                         const error =(response.response.data);
                         console.log(error.error)
                         document.getElementById('pasek0').style.border="3px solid red";
                         document.getElementById('pasek1').style.border="3px solid red";
-                        document.getElementById('blad').style.display = "inline";
+                        document.getElementById('bladl').style.display = "inline";
                     }).catch(function (response) {
                     //handle error
                     console.log(response);
@@ -108,12 +110,13 @@ class Logowanie extends React.Component {
                 <div id="przyciskl">
                     <input id="przycisk1l" type="submit" value="Zaloguj" />
                 </div>
+                </form>
                 <div id="rejl">Nie masz jeszcze konta?
 
                     <Linkk></Linkk>
                 
                 </div>
-                </form>
+                
             </div>
             //</div>
         );

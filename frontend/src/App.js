@@ -9,11 +9,6 @@ import Pracownik from './components/Pracownik';
 import Klient from './components/Klient';
 import Administrator from './components/Administrator';
 
-require('react-dom');
-window.React2 = require('react');
-console.log(window.React1 === window.React2);
-
-
 function App() {
   return (
       <Router>
