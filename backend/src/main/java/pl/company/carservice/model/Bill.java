@@ -1,5 +1,8 @@
 package pl.company.carservice.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +19,14 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ServiceEntity service;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Order order;
 
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;

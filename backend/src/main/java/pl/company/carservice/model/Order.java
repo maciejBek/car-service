@@ -5,7 +5,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -29,10 +28,6 @@ public class Order {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Bill bill;
-
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Magazine magazine;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
@@ -52,9 +47,8 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    public Order(Supplier supplier, Bill bill, Magazine magazine, LocalDateTime assignmentDate, LocalDateTime date, int totalPrice) {
+    public Order(Supplier supplier, Magazine magazine, LocalDateTime assignmentDate, LocalDateTime date, int totalPrice) {
         this.supplier = supplier;
-        this.bill = bill;
         this.magazine = magazine;
         this.assignmentDate = assignmentDate;
         this.date = date;
@@ -75,14 +69,6 @@ public class Order {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 
     public Magazine getMagazine() {

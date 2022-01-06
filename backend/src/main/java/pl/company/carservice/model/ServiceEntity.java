@@ -1,8 +1,5 @@
 package pl.company.carservice.model;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 
 @Entity
@@ -13,22 +10,21 @@ public class ServiceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Bill bill;
-
     private String name;
 
-    private int hoursCompletionTime;
+    private int estimatedHoursCompletionTime;
+    private int priceFrom;
+    private int priveTo;
 
     public ServiceEntity() {
 
     }
 
-    public ServiceEntity(Bill bill, String name, int hoursCompletionTime) {
-        this.bill = bill;
+    public ServiceEntity(String name, int estimatedHoursCompletionTime, int priceFrom, int priveTo) {
         this.name = name;
-        this.hoursCompletionTime = hoursCompletionTime;
+        this.estimatedHoursCompletionTime = estimatedHoursCompletionTime;
+        this.priceFrom = priceFrom;
+        this.priveTo = priveTo;
     }
 
     public Long getId() {
@@ -37,14 +33,6 @@ public class ServiceEntity {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Bill getBill() {
-        return bill;
-    }
-
-    public void setBill(Bill bill) {
-        this.bill = bill;
     }
 
     public String getName() {
@@ -56,10 +44,26 @@ public class ServiceEntity {
     }
 
     public int getHoursCompletionTime() {
-        return hoursCompletionTime;
+        return estimatedHoursCompletionTime;
     }
 
-    public void setHoursCompletionTime(int hoursCompletionTime) {
-        this.hoursCompletionTime = hoursCompletionTime;
+    public void setHoursCompletionTime(int estimatedHoursCompletionTime) {
+        this.estimatedHoursCompletionTime = estimatedHoursCompletionTime;
+    }
+
+    public int getPriceFrom() {
+        return priceFrom;
+    }
+
+    public void setPriceFrom(int priceFrom) {
+        this.priceFrom = priceFrom;
+    }
+
+    public int getPriveTo() {
+        return priveTo;
+    }
+
+    public void setPriveTo(int priveTo) {
+        this.priveTo = priveTo;
     }
 }
