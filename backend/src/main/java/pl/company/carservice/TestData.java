@@ -23,28 +23,41 @@ public class TestData {
     private CarRepository carRepository;
     private CustomerController customerController;
     private CustomerRepository customerRepository;
+    private OrderRepository orderRepository;
+    private PartRepository partRepository;
     private RegistrationController registrationController;
     private TaskController taskController;
 
     @Autowired
-    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController,
-                    CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository,
-                    RegistrationController registrationController, TaskController taskController) {
+    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, TaskController taskController) {
         this.accountRepository = accountRepository;
         this.accountKindRepository = accountKindRepository;
         this.carController = carController;
         this.carRepository = carRepository;
         this.customerController = customerController;
         this.customerRepository = customerRepository;
+        this.orderRepository = orderRepository;
+        this.partRepository = partRepository;
         this.registrationController = registrationController;
         this.taskController = taskController;
     }
 
-
-
-
     @EventListener(classes = ApplicationStartedEvent.class)
     public void addData(ApplicationStartedEvent event) {
+
+        // Part 4x
+        Part part1 = new Part("Tarcza sprzęgła", "0035672", "21 20 7 526 516", "BMW", "M3", "E92", 2011, 2);
+        Part part2 = new Part("Tarcza hamulcowa, wentylowana, przednia, prawa", "0008672", "34 11 2 283 802", "BMW", "M3", " E92", 2011, 1);
+        Part part3 = new Part("Panewka oporowa", "0155672", "11 21 1 706 831", "BMW", "Seria 3", " E36", 1997, 12);
+        this.partRepository.save(part1);
+        this.partRepository.save(part2);
+        this.partRepository.save(part3);
+
+        // Order (2x)
+        Order order1 = new Order(LocalDateTime.now(), LocalDateTime.now(), 1221);
+        Order order2 = new Order(LocalDateTime.now(), LocalDateTime.now(), 2311);
+        this.orderRepository.save(order1);
+        this.orderRepository.save(order2);
 
         // AccountKind (all kinds)
         this.accountKindRepository.save(new AccountKind(AccountKind.PermissionLevel.ADMIN));
@@ -87,8 +100,10 @@ public class TestData {
         car1.setCustomer(this.customerRepository.getById(1L));
         this.carRepository.save(car1);
         Car car2 = new Car("BMW", "M4", 2012, "1HGBH41JXAN109186", "RKR 50123", 3999, "gasoline", 420, 400);
-        car2.setCustomer(this.customerRepository.getById(1L));
+        car2.setCustomer(this.customerRepository.getById(2L));
         this.carRepository.save(car2);
+
+
 
 
         // Task x15
