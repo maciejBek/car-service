@@ -1,18 +1,20 @@
 package pl.company.carservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.StringToJson;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerIdDto;
-import pl.company.carservice.model.Account;
+import pl.company.carservice.dto.CarIdBrandModelDto;
 import pl.company.carservice.model.Car;
 import pl.company.carservice.model.Customer;
 import pl.company.carservice.repository.CarRepository;
 import pl.company.carservice.repository.CustomerRepository;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,6 +39,29 @@ public class CarService {
         } else {
             String errorResponse = StringToJson.parse("error", "car-does-not-exist");
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    public ResponseEntity<?> getCars(Integer pageNo, Integer pageSize, String sortBy, Long customerId) {
+        System.out.println("sortBy:" + sortBy + ".");
+        if (pageSize > 200 || !("id".equals(sortBy) || "brand".equals(sortBy) || "model".equals(sortBy))) {
+            ErrorResponse errorResponse = new ErrorResponse("invalid-parameter");
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        }
+
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<CarIdBrandModelDto> pagedResult = null;
+        if (customerId != null) {
+            pagedResult = this.carRepository.findAllById(customerId, paging);
+        } else {
+            pagedResult = this.carRepository.findAllBy(paging);
+        }
+
+        if (pagedResult.hasContent()) {
+            return new ResponseEntity<>(pagedResult.getContent(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
     }
 
