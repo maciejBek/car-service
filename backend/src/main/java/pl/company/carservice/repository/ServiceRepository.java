@@ -1,12 +1,12 @@
 package pl.company.carservice.repository;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import pl.company.carservice.model.ServiceEntity;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ServiceRepository extends Repository<ServiceEntity, Long> {
+public interface ServiceRepository extends JpaRepository<ServiceEntity, Long> {
 
     Long removeById(Long id);
 

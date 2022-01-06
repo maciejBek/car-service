@@ -14,6 +14,6 @@ public interface CarRepository extends CrudRepository<Car, Long> {
 
     Page<CarIdBrandModelDto> findAllById(Long id, Pageable pageable);
 
-    Page<CarIdBrandModelDto> findAllBy(Pageable pageable);
+    Page<CarIdBrandModelDto> findAllDtoBy(Pageable pageable);
 
 }

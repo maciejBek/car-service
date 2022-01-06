@@ -26,6 +26,11 @@ public class CustomerController {
         return this.customerService.getCustomer(id);
     }
 
+    @GetMapping(value = "/customers", produces = "application/json")
+    public ResponseEntity<?> getCustomers() {
+        return this.customerService.getCustomers();
+    }
+
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
         return this.customerService.deleteCustomer(id);

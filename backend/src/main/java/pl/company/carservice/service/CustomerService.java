@@ -6,9 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.StringToJson;
 import pl.company.carservice.controller.error.ErrorResponse;
+import pl.company.carservice.dto.CustomerIdNameSurnameDto;
 import pl.company.carservice.model.Customer;
+import pl.company.carservice.model.ServiceEntity;
 import pl.company.carservice.repository.CustomerRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -33,6 +37,16 @@ public class CustomerService {
         }
     }
 
+    public ResponseEntity<?> getCustomers() {
+        List<CustomerIdNameSurnameDto> services = this.customerRepository.findAllDtoBy();
+
+        if (!services.isEmpty()) {
+            return new ResponseEntity<>(services, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+        }
+    }
+
     public ResponseEntity<?> deleteCustomer(Long id) {
         this.customerRepository.deleteById(id);
 
@@ -44,9 +58,4 @@ public class CustomerService {
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
     }
-
-    public boolean ifExists(Long id) {
-        return this.customerRepository.existsById(id);
-    }
-
 }

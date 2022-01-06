@@ -55,7 +55,7 @@ public class CarService {
         if (customerId != null) {
             pagedResult = this.carRepository.findAllById(customerId, paging);
         } else {
-            pagedResult = this.carRepository.findAllBy(paging);
+            pagedResult = this.carRepository.findAllDtoBy(paging);
         }
 
         if (pagedResult.hasContent()) {
