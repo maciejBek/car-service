@@ -14,7 +14,7 @@ public class Complaint {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Service service;
+    private ServiceEntity service;
 
     private String description;
 
@@ -22,7 +22,7 @@ public class Complaint {
 
     }
 
-    public Complaint(Service service, String description) {
+    public Complaint(ServiceEntity service, String description) {
         this.service = service;
         this.description = description;
     }
@@ -35,11 +35,11 @@ public class Complaint {
         this.id = id;
     }
 
-    public Service getService() {
+    public ServiceEntity getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(ServiceEntity service) {
         this.service = service;
     }
 

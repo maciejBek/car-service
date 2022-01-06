@@ -4,11 +4,10 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Set;
 
 @Entity
-public class Service {
+@Table(name = "service")
+public class ServiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,18 +17,15 @@ public class Service {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Bill bill;
 
-    @ManyToMany(mappedBy="services")
-    private Set<Car> cars;
-
     private String name;
 
     private int hoursCompletionTime;
 
-    public Service() {
+    public ServiceEntity() {
 
     }
 
-    public Service(Bill bill, String name, int hoursCompletionTime) {
+    public ServiceEntity(Bill bill, String name, int hoursCompletionTime) {
         this.bill = bill;
         this.name = name;
         this.hoursCompletionTime = hoursCompletionTime;
@@ -49,14 +45,6 @@ public class Service {
 
     public void setBill(Bill bill) {
         this.bill = bill;
-    }
-
-    public Collection<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Set<Car> cars) {
-        this.cars = cars;
     }
 
     public String getName() {

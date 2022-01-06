@@ -1,9 +1,7 @@
 package pl.company.carservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Part {
@@ -11,14 +9,32 @@ public class Part {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToMany(mappedBy = "parts")
+    private Set<Order> orders;
+
     private String name;
     private String numbering;
     private String serialNumber;
     private String carBrand;
     private String carModel;
+    private String carModelSymbol;
+    private int carYear;
+    private int quantity;
 
     public Part() {
 
+    }
+
+    public Part(String name, String numbering, String serialNumber, String carBrand, String carModel, String carModelSymbol, int carYear, int quantity) {
+        this.name = name;
+        this.numbering = numbering;
+        this.serialNumber = serialNumber;
+        this.carBrand = carBrand;
+        this.carModel = carModel;
+        this.carModelSymbol = carModelSymbol;
+        this.carYear = carYear;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -67,5 +83,29 @@ public class Part {
 
     public void setCarModel(String carModel) {
         this.carModel = carModel;
+    }
+
+    public String getCarModelSymbol() {
+        return carModelSymbol;
+    }
+
+    public void setCarModelSymbol(String carModelSymbol) {
+        this.carModelSymbol = carModelSymbol;
+    }
+
+    public int getCarYear() {
+        return carYear;
+    }
+
+    public void setCarYear(int carYear) {
+        this.carYear = carYear;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

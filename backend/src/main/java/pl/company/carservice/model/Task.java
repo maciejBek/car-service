@@ -16,7 +16,7 @@ public class Task {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Service service;
+    private ServiceEntity service;
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)

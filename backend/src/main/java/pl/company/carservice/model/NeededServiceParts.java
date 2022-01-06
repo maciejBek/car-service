@@ -18,7 +18,7 @@ public class NeededServiceParts {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Service service;
+    private ServiceEntity service;
 
     private int amount;
 
@@ -26,7 +26,7 @@ public class NeededServiceParts {
 
     }
 
-    public NeededServiceParts(Part part, Service service, int amount) {
+    public NeededServiceParts(Part part, ServiceEntity service, int amount) {
         this.part = part;
         this.service = service;
         this.amount = amount;
@@ -48,11 +48,11 @@ public class NeededServiceParts {
         this.part = part;
     }
 
-    public Service getService() {
+    public ServiceEntity getService() {
         return service;
     }
 
-    public void setService(Service service) {
+    public void setService(ServiceEntity service) {
         this.service = service;
     }
 
