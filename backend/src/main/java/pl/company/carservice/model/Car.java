@@ -4,8 +4,8 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Set;
 
 @Entity
 public class Car {
@@ -15,10 +15,15 @@ public class Car {
         @Column(updatable = false)
         private Long id;
 
-        @ManyToOne
         @OnDelete(action = OnDeleteAction.CASCADE)
+        @ManyToOne
         private Customer customer;
 
+        @ManyToMany
+        @JoinTable(name="car_service",
+                joinColumns=@JoinColumn(name="id"),
+                inverseJoinColumns=@JoinColumn(name="car_id"))
+        private Set<Service> services;
 //        @ManyToOne
 //        @OnDelete(action = OnDeleteAction.CASCADE)
 //        private List<Service> services = new ArrayList<>();
@@ -81,13 +86,13 @@ public class Car {
                 this.customer = customer;
         }
 
-//        public Service getService() {
-//                return service;
-//        }
-//
-//        public void setService(Service service) {
-//                this.service = service;
-//        }
+        public Collection<Service> getServices() {
+                return services;
+        }
+
+        public void setServices(Set<Service> services) {
+                this.services = services;
+        }
 
         public String getBrand() {
                 return brand;
