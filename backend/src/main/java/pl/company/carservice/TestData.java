@@ -26,10 +26,11 @@ public class TestData {
     private OrderRepository orderRepository;
     private PartRepository partRepository;
     private RegistrationController registrationController;
+    private ServiceRepository serviceRepository;
     private TaskController taskController;
 
     @Autowired
-    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, TaskController taskController) {
+    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, ServiceRepository serviceRepository, TaskController taskController) {
         this.accountRepository = accountRepository;
         this.accountKindRepository = accountKindRepository;
         this.carController = carController;
@@ -39,6 +40,7 @@ public class TestData {
         this.orderRepository = orderRepository;
         this.partRepository = partRepository;
         this.registrationController = registrationController;
+        this.serviceRepository = serviceRepository;
         this.taskController = taskController;
     }
 
@@ -52,6 +54,28 @@ public class TestData {
         this.partRepository.save(part1);
         this.partRepository.save(part2);
         this.partRepository.save(part3);
+
+        // Service 10x
+        ServiceEntity service1 = new ServiceEntity("Wymiana klocków hamulcowych przód komplet", 1, 50, 100);
+        ServiceEntity service2 = new ServiceEntity("Wymiana klocków hamulcowych tył komplet", 1, 50, 100);
+        ServiceEntity service3 = new ServiceEntity("Regulacja zaworów silnikowych", 3, 150, 250);
+        ServiceEntity service4 = new ServiceEntity("Wymiana oleju z filtrem", 1, 30, 50);
+        ServiceEntity service5 = new ServiceEntity("Wymiana sprzęgła", 8, 400, 600);
+        ServiceEntity service6 = new ServiceEntity("Wymiana rozrządu", 6, 250, 400);
+        ServiceEntity service7 = new ServiceEntity("Wymiana uszczelki pod głowicą", 8, 350, 500);
+        ServiceEntity service8 = new ServiceEntity("Wymiana amortyzatora przód 1 szt.", 2, 100, 150);
+        ServiceEntity service9 = new ServiceEntity("Wymiana amortyzatora tył 1 szt.", 2, 75, 125);
+        ServiceEntity service10 = new ServiceEntity("Wymiana kompletnego układu wydechowego", 4, 200, 300);
+        this.serviceRepository.save(service1);
+        this.serviceRepository.save(service2);
+        this.serviceRepository.save(service3);
+        this.serviceRepository.save(service4);
+        this.serviceRepository.save(service5);
+        this.serviceRepository.save(service6);
+        this.serviceRepository.save(service7);
+        this.serviceRepository.save(service8);
+        this.serviceRepository.save(service9);
+        this.serviceRepository.save(service10);
 
         // Order (2x)
         Order order1 = new Order(LocalDateTime.now(), LocalDateTime.now(), 1221);
@@ -94,7 +118,6 @@ public class TestData {
         accountEmployee.put("employee", employeeRegistrationDto);
         this.registrationController.register(accountEmployee);
 
-
         // Car 2x
         Car car1 = new Car("BMW", "M3", 2012, "1HGBH41JXMN109186", "RKR 50123", 3999, "gasoline", 420, 400);
         car1.setCustomer(this.customerRepository.getById(1L));
@@ -102,9 +125,6 @@ public class TestData {
         Car car2 = new Car("BMW", "M4", 2012, "1HGBH41JXAN109186", "RKR 50123", 3999, "gasoline", 420, 400);
         car2.setCustomer(this.customerRepository.getById(2L));
         this.carRepository.save(car2);
-
-
-
 
         // Task x15
         LocalDateTime acceptationDate1 = LocalDateTime.of(2021, 12, 8, 10, 45, 20, 3353);

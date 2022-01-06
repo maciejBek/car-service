@@ -30,12 +30,12 @@ public class ServiceController {
         return this.serviceService.getServices();
     }
 
-    @PostMapping("/cars")
+    @PostMapping("/services")
     public ResponseEntity<?> addService(@RequestBody ServiceEntity service) {
         return this.serviceService.addService(service);
     }
 
-    @DeleteMapping("/cars/{id}")
+    @DeleteMapping("/services/{id}")
     public ResponseEntity<?> deleteService(@PathVariable Long id) {
         return this.serviceService.deleteService(id);
     }

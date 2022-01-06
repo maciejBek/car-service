@@ -11,7 +11,6 @@ public class ServiceEntity {
     private Long id;
 
     private String name;
-
     private int estimatedHoursCompletionTime;
     private int priceFrom;
     private int priveTo;
