@@ -69,18 +69,35 @@ class Form extends React.Component {
         // getting data from form and putting to json string to body array
         let rere = document.getElementById('rejestracja2');
         let formData = new FormData(rere);
-        console.log(rere)
 
         var data = {};
         formData.forEach(function(value, key){
             data[key] = value;
         });
-        console.log(data);
         data.emailAddress = sessionStorage.getItem("emailAddress")
         data.username = sessionStorage.getItem("username")
         data.password = sessionStorage.getItem("password")
-        let body = JSON.stringify(data);
+
         console.log(data);
+        
+        var pojemnik = {};
+        pojemnik.account = {};
+        pojemnik.account.username = data.username
+        pojemnik.account.password = data.password
+        pojemnik.account.emailAddress = data.emailAddress
+        pojemnik.customer = {};
+        pojemnik.customer.name = data.Imie;
+        pojemnik.customer.surname = data.Nazwisko;
+        pojemnik.customer.phoneNumber = data.nrTel;
+        pojemnik.customer.address = {};
+        pojemnik.customer.address.street = data.Ulica;
+        pojemnik.customer.address.number = data.Nrdomu;
+        pojemnik.customer.address.town = data.Miejscowosc;
+        console.log(pojemnik);
+        
+
+        let body = JSON.stringify(pojemnik);
+        console.log(body);
 
         // add car to database with post method
         axios({
