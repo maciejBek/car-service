@@ -26,6 +26,10 @@ public class Task {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Customer customer;
 
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Bill bill;
+
     @Column(nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime acceptanceDate;

@@ -24,10 +24,6 @@ public class Bill {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ServiceEntity service;
 
-    @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Order order;
-
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
     private Boolean isPaid;

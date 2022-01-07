@@ -28,6 +28,10 @@ public class Order {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
+    private Bill bill;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Magazine magazine;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
