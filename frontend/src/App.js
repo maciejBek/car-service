@@ -8,6 +8,8 @@ import Rejestracja2 from './components/Rejestracja2';
 import Pracownik from './components/Pracownik';
 import Klient from './components/Klient';
 import Administrator from './components/Administrator';
+import Task from './components/Task';
+import MyProvider from './components/MyProvider';
 
 function App() {
   return (
@@ -15,11 +17,12 @@ function App() {
         <Routes>
         <Route exact path="/" element={<Logowanie/>}></Route>
         <Route path="/Rejestracja" element={<Rejestracja/>}></Route>
-        <Route path="/Rejestracja2" element={<Rejestracja2/>}></Route>
-        <Route path="/Pracownik" element={<Pracownik/>}></Route>
+        <Route path="/rejestracja2" element={<Rejestracja2/>}></Route>
+        <Route path="/pracownik" element={<Pracownik/>}></Route>
         <Route path="/Form" element={<Form/>}></Route>
-        <Route path="/Klient" element={<Klient/>}></Route>
-        <Route path="/Administrator" element={<Administrator/>}></Route>
+        <Route path="/klient" element={<Klient/>}></Route>
+        <Route path="/admin" element={<Administrator/>}></Route>
+        <Route path="/task" element={<Task/>}></Route>
         
         
         

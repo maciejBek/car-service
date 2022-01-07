@@ -3,8 +3,9 @@ import React from 'react';
 import axios from 'axios';
 import './Rejestracja2.css';
 import Rejestracja from './Rejestracja';
+import './servis.js';
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/cars';
+const CAR_REST_API_URL = 'http://localhost:8080/api/register';
 
 const Tytul = (values) =>{
     return(
@@ -26,7 +27,7 @@ const Wstaw = (values) =>{
     return(
         <div id="inputrr">
         {values.tekst}
-        <input type="text" className="inputr" placeholder={values.dom} id="power" name="power" />
+        <input type="text" className="inputr" placeholder={values.dom} id="power" name={values.idk} />
         </div>
     )
 }
@@ -43,52 +44,111 @@ const Przycisk = (values) =>{
 
 
 class Form extends React.Component {
-
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            value:this.props.location.state,
-        }
+        this.state = {
+            isGoing: true,
+            numberOfGuests: 2
+        };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
 
     }
 
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+        // getting data from form and putting to json string to body array
+        let rere = document.getElementById('rejestracja2');
+        let formData = new FormData(rere);
+        console.log(rere)
+
+        var data = {};
+        formData.forEach(function(value, key){
+            data[key] = value;
+        });
+        console.log(data);
+        data.emailAddress = sessionStorage.getItem("emailAddress")
+        data.username = sessionStorage.getItem("username")
+        data.password = sessionStorage.getItem("password")
+        let body = JSON.stringify(data);
+        console.log(data);
+
+        // add car to database with post method
+        axios({
+            method: "post",
+            url: CAR_REST_API_URL,
+            data: body,
+            headers: { "Content-Type": "application/JSON" },
+        })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+            });
+
+        event.preventDefault();
+    }
+
+
+
     render() {
         return (
-            <form id="Rejestracja2" onSubmit={console.log("klik")}>
+
                 <div id="glownyr">
                 <Tytul
                 tekst="Witaj w ostanim etapie rejestracji !"/>
                 <Tekst
                 tekst="aby ukończyć rejestracie musisz wypełnić jeszcze kilka informacji na swój temat. Pozwoli nam to na spersonalizowanie twojego konta"/>
+                <form id="rejestracja2" onSubmit={this.handleSubmit}>
                 <div id = "inputy">
                 <Wstaw
                 tekst="Podaj swoje imię"
-                dom = "Imię"/>
+                dom = "Imię"
+                idk = "Imie"/>
                 <Wstaw
                 tekst="Podaj swoje Nazwisko"
-                dom = "Nazwisko"/>
+                dom = "Nazwisko"
+                idk = "Nazwisko"/>
                 <Wstaw
                 tekst="Podaj nr telefonu"
-                dom = "Nr telefonu"/>
+                dom = "Nr telefonu"
+                idk = "nrTel"/>
                 <Wstaw
                 tekst="Miejscowość"
-                dom = "Miejscowość"/>
+                dom = "Miejscowość"
+                idk = "Miejscowosc"/>
                 <Wstaw
                 tekst="Ulica"
-                dom = "Ulica"/>
+                dom = "Ulica"
+                idk = "Ulica"/>
                 <Wstaw
                 tekst="Nr Domu"
-                dom = "Nr Domu"/>
+                dom = "Nr Domu"
+                idk = "Nrdomu"/>
                 </div>
-                <Przycisk/>
+               
+                <input  type="submit" value="Dalej" />
+                </form>
 
-                {console.log(this.props.location.state.id)}
+            
 
 
                 
 
                 </div>
-            </form>
+            
         );
     }
 }

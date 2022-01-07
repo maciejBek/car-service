@@ -11,9 +11,21 @@ const Linkk = () =>{
     )
 }
 
-const Linkk2 = (rel) =>{
+const Linkk2 = () =>{
     return(
-        <Link id="panel" to={rel}></Link>
+        <Link id="admin" to="admin"></Link>
+    )
+}
+
+const Linkk3 = () =>{
+    return(
+        <Link id="pracownik" to="pracownik"></Link>
+    )
+}
+
+const Linkk4 = () =>{
+    return(
+        <Link id="klient" to="klient"></Link>
     )
 }
 
@@ -67,15 +79,24 @@ class Logowanie extends React.Component {
                 })
 
                     .then(function (response) {
-                        const data =(response.response.data);
+                        const data =(response.data);
                         console.log(data.accountKind)
                         document.getElementById('dobrzel').style.display = "inline";
-
+                        if(data.accountKind == "admin"){
+                            document.getElementById('admin').click();
+                        }
+                        if(data.accountKind == "customer"){
+                            document.getElementById('pracownik').click();
+                        }
+                        if(data.accountKind == "employee"){
+                            document.getElementById('klient').click();
+                        }
+                        
                         
                     })
                     .catch(function (response) {
                         const errorData =(response.response.data);
-                        console.log(errorData.accountKind)
+                        console.log(errorData.error)
                         document.getElementById('pasek0').style.border="3px solid red";
                         document.getElementById('pasek1').style.border="3px solid red";
                         document.getElementById('bladl').style.display = "inline";
@@ -118,6 +139,8 @@ class Logowanie extends React.Component {
                 <div id="przyciskl">
                     <input id="przycisk1l" type="submit" value="Zaloguj" />
                     <Linkk2/>
+                    <Linkk3/>
+                    <Linkk4/>
                 </div>
                 </form>
                 <div id="rejl">Nie masz jeszcze konta?
