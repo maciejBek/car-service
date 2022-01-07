@@ -52,6 +52,12 @@ public class RegistrationService {
 
         ObjectMapper objectMapper = new ObjectMapper();
         AccountRegistrationDto accountRegistrationDto = objectMapper.convertValue(accountAndUser.get("account"), AccountRegistrationDto.class);
+
+        if (accountRegistrationDto == null) {
+            ErrorResponse errorResponse = new ErrorResponse("empty-data");
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        }
+
         String username = accountRegistrationDto.username();
         String password = accountRegistrationDto.password();
         String emailAddress = accountRegistrationDto.emailAddress();
@@ -99,6 +105,7 @@ public class RegistrationService {
         }
 
         account.setAccountKind(accountKind);
+
         //saving account to database
         Long addedAccountId = this.accountRepository.save(account).getId();
 

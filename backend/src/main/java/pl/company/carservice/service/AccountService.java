@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.AccountLoginDto;
+import pl.company.carservice.dto.AccountRegistrationDto;
 import pl.company.carservice.model.Account;
 import pl.company.carservice.model.AccountKind;
 import pl.company.carservice.repository.AccountRepository;
@@ -32,6 +34,24 @@ public class AccountService {
             ErrorResponse errorResponse = new ErrorResponse("account-does-not-exist");
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
+    }
+
+    public ResponseEntity<?> existsAccount (@RequestBody AccountRegistrationDto accountRegistrationDto) {
+        if (this.accountRepository.existsByUsername(accountRegistrationDto.username())) {
+            if (this.accountRepository.existsByEmailAddress(accountRegistrationDto.emailAddress())) {
+                ErrorResponse errorResponse = new ErrorResponse("email-address-and-username-exist");
+                return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+            }
+            ErrorResponse errorResponse = new ErrorResponse("username-exists");
+            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+        }
+
+        if (this.accountRepository.existsByEmailAddress(accountRegistrationDto.emailAddress())) {
+            ErrorResponse errorResponse = new ErrorResponse("email-address-exists");
+            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     public ResponseEntity<?> deleteAccount(Long id) {
