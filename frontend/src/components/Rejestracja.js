@@ -2,9 +2,10 @@ import React from 'react';
 import './Rejestracja.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import './servis.js';
 
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/register';
+const CAR_REST_API_URL = 'http://localhost:8080/api/accounts';
 
 
 
@@ -86,8 +87,8 @@ class Rejestracja extends React.Component {
 
         }else {
             console.log("hasla zgodne")
-            document.getElementById('to').click();
-
+            
+            
 
             console.log(data)
 
@@ -102,8 +103,12 @@ class Rejestracja extends React.Component {
             })
 
                 .then(function (response) {
+                    console.log(response)
                     document.getElementById('dobrze').style.display = "inline";
-                    
+                    sessionStorage.setItem("emailAddress", email);
+                    sessionStorage.setItem("username", login);
+                    sessionStorage.setItem("password", haslo1);
+                    document.getElementById('to').click();
                 })
                 .catch(function (response) {
                     const error =(response.response.data);
@@ -183,9 +188,7 @@ class Rejestracja extends React.Component {
 
                     <div id="przycisk">
                         <input id="przycisk1" type="submit" value="Zarejestruj się" />
-                        <Link id="to" to={{
-                            pathname: '/details',
-                            state: {id: 1, name: 'sabaoon', shirt: 'green'}}}/>
+                        <Link id="to" to="/Rejestracja2"/>
                     </div>
 
                 </form>
