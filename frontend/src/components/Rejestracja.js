@@ -2,7 +2,7 @@ import React from 'react';
 import './Rejestracja.css';
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import './servis.js';
+
 
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/accounts';

@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import './Rejestracja2.css';
 import Rejestracja from './Rejestracja';
-import './servis.js';
+
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/register';
 

@@ -9,7 +9,7 @@ import Pracownik from './components/Pracownik';
 import Klient from './components/Klient';
 import Administrator from './components/Administrator';
 import Task from './components/Task';
-import MyProvider from './components/MyProvider';
+
 
 function App() {
   return (
