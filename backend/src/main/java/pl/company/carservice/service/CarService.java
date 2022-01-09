@@ -73,6 +73,7 @@ public class CarService {
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
+        // TODO: entityManager.getReference(ServiceEntity.class, serviceId);
         Optional<Customer> customer = this.customerRepository.findById(customerId);
         if (customer.isPresent()) {
             String brand = carCustomerIdDto.brand();

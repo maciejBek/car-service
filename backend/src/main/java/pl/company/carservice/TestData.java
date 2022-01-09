@@ -143,21 +143,21 @@ public class TestData {
         LocalDateTime acceptationDate14 = LocalDateTime.of(2021, 12, 29, 8, 45, 20, 3353);
         LocalDateTime acceptationDate15 = LocalDateTime.of(2021, 12, 30, 10, 45, 20, 3353);
 
-        TaskAdditionDto taskAdditionDto1 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate1, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto2 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate2, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto3 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate3, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto4 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate4, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto5 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate5, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto6 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate6, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto7 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate7, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto8 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate8, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto9 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate9, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto10 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate10, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto11 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate11, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto12 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate12, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto13 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate13, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto14 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate14, "opis", "opis2");
-        TaskAdditionDto taskAdditionDto15 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate15, "opis", "opis2");
+        TaskAdditionDto taskAdditionDto1 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate1.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto2 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate2.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto3 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate3.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto4 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate4.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto5 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate5.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto6 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate6.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto7 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate7.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto8 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate8.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto9 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate9.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto10 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate10.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto11 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate11.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto12 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate12.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto13 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate13.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto14 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate14.toString(), "opis", "opis2");
+        TaskAdditionDto taskAdditionDto15 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate15.toString(), "opis", "opis2");
 
         this.taskController.addTask(taskAdditionDto1);
         this.taskController.addTask(taskAdditionDto2);
