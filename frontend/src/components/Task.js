@@ -129,7 +129,7 @@ class Task extends React.Component {
         let body = JSON.stringify(data);
         console.log(data)
         
-        data.acceptationDate = day.toISOString()
+        data.acceptanceDate = day.toISOString()
         // add car to database with post method
         axios({
             method: "post",
