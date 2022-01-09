@@ -7,41 +7,50 @@ class Task extends React.Component {
 
     constructor(props) {
         super(props);
-        this.pobranie = this.pobranie.bind(this);
         this.state = {
+            obj: 0,
             isGoing: true,
             numberOfGuests: 2
         };
 
     }
 
-    pobranie() {
-        console.log("dziala")
-     // add car to database with post method
+    componentDidMount(){
+        console.log(document.getElementById("select"))
+        var pomoc
         axios({
             method: "get",
             url: CAR_REST_API_URL,
             params: {
                 pageSize: 5,
                 pageNo: 1,
-                sortBy: "acceptationDate"
+                sortBy: "acceptanceDate"
               }
         })
 
             .then(function (response) {
-                console.log(response.data)
+                console.log(response.data[1])
+                var obj = (response.data);
             })
             .catch(function (response) {
                 console.log(response)       
             })
-
+            this.state.obj = pomoc
+            console.log(this.state.obj)
     }
+    
+   
 
 
     render() {
+        console.log("kkkkkkkkkkkkkkkkkk")
         return (
+            <div>
+                <select id="select">
+                <option id="options" value="1">{document.getElementById("options").value}</option>
             
-            1
+                </select>
+            </div>
         ); 
     }
 }
