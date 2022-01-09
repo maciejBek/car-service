@@ -27,7 +27,6 @@ class Task extends React.Component {
     }
 
     serwis() {
-        console.log("atatatatata")
 
         const e = axios({
             method: "get",
@@ -39,9 +38,7 @@ class Task extends React.Component {
         })
 
             const f = e.then(response => {
-                console.log(response.data)
                 this.setState({service: response.data }) 
-                console.log(this.state.service)
                 
             })
             e.catch(function (response) {
@@ -52,8 +49,6 @@ class Task extends React.Component {
 
     samochody() {
         var id = document.getElementById("select").value
-        console.log(this.state.cars)
-        console.log("tututututu")
 
         const c = axios({
             method: "get",
@@ -67,9 +62,7 @@ class Task extends React.Component {
         })
 
             const d = c.then(response => {
-                console.log(response.data)
                 this.setState({cars: response.data }) 
-                console.log(this.state.cars)
                 
             })
             c.catch(function (response) {
@@ -80,7 +73,6 @@ class Task extends React.Component {
 
     componentDidMount(){
         console.log(document.getElementById("select"))
-        console.log(this.state.cars)
         
         const a = axios({
             method: "get",
@@ -93,16 +85,13 @@ class Task extends React.Component {
         })
 
             const b = a.then(response => {
-                console.log(response.data)
                 this.setState({obj: response.data }) 
-                console.log(this.state.obj)
                 
             })
             a.catch(function (response) {
                 console.log(response)       
             })
 
-            console.log(this.state.obj)
         
     }
 
@@ -126,13 +115,18 @@ class Task extends React.Component {
             data[key] = value;
         });
 
-        let body = JSON.stringify(data);
-        data.customerId = document.getElementById("select").value
-        data.carId = document.getElementById("cars").value
-        data.serviceId = document.getElementById("service").value
+        var m = document.getElementById("select").value
+        var i = document.getElementById("cars").value
+        var f = document.getElementById("service").value
+
+
+        data.customerId = parseInt(m)
+        data.carId = parseInt(i)
+        data.serviceId = parseInt(f)
+
         var day = new Date();
         
-        console.log(day.toISOString())
+        let body = JSON.stringify(data);
         console.log(data)
         
         data.acceptationDate = day.toISOString()
@@ -161,21 +155,21 @@ class Task extends React.Component {
         return (
             <div>
                 
-                <select id="select" onInput={this.samochody}>
+                <select id="select" name="customerId" onInput={this.samochody}>
                 <option value="" disabled selected>Klenci</option>
                     {this.state.obj.map(el =>(
                         <option value={el.id}>{el.name}{" "}{el.surname}</option>
                     ))}
                 </select>
 
-                <select id="cars" onInput={this.serwis}>
+                <select id="cars" name="carId" onInput={this.serwis}>
                 <option value="" disabled selected>Samochody</option>
                     {this.state.cars.map(el =>(
                         <option value={el.id}>{el.brand}{" "}{el.model}</option>
                     ))}
                 </select>
 
-                <select id="service">
+                <select id="service" name="serviceId">
                 <option value="" disabled selected>Usługi</option>
                     {this.state.service.map(el =>(
                         <option value={el.id}>{el.name}</option>
