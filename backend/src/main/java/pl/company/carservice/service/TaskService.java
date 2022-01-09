@@ -10,9 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.TaskAdditionDto;
+import pl.company.carservice.model.Car;
+import pl.company.carservice.model.Customer;
+import pl.company.carservice.model.ServiceEntity;
 import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.TaskRepository;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
@@ -22,10 +26,12 @@ import java.util.Optional;
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private EntityManager entityManager;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, EntityManager entityManager) {
         this.taskRepository = taskRepository;
+        this.entityManager = entityManager;
     }
 
     public ResponseEntity<?> getTask(Long id) {
@@ -61,11 +67,14 @@ public class TaskService {
         Long carId = taskAdditionDto.carId();
         Long customerId = taskAdditionDto.customerId();
         LocalDateTime acceptationDate = taskAdditionDto.acceptationDate();
-        LocalDateTime completionDateDate = taskAdditionDto.completionDate();
         String serviceDescription = taskAdditionDto.serviceDescription();
         String problemDescription = taskAdditionDto.problemDescription();
 
-        Task task = new Task(acceptationDate, completionDateDate, serviceDescription, problemDescription);
+        ServiceEntity service = entityManager.getReference(ServiceEntity.class, serviceId);
+        Car car = entityManager.getReference(Car.class, carId);
+        Customer customer = entityManager.getReference(Customer.class, customerId);
+
+        Task task = new Task(service, car, customer, acceptationDate, serviceDescription, problemDescription);
 
         this.taskRepository.save(task);
 
