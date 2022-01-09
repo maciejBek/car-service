@@ -1,14 +1,15 @@
 import React from 'react';
 import axios from "axios";
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/tasks';
+const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
+const TASK_REST_API_URL = 'http://localhost:8080/api/tasks';
 
 class Task extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            obj: null,
+            obj: [],
             isGoing: true,
             numberOfGuests: 2
         };
@@ -21,7 +22,7 @@ class Task extends React.Component {
         
         const a = axios({
             method: "get",
-            url: CAR_REST_API_URL,
+            url: CUSTOMER_REST_API_URL,
             params: {
                 pageSize: 5,
                 pageNo: 0,
@@ -31,7 +32,7 @@ class Task extends React.Component {
 
             const b = a.then(response => {
                 console.log(response.data)
-                this.state.obj = response.data
+                this.setState({obj: response.data }) 
                 console.log(this.state.obj)
                 
             })
@@ -49,12 +50,13 @@ class Task extends React.Component {
 
 
     render() {
-        console.log("kkkkkkkkkkkkkkkkkk")
         return (
             <div>
                 <select id="select">
-                <option>2</option>
-            
+                    <option value="" disabled selected></option>
+                    {this.state.obj.map(el =>(
+                        <option>{el.name}{" "}{el.surname}</option>
+                    ))}
                 </select>
             </div>
         ); 
