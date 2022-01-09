@@ -8,7 +8,7 @@ class Task extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            obj: 0,
+            obj: null,
             isGoing: true,
             numberOfGuests: 2
         };
@@ -17,29 +17,35 @@ class Task extends React.Component {
 
     componentDidMount(){
         console.log(document.getElementById("select"))
-        var pomoc
-        axios({
+        console.log(this.state.obj)
+        
+        const a = axios({
             method: "get",
             url: CAR_REST_API_URL,
             params: {
                 pageSize: 5,
-                pageNo: 1,
+                pageNo: 0,
                 sortBy: "acceptanceDate"
               }
         })
 
-            .then(function (response) {
-                console.log(response.data[1])
-                var obj = (response.data);
+            const b = a.then(response => {
+                console.log(response.data)
+                this.state.obj = response.data
+                console.log(this.state.obj)
+                
             })
-            .catch(function (response) {
+            a.catch(function (response) {
                 console.log(response)       
             })
-            this.state.obj = pomoc
+
             console.log(this.state.obj)
     }
     
-   
+    doSomething(data) {
+       this.state.obj = data
+       console.log(this.state.obj)
+    }
 
 
     render() {
@@ -47,7 +53,7 @@ class Task extends React.Component {
         return (
             <div>
                 <select id="select">
-                <option id="options" value="1">{document.getElementById("options").value}</option>
+                <option>2</option>
             
                 </select>
             </div>
