@@ -72,7 +72,6 @@ class Task extends React.Component {
     }
 
     componentDidMount(){
-        console.log(document.getElementById("select"))
         
         const a = axios({
             method: "get",
