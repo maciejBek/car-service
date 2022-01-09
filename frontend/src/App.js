@@ -9,6 +9,7 @@ import Pracownik from './components/Pracownik';
 import Klient from './components/Klient';
 import Administrator from './components/Administrator';
 import Task from './components/Task';
+import Harmonogram from './components/Harmonogram';
 
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
         <Route path="/Form" element={<Form/>}></Route>
         <Route path="/klient" element={<Klient/>}></Route>
         <Route path="/admin" element={<Administrator/>}></Route>
-        <Route path="/task" element={<Task/>}></Route>
+        <Route path="/pracownik/task" element={<Task/>}></Route>
+        <Route path="/pracownik/harmonogram" element={<Harmonogram/>}></Route>
         
         
         
