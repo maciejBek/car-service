@@ -125,11 +125,13 @@ class Task extends React.Component {
 
         var day = new Date();
         
-        let body = JSON.stringify(data);
-        console.log(data)
+       
         
         data.acceptanceDate = day.toISOString()
         // add car to database with post method
+        let body = JSON.stringify(data);
+        console.log(data)
+        console.log(body)
         axios({
             method: "post",
             url: TASKS_REST_API_URL,
