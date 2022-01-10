@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import './Task.css';
 
 const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
 const CARS_REST_API_URL = 'http://localhost:8080/api/cars';
@@ -154,7 +155,16 @@ class Task extends React.Component {
 
     render() {
         return (
-            <div>
+            <div id="contener">
+                <div id="teksttask">
+                Aby dodać nowe zlecenie należy wypełnić poniższe pola:
+                </div>
+
+                <div id="wyborytask">
+                <div id="customercont">
+                <div id="teksttask1">
+                Wybierz klienta:
+                </div>
                 
                 <select id="select" name="customerId" onInput={this.samochody}>
                 <option value="" disabled selected>Klenci</option>
@@ -162,30 +172,51 @@ class Task extends React.Component {
                         <option value={el.id}>{el.name}{" "}{el.surname}</option>
                     ))}
                 </select>
-
+                </div>
+                <div id="customercont">
+                <div id="teksttask1">
+                Wybierz samochód:
+                </div>
                 <select id="cars" name="carId" onInput={this.serwis}>
                 <option value="" disabled selected>Samochody</option>
                     {this.state.cars.map(el =>(
                         <option value={el.id}>{el.brand}{" "}{el.model}</option>
                     ))}
                 </select>
-
+                </div>
+                </div>
+                <div id="taskcont">
+                    <div id="teksttask2">
+                Wybierz Usługę która ma zostać wykonana:
+                    </div>
                 <select id="service" name="serviceId">
                 <option value="" disabled selected>Usługi</option>
                     {this.state.service.map(el =>(
                         <option value={el.id}>{el.name}</option>
                     ))}
                 </select>
+                </div>
+                
                 <form id="usluga" onSubmit={this.handleSubmit}>
-                <textarea id="story" name="serviceDescription" rows="5" cols="33">
+                <div id="uslugacont1">
+                    <div id="teksttask1">
+                    Opis usługi:
+                    </div>
+                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33">
                     Opis usługi...
                 </textarea>
-
-                <textarea id="story" name="problemDescription" rows="5" cols="33">
+                </div>
+                <div id="uslugacont2">
+                    <div id="teksttask1">
+                        Opis problemu:
+                    </div>
+                <textarea id="tekstarea2" name="problemDescription" rows="5" cols="33">
                     Opis problemu...
                 </textarea>
-
+                </div>
+                <div id="taskbutton">
                 <input id="przycisk2" type="submit" value="Wyślij" />
+                </div>
                 </form>
 
             </div>
