@@ -37,7 +37,7 @@ class Harmonogram extends React.Component {
             method: "get",
             url: HARMONOGRAM_REST_API_URL,
             params: {
-                pageSize: 10,
+                pageSize: 20,
                 pageNo: 0,
                 sortBy: "acceptanceDate"
               }
