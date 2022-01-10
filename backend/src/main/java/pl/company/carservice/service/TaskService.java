@@ -54,7 +54,6 @@ public class TaskService {
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
-        sortBy = camelToSnake(sortBy);
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<CarCustomerServiceTaskDto> pagedResult = taskRepository.findAllDto(paging);
         if (pagedResult.hasContent()) {
