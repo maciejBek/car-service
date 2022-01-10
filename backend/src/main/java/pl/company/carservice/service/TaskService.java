@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.controller.error.ErrorResponse;
+import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.model.Car;
 import pl.company.carservice.model.Customer;
@@ -53,14 +54,23 @@ public class TaskService {
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
+        sortBy = camelToSnake(sortBy);
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        Page<Task> pagedResult = taskRepository.findAll(paging);
-
+        Page<CarCustomerServiceTaskDto> pagedResult = taskRepository.findAllDto(paging);
         if (pagedResult.hasContent()) {
             return new ResponseEntity<>(pagedResult.getContent(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
+    }
+
+    public static String camelToSnake(String string) {
+        String regex = "([a-z])([A-Z]+)";
+        String replacement = "$1_$2";
+
+        string = string.replaceAll(regex, replacement).toLowerCase();
+
+        return string;
     }
 
     //TODO: validation
