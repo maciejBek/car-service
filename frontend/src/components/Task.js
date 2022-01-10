@@ -202,20 +202,20 @@ class Task extends React.Component {
                     <div id="teksttask1">
                     Opis usługi:
                     </div>
-                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33">
-                    Opis usługi...
+                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis usługi..." >
+                    
                 </textarea>
                 </div>
                 <div id="uslugacont2">
                     <div id="teksttask1">
                         Opis problemu:
                     </div>
-                <textarea id="tekstarea2" name="problemDescription" rows="5" cols="33">
-                    Opis problemu...
+                <textarea id="tekstarea2" name="problemDescription" rows="5" cols="33" placeholder="Opis problemu...">
+                    
                 </textarea>
                 </div>
                 <div id="taskbutton">
-                <input id="przycisk2" type="submit" value="Wyślij" />
+                <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
 
