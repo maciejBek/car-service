@@ -18,6 +18,8 @@ import pl.company.carservice.repository.TaskRepository;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
@@ -61,12 +63,20 @@ public class TaskService {
         }
     }
 
-    //TODO: test this function
+    //TODO: validation
     public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
         Long serviceId = taskAdditionDto.serviceId();
         Long carId = taskAdditionDto.carId();
         Long customerId = taskAdditionDto.customerId();
-        LocalDateTime acceptationDate = taskAdditionDto.acceptationDate();
+
+        // incompatible data formats javascript <-> java ('Z' at the end of data)
+        // deleting 'Z'
+        String acceptanceDateString = taskAdditionDto.acceptanceDate();
+        StringBuffer stringBuffer = new StringBuffer(acceptanceDateString);
+        stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+        acceptanceDateString = stringBuffer.toString();
+
+        LocalDateTime acceptanceDate = LocalDateTime.parse(acceptanceDateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String serviceDescription = taskAdditionDto.serviceDescription();
         String problemDescription = taskAdditionDto.problemDescription();
 
@@ -74,15 +84,9 @@ public class TaskService {
         Car car = entityManager.getReference(Car.class, carId);
         Customer customer = entityManager.getReference(Customer.class, customerId);
 
-        Task task = new Task(service, car, customer, acceptationDate, serviceDescription, problemDescription);
-
+        Task task = new Task(service, car, customer, acceptanceDate, serviceDescription, problemDescription);
         this.taskRepository.save(task);
 
-        // TODO: sprawdzic czy nie ma nulli, ale najpierw dac not null na kolumny entity i sprawdzic jak baza dostarcza blad do springboota, pewnie trzeba bedzie na try{} zrobic
-//        if (serviceId == null || carId == null || customerId == null ) {
-//            ErrorResponse errorResponse = new ErrorResponse("invalid-data");
-//            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-//        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
