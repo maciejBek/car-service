@@ -8,8 +8,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerServiceTaskDto;
+import pl.company.carservice.dto.CompletionDateDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.model.Car;
 import pl.company.carservice.model.Customer;
@@ -63,15 +66,6 @@ public class TaskService {
         }
     }
 
-    public static String camelToSnake(String string) {
-        String regex = "([a-z])([A-Z]+)";
-        String replacement = "$1_$2";
-
-        string = string.replaceAll(regex, replacement).toLowerCase();
-
-        return string;
-    }
-
     //TODO: validation
     public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
         Long serviceId = taskAdditionDto.serviceId();
@@ -96,6 +90,21 @@ public class TaskService {
         Task task = new Task(service, car, customer, acceptanceDate, serviceDescription, problemDescription);
         this.taskRepository.save(task);
 
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> markAsCompleted(Long id, CompletionDateDto completionDateDto) {
+        // incompatible data formats javascript <-> java ('Z' at the end of data)
+        // deleting 'Z'
+        String completionDate = completionDateDto.completionDate();
+        StringBuffer stringBuffer = new StringBuffer(completionDate);
+        stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+        completionDate = stringBuffer.toString();
+
+        LocalDateTime completionDateLocalDateTime = LocalDateTime.parse(completionDate, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+        this.taskRepository.markAsCompleted(id, completionDateLocalDateTime);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

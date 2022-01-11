@@ -3,8 +3,11 @@ package pl.company.carservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.company.carservice.dto.CompletionDateDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.service.TaskService;
+
+import java.time.LocalDateTime;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -36,6 +39,11 @@ public class TaskController {
     @PostMapping("/tasks")
     public ResponseEntity<?> addTask(@RequestBody TaskAdditionDto taskAdditionDto) {
         return this.taskService.addTask(taskAdditionDto);
+    }
+
+    @PatchMapping("/tasks/{id}")
+    public ResponseEntity<?> markAsCompleted(@PathVariable Long id, @RequestBody CompletionDateDto completionDateDto) {
+        return this.taskService.markAsCompleted(id, completionDateDto);
     }
 
     @DeleteMapping("/tasks/{id}")
