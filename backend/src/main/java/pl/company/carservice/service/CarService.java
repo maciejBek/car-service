@@ -43,7 +43,6 @@ public class CarService {
     }
 
     public ResponseEntity<?> getCars(Integer pageNo, Integer pageSize, String sortBy, Long customerId) {
-        System.out.println("sortBy:" + sortBy + ".");
         if (pageSize > 200 || !("id".equals(sortBy) || "brand".equals(sortBy) || "model".equals(sortBy))) {
             ErrorResponse errorResponse = new ErrorResponse("invalid-parameter");
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
