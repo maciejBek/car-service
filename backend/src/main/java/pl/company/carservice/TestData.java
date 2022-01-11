@@ -94,12 +94,18 @@ public class TestData {
         Account account = new Account("admin", "12345", "admin@o2.pl", accountKind);
         this.accountRepository.save(account);
 
+        // Address x3
+        Address address1 = new Address("Bieszczadzka", "43", "Krosno", "38-400");
+        Address address2 = new Address("Krakowska", "12", "Krosno", "38-400");
+        Address address3 = new Address("Mackiewicza", "56", "Krakow", "31-214");
+
         // Customer Account
         AccountRegistrationDto accountRegistrationDto = new AccountRegistrationDto("kowalski123", "1234", "kowalski123@o2.pl");
         CustomerRegistrationDto customerRegistrationDto =  new CustomerRegistrationDto("Jan", "Kowalski", "882552389");
         Map<String, Object> accountCustomer = new HashMap<>();
         accountCustomer.put("account", accountRegistrationDto);
         accountCustomer.put("customer", customerRegistrationDto);
+        accountCustomer.put("address", address1);
         this.registrationController.register(accountCustomer);
 
         // Customer Account
@@ -108,6 +114,7 @@ public class TestData {
         Map<String, Object> accountCustomer1 = new HashMap<>();
         accountCustomer1.put("account", accountRegistrationDto1);
         accountCustomer1.put("customer", customerRegistrationDto1);
+        accountCustomer1.put("address", address2);
         this.registrationController.register(accountCustomer1);
 
         // Employee Account
@@ -116,6 +123,7 @@ public class TestData {
         Map<String, Object> accountEmployee = new HashMap<>();
         accountEmployee.put("account", accountRegistrationDto2);
         accountEmployee.put("employee", employeeRegistrationDto);
+        accountEmployee.put("address", address3);
         this.registrationController.register(accountEmployee);
 
         // Car 2x

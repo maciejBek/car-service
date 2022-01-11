@@ -36,7 +36,7 @@ public class AccountService {
         }
     }
 
-    public ResponseEntity<?> existsAccount (@RequestBody AccountRegistrationDto accountRegistrationDto) {
+    public ResponseEntity<?> existsAccount(AccountRegistrationDto accountRegistrationDto) {
         if (this.accountRepository.existsByUsername(accountRegistrationDto.username())) {
             if (this.accountRepository.existsByEmailAddress(accountRegistrationDto.emailAddress())) {
                 ErrorResponse errorResponse = new ErrorResponse("email-address-and-username-exist");

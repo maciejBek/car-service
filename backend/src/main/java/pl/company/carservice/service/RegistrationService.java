@@ -7,11 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.*;
-import pl.company.carservice.model.Account;
-import pl.company.carservice.model.AccountKind;
-import pl.company.carservice.model.Customer;
-import pl.company.carservice.model.Employee;
+import pl.company.carservice.model.*;
 import pl.company.carservice.repository.AccountRepository;
+import pl.company.carservice.repository.AddressRepository;
 import pl.company.carservice.repository.CustomerRepository;
 import pl.company.carservice.repository.EmployeeRepository;
 
@@ -21,15 +19,20 @@ import java.util.Map;
 @Service
 public class RegistrationService {
 
+    private AddressRepository addressRepository;
     private AccountRepository accountRepository;
     private CustomerRepository customerRepository;
     private EmployeeRepository employeeRepository;
 
+    private AccountService accountService;
+
     @Autowired
-    public RegistrationService(AccountRepository accountRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
+    public RegistrationService(AddressRepository addressRepository, AccountRepository accountRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, AccountService accountService) {
+        this.addressRepository = addressRepository;
         this.accountRepository = accountRepository;
         this.customerRepository = customerRepository;
         this.employeeRepository = employeeRepository;
+        this.accountService = accountService;
     }
 
 
@@ -58,25 +61,18 @@ public class RegistrationService {
             return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
         }
 
+        // check if account exists
+        ResponseEntity<?> responseEntity = accountService.existsAccount(accountRegistrationDto);
+        // if there is an error
+        if (responseEntity.hasBody()) {
+            ErrorResponse errorResponse = (ErrorResponse) responseEntity.getBody();
+            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+        }
+
         String username = accountRegistrationDto.username();
         String password = accountRegistrationDto.password();
         String emailAddress = accountRegistrationDto.emailAddress();
-
         Account account = new Account(username, password, emailAddress);
-
-        if (this.accountRepository.existsByUsername(account.getUsername())) {
-            if (this.accountRepository.existsByEmailAddress(account.getEmailAddress())) {
-                ErrorResponse errorResponse = new ErrorResponse("email-address-and-username-exist");
-                return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-            }
-            ErrorResponse errorResponse = new ErrorResponse("username-exists");
-            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-        }
-
-        if (this.accountRepository.existsByEmailAddress(account.getEmailAddress())) {
-            ErrorResponse errorResponse = new ErrorResponse("email-address-exists");
-            return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-        }
 
         // checking if user is customer or employee
         Customer customer = null;
@@ -106,17 +102,24 @@ public class RegistrationService {
 
         account.setAccountKind(accountKind);
 
+        // save address to database
+        Address address = objectMapper.convertValue(accountAndUser.get("address"), Address.class);
+        address = this.addressRepository.save(address);
+
         //saving account to database
         Long addedAccountId = this.accountRepository.save(account).getId();
 
         // adding customer
         if (customer != null) {
             customer.setAccount(account);
+            customer.setAddress(address);
             this.customerRepository.save(customer);
         }
 
+        // or adding employee
         if (employee != null) {
             employee.setAccount(account);
+            employee.setAddress(address);
             this.employeeRepository.save(employee);
         }
 

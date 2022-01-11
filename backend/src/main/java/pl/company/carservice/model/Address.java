@@ -20,6 +20,13 @@ public class Address {
 
     }
 
+    public Address(String street, String number, String town, String postcode) {
+        this.street = street;
+        this.number = number;
+        this.town = town;
+        this.postcode = postcode;
+    }
+
     public Long getId() {
         return id;
     }
