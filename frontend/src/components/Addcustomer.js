@@ -73,25 +73,23 @@ class Form extends React.Component {
         formData.forEach(function(value, key){
             data[key] = value;
         });
-        data.emailAddress = sessionStorage.getItem("emailAddress")
-        data.username = sessionStorage.getItem("username")
-        data.password = sessionStorage.getItem("password")
 
         console.log(data);
         
         var pojemnik = {};
+        console.log(pojemnik);
         pojemnik.account = {};
         pojemnik.account.username = data.username
         pojemnik.account.password = data.password
         pojemnik.account.emailAddress = data.emailAddress
         pojemnik.customer = {};
-        pojemnik.customer.name = data.Imie;
-        pojemnik.customer.surname = data.Nazwisko;
-        pojemnik.customer.phoneNumber = data.nrTel;
-        pojemnik.customer.address = {};
-        pojemnik.customer.address.street = data.Ulica;
-        pojemnik.customer.address.number = data.Nrdomu;
-        pojemnik.customer.address.town = data.Miejscowosc;
+        pojemnik.customer.name = data.name;
+        pojemnik.customer.surname = data.surname;
+        pojemnik.customer.phoneNumber = data.phoneNumber;
+        pojemnik.address = {};
+        pojemnik.address.street = data.street;
+        pojemnik.address.number = data.number;
+        pojemnik.address.town = data.town;
         console.log(pojemnik);
         
 
@@ -134,39 +132,39 @@ class Form extends React.Component {
                 <Wstaw
                 tekst="Podaj login"
                 dom = "Login"
-                idk = "Imie"/>
+                idk = "username"/>
                 <Wstaw
                 tekst="Podaj E-mail"
                 dom = "E-mail"
-                idk = "Imie"/>
+                idk = "emailAddress"/>
                 <Wstaw
                 tekst="Podaj Hasło"
                 dom = "Hasło"
-                idk = "Imie"/>
+                idk = "password"/>
                 <Wstaw
                 tekst="Podaj swoje imię"
                 dom = "Imię"
-                idk = "Imie"/>
+                idk = "name"/>
                 <Wstaw
                 tekst="Podaj swoje Nazwisko"
                 dom = "Nazwisko"
-                idk = "Nazwisko"/>
+                idk = "surname"/>
                 <Wstaw
                 tekst="Podaj nr telefonu"
                 dom = "Nr telefonu"
-                idk = "nrTel"/>
+                idk = "phoneNumber"/>
                 <Wstaw
                 tekst="Miejscowość"
                 dom = "Miejscowość"
-                idk = "Miejscowosc"/>
+                idk = "town"/>
                 <Wstaw
                 tekst="Ulica"
                 dom = "Ulica"
-                idk = "Ulica"/>
+                idk = "street"/>
                 <Wstaw
                 tekst="Nr Domu"
                 dom = "Nr Domu"
-                idk = "Nrdomu"/>
+                idk = "number"/>
                 </div>
                 <div id="taskbutton">
                 <input id="przycisk2" type="submit" value="Wyślij"  />
