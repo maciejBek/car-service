@@ -60,7 +60,7 @@ class Pracownik extends React.Component {
                 <Kratka
                     id="opcja8"
                     zdj="remove"
-                    tekst="Usunięcie przedmiotu"
+                    tekst="Usunięcie pojazdu"
                     uuu="task"/>
             </div>
         );

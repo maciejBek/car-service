@@ -74,9 +74,6 @@ class Form extends React.Component {
         formData.forEach(function(value, key){
             data[key] = value;
         });
-        data.emailAddress = sessionStorage.getItem("emailAddress")
-        data.username = sessionStorage.getItem("username")
-        data.password = sessionStorage.getItem("password")
 
         console.log(data);
         

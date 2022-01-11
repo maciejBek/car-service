@@ -3,6 +3,7 @@ import axios from "axios";
 import './Addcar.css';
 
 const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
+const CARS_REST_API_URL = 'http://localhost:8080/api/cars';
 
 
 const Wstaw = (values) =>{
@@ -52,7 +53,59 @@ class Addcar extends React.Component {
         
     }
 
-  
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
+    }
+
+    handleSubmit(event) {
+        // getting data from form and putting to json string to body array
+        let rere = document.getElementById('rejestracja2');
+        let idcustomer = document.getElementById('select').value;
+        let formData = new FormData(rere);
+
+        var data = {};
+        formData.forEach(function(value, key){
+            data[key] = value;
+        });
+        console.log(data);
+        data.year = parseInt(data.year)
+        data.capacity = parseInt(data.capacity)
+        data.power = parseInt(data.power)
+        data.tourqe = parseInt(data.tourqe)
+
+        data.customerId = parseInt(idcustomer)
+        
+
+        let body = JSON.stringify(data);
+        console.log(body);
+
+        // add car to database with post method
+        axios({
+            method: "post",
+            url: CARS_REST_API_URL,
+            data: body,
+            headers: { "Content-Type": "application/JSON" },
+        })
+            .then(function (response) {
+                //handle success
+                console.log(response);
+                sessionStorage.clear();
+            })
+            .catch(function (response) {
+                //handle error
+                console.log(response);
+                
+            });
+
+        event.preventDefault();
+    }
+
 
 
    
@@ -81,46 +134,47 @@ class Addcar extends React.Component {
                 <div id="tekstaddcar">
                     Następnie proszę wypełnić pola:
                 </div>
+                <form id="rejestracja2" onSubmit={this.handleSubmit}>
                 <Wstaw
                 tekst="Podaj Marke"
                 dom = "Marka"
-                idk = "Imie"/>
+                idk = "model"/>
                 <Wstaw
                 tekst="Podaj Model"
                 dom = "Model"
-                idk = "Imie"/>
+                idk = "brand"/>
                  <Wstaw
                 tekst="Rocznik"
                 dom = "Rocznik"
-                idk = "Imie"/>
+                idk = "year"/>
                 <Wstaw
                 tekst="Podaj Nr Vin"
                 dom = "Nr Vin"
-                idk = "Imie"/>
+                idk = "vinNumber"/>
                  <Wstaw
                 tekst="Podaj Nr Rejestracyjny"
                 dom = "Nr Rejestracyjny"
-                idk = "Imie"/>
+                idk = "registrationNumber"/>
                 <Wstaw
                 tekst="Podaj Pojemność"
                 dom = "Pojemność"
-                idk = "Imie"/>
+                idk = "capacity"/>
                  <Wstaw
                 tekst="Podaj Rodzaj Paliwa"
                 dom = "Rodzaj Paliwa"
-                idk = "Imie"/>
+                idk = "fuelType"/>
                 <Wstaw
                 tekst="Podaj Moc"
                 dom = "Moc"
-                idk = "Imie"/>
+                idk = "power"/>
                  <Wstaw
                 tekst="Podaj Moment Obrotowy"
                 dom = "Moment obrotowy"
-                idk = "Imie"/>
+                idk = "tourqe"/>
                 <div id="taskbutton">
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
-
+                </form>
             </div>
         ); 
     }
