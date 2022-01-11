@@ -27,7 +27,7 @@ class Wykonane extends React.Component {
             numberOfGuests: 2
         };
 
-
+        this.wyslij = this.wyslij.bind(this);
     }
 
     
@@ -63,6 +63,35 @@ class Wykonane extends React.Component {
             })
 
         
+    }
+
+    wyslij(idtask){
+        console.log(idtask)
+
+        var urll = 'http://localhost:8080/api/tasks/'+idtask
+        console.log(urll)
+
+        var data = {};
+        var day = new Date(); 
+        data.completionDate = day.toISOString()
+        let body = JSON.stringify(data);
+        console.log(body)
+
+        const a = axios({
+            headers: { "Content-Type": "application/JSON" },
+            method: "patch",
+            url: urll,
+            data: body
+        })
+
+            const b = a.then(response => {
+                console.log(response)
+                this.componentDidMount()
+            })
+            a.catch(function (response) {
+                console.log(response)       
+            })
+
     }
 
    
@@ -132,7 +161,7 @@ class Wykonane extends React.Component {
                         tekst={el.acceptanceDate}/>
                         
                         <div id="wykonanepole">
-                        <input id="przycisk2" type="submit" value="Wykonane"  />
+                        <input id="przycisk2" type="submit" onClick={()=> {this.wyslij(el.taskId)}} value="Wykonane"  />
                         </div>
     
                    </div>
