@@ -6,7 +6,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Entity
-public class NeededServiceParts {
+public class NeededTaskParts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,17 +18,17 @@ public class NeededServiceParts {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ServiceEntity service;
+    private Task task;
 
     private int amount;
 
-    public NeededServiceParts() {
+    public NeededTaskParts() {
 
     }
 
-    public NeededServiceParts(Part part, ServiceEntity service, int amount) {
+    public NeededTaskParts(Part part, Task task, int amount) {
         this.part = part;
-        this.service = service;
+        this.task = task;
         this.amount = amount;
     }
 
@@ -48,12 +48,12 @@ public class NeededServiceParts {
         this.part = part;
     }
 
-    public ServiceEntity getService() {
-        return service;
+    public Task getTask() {
+        return task;
     }
 
-    public void setService(ServiceEntity service) {
-        this.service = service;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public int getAmount() {
