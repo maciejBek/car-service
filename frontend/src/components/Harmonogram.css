@@ -1,0 +1,88 @@
+#contenerharmonogram{
+    background-color: rgba(255, 255, 255, 0.8) ;
+    height: 800px;
+    width: 1600px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 0px;
+    margin-top: 3%;
+    border-radius: 7px;
+    box-shadow: 0px 0px 10em black;
+    float: none;
+}
+
+#contenerharmonogramid1{
+    height: 40px;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, 0.8) ;
+    color: white;
+}
+
+#harmonogramtekst1{
+    width: 630px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+}
+
+#imieharmonogram{
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+#nazwiskoharmonogram{
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+#markaharmonogram{
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+#modelharmonogram{
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+#uslugaharmonogram{
+    width: 600px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+#opisharmonogram{
+    width: 260px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+
+#ouslugaharmonogram{
+    width: 240px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+
+#dataprzharmonogram{
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}
+
+#dataukharmonogram{
+    width: 100px;
+    height: 40px;
+    text-align: center;
+    float: left;
+}

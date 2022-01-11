@@ -10,6 +10,10 @@ import Klient from './components/Klient';
 import Administrator from './components/Administrator';
 import Task from './components/Task';
 import Harmonogram from './components/Harmonogram';
+import Addcustomer from './components/Addcustomer';
+import Addcar from './components/Addcar';
+import Wykonane from './components/Wykonane';
+
 
 
 function App() {
@@ -25,6 +29,9 @@ function App() {
         <Route path="/admin" element={<Administrator/>}></Route>
         <Route path="/pracownik/task" element={<Task/>}></Route>
         <Route path="/pracownik/harmonogram" element={<Harmonogram/>}></Route>
+        <Route path="/pracownik/addcustomer" element={<Addcustomer/>}></Route>
+        <Route path="/pracownik/addcar" element={<Addcar></Addcar>}></Route>
+        <Route path="/pracownik/wykonane" element={<Wykonane/>}></Route>
         
         
         
