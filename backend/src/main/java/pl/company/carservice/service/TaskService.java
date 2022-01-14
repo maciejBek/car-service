@@ -90,7 +90,6 @@ public class TaskService {
         Task task = new Task(service, car, customer, acceptanceDate, serviceDescription, problemDescription);
         this.taskRepository.save(task);
 
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

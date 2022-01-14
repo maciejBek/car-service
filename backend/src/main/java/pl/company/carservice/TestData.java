@@ -48,9 +48,9 @@ public class TestData {
     public void addData(ApplicationStartedEvent event) {
 
         // Part 4x
-        Part part1 = new Part("Tarcza sprzęgła", "0035672", "21 20 7 526 516", "BMW", "M3", "E92", 2011, 2);
-        Part part2 = new Part("Tarcza hamulcowa, wentylowana, przednia, prawa", "0008672", "34 11 2 283 802", "BMW", "M3", " E92", 2011, 1);
-        Part part3 = new Part("Panewka oporowa", "0155672", "11 21 1 706 831", "BMW", "Seria 3", " E36", 1997, 12);
+        Part part1 = new Part("Tarcza sprzęgła", "0035672", "21 20 7 526 516", "BMW", "M3");
+        Part part2 = new Part("Tarcza hamulcowa, wentylowana, przednia, prawa", "0008672", "34 11 2 283 802", "BMW", "M3");
+        Part part3 = new Part("Panewka oporowa", "0155672", "11 21 1 706 831", "BMW", "Seria 3");
         this.partRepository.save(part1);
         this.partRepository.save(part2);
         this.partRepository.save(part3);

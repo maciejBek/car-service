@@ -20,21 +20,17 @@ public class Part {
     private String carModel;
     private String carModelSymbol;
     private int carYear;
-    private int quantity;
 
     public Part() {
 
     }
 
-    public Part(String name, String numbering, String serialNumber, String carBrand, String carModel, String carModelSymbol, int carYear, int quantity) {
+    public Part(String name, String numbering, String serialNumber, String carBrand, String carModel) {
         this.name = name;
         this.numbering = numbering;
         this.serialNumber = serialNumber;
         this.carBrand = carBrand;
         this.carModel = carModel;
-        this.carModelSymbol = carModelSymbol;
-        this.carYear = carYear;
-        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -83,29 +79,5 @@ public class Part {
 
     public void setCarModel(String carModel) {
         this.carModel = carModel;
-    }
-
-    public String getCarModelSymbol() {
-        return carModelSymbol;
-    }
-
-    public void setCarModelSymbol(String carModelSymbol) {
-        this.carModelSymbol = carModelSymbol;
-    }
-
-    public int getCarYear() {
-        return carYear;
-    }
-
-    public void setCarYear(int carYear) {
-        this.carYear = carYear;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 }
