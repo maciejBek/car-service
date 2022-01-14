@@ -16,6 +16,7 @@ import Wykonane from './components/Wykonane';
 import Additem from './components/Additem';
 import Additem2 from './components/Additem2';
 import Removecar from './components/Removecar';
+import Urlop from './components/Urlop';
 
 
 
@@ -38,6 +39,7 @@ function App() {
         <Route path="/pracownik/additem" element={<Additem/>}></Route>
         <Route path="/pracownik/additem/additem2" element={<Additem2/>}></Route>
         <Route path="/pracownik/removecar" element={<Removecar/>}></Route>
+        <Route path="/pracownik/urlop" element={<Urlop/>}></Route>
         
         
         

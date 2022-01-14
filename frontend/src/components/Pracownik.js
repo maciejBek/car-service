@@ -51,7 +51,7 @@ class Pracownik extends React.Component {
                     id="opcja6"
                     zdj="urlop"
                     tekst="Urlop"
-                    uuu="task"/>
+                    uuu="urlop"/>
                 <Kratka
                     id="opcja7"
                     zdj="add2"
