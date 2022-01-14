@@ -79,7 +79,9 @@ class Logowanie extends React.Component {
                 })
 
                     .then(function (response) {
+                        console.log(response.data)
                         const data =(response.data);
+                        sessionStorage.setItem("id", response.data.id);
                         console.log(data.accountKind)
                         document.getElementById('dobrzel').style.display = "inline";
                         if(data.accountKind == "admin"){
