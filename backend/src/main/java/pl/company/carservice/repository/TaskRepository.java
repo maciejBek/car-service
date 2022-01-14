@@ -19,6 +19,8 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     Optional<Task> findById(Long id);
 
+    Iterable<Task> findAllByCustomerId(Long customerId);
+
     void deleteById(Long id);
 
     boolean existsById(Long id);

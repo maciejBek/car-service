@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.dto.CompletionDateDto;
@@ -64,6 +63,12 @@ public class TaskService {
         } else {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
+    }
+
+    public ResponseEntity<?> getTasksByCustomerId(@PathVariable Long customerId) {
+        Iterable<Task> tasks = this.taskRepository.findAllByCustomerId(customerId);
+
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
     //TODO: validation

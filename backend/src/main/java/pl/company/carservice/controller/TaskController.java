@@ -7,8 +7,6 @@ import pl.company.carservice.dto.CompletionDateDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.service.TaskService;
 
-import java.time.LocalDateTime;
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
@@ -34,6 +32,11 @@ public class TaskController {
             @RequestParam(defaultValue = "id") String sortBy) {
 
         return this.taskService.getTasks(pageNo, pageSize, sortBy);
+    }
+
+    @GetMapping(value = "/tasks/customer/{id}", produces = "application/json")
+    public ResponseEntity<?> getTasksByCustomerId(@PathVariable Long customerId) {
+        return taskService.getTask(customerId);
     }
 
     @PostMapping("/tasks")
