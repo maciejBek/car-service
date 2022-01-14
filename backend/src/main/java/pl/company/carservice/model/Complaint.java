@@ -14,7 +14,7 @@ public class Complaint {
 
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ServiceEntity service;
+    private Task task;
 
     private String description;
 
@@ -22,8 +22,8 @@ public class Complaint {
 
     }
 
-    public Complaint(ServiceEntity service, String description) {
-        this.service = service;
+    public Complaint(Task task, String description) {
+        this.task = task;
         this.description = description;
     }
 
@@ -35,12 +35,12 @@ public class Complaint {
         this.id = id;
     }
 
-    public ServiceEntity getService() {
-        return service;
+    public Task getTask() {
+        return task;
     }
 
-    public void setService(ServiceEntity service) {
-        this.service = service;
+    public void setTask(Task task) {
+        this.task = task;
     }
 
     public String getDescription() {
