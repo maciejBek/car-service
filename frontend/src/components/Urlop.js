@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import './Urlop.css';
 
-const VACATIONS_REST_API_URL = 'http://localhost:8080/api/accounts/vacations';
+const VACATIONS_REST_API_URL = 'http://localhost:8080/api/vacations';
 
 
 class Urlop extends React.Component {
@@ -41,12 +41,12 @@ class Urlop extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
-                sessionStorage.clear();
+                //sessionStorage.clear();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
-                sessionStorage.clear();
+                //sessionStorage.clear();
             });
 
 
