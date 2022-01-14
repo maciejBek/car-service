@@ -37,17 +37,16 @@ public class VacationService {
         LocalDate endDate = LocalDate.parse(vacationDto.endDate());
         Long accountId = vacationDto.accountId();
 
-        Optional<Employee> fetchedEmployee = this.employeeRepository.findById(accountId);
+        Optional<Employee> fetchedEmployee = this.employeeRepository.findByAccount_Id(accountId);
 
-        Employee employee = null;
-        if (fetchedEmployee.isPresent()) {
-            employee = fetchedEmployee.get();
-        } else {
+        if (!fetchedEmployee.isPresent()) {
             String errorResponse = StringToJson.parse("error", "employee-does-not-exist");
+            System.out.println("error");
+
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
 
-        Vacation vacation = new Vacation(employee, startDate, endDate);
+        Vacation vacation = new Vacation(fetchedEmployee.get(), startDate, endDate);
 
         // save to database
         Long vacationId = vacationRepository.save(vacation).getId();

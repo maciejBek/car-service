@@ -18,8 +18,8 @@ public class VacationController {
         this.vacationService = vacationService;
     }
 
-    @PostMapping(value = "/vacations", produces = "application/json")
-    public ResponseEntity<?> addVacation(@PathVariable VacationDto vacationDto) {
+    @PostMapping("/vacations")
+    public ResponseEntity<?> addVacation(@RequestBody VacationDto vacationDto) {
         return vacationService.addVacation(vacationDto);
     }
 }
