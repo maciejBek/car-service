@@ -17,6 +17,7 @@ import Additem from './components/Additem';
 import Additem2 from './components/Additem2';
 import Removecar from './components/Removecar';
 import Urlop from './components/Urlop';
+import Customerhistory from './components/Customerhistory';
 
 
 
@@ -40,6 +41,8 @@ function App() {
         <Route path="/pracownik/additem/additem2" element={<Additem2/>}></Route>
         <Route path="/pracownik/removecar" element={<Removecar/>}></Route>
         <Route path="/pracownik/urlop" element={<Urlop/>}></Route>
+        <Route path="/klient/customerhistory" element={<Customerhistory/>}></Route>
+        <Route path="/klient/harmonogram" element={<Harmonogram/>}></Route>
         
         
         
