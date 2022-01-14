@@ -21,16 +21,6 @@ public class NeededTaskPartsController {
         this.neededTaskPartsService = neededTaskPartsService;
     }
 
-    @GetMapping(value = "/needed-task-parts", produces = "application/json")
-    public ResponseEntity<?> getCars(
-            @RequestParam(defaultValue = "0") Integer pageNo,
-            @RequestParam(defaultValue = "100") Integer pageSize,
-            @RequestParam(defaultValue = "brand") String sortBy,
-            @RequestParam(defaultValue = "") Long customerId) {
-
-        return this.neededTaskPartsService.getNeededTaskParts(pageNo, pageSize, sortBy, customerId);
-    }
-
     @PostMapping("/needed-task-parts")
     public ResponseEntity<?> addNeededTaskParts(@RequestBody NeededTaskPartsDto neededTaskPartsDto) {
         return this.neededTaskPartsService.addNeededTaskParts(neededTaskPartsDto);
