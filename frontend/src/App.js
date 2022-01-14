@@ -13,6 +13,9 @@ import Harmonogram from './components/Harmonogram';
 import Addcustomer from './components/Addcustomer';
 import Addcar from './components/Addcar';
 import Wykonane from './components/Wykonane';
+import Additem from './components/Additem';
+import Additem2 from './components/Additem2';
+import Removecar from './components/Removecar';
 
 
 
@@ -32,6 +35,9 @@ function App() {
         <Route path="/pracownik/addcustomer" element={<Addcustomer/>}></Route>
         <Route path="/pracownik/addcar" element={<Addcar></Addcar>}></Route>
         <Route path="/pracownik/wykonane" element={<Wykonane/>}></Route>
+        <Route path="/pracownik/additem" element={<Additem/>}></Route>
+        <Route path="/pracownik/additem/additem2" element={<Additem2/>}></Route>
+        <Route path="/pracownik/removecar" element={<Removecar/>}></Route>
         
         
         
