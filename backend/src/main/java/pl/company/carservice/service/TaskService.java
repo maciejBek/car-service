@@ -13,10 +13,9 @@ import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.dto.CompletionDateDto;
 import pl.company.carservice.dto.TaskAdditionDto;
-import pl.company.carservice.model.Car;
-import pl.company.carservice.model.Customer;
-import pl.company.carservice.model.ServiceEntity;
-import pl.company.carservice.model.Task;
+import pl.company.carservice.model.*;
+import pl.company.carservice.repository.AccountRepository;
+import pl.company.carservice.repository.CustomerRepository;
 import pl.company.carservice.repository.TaskRepository;
 
 import javax.persistence.EntityManager;
@@ -24,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,11 +31,13 @@ import java.util.Optional;
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private CustomerRepository customerRepository;
     private EntityManager entityManager;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, EntityManager entityManager) {
+    public TaskService(TaskRepository taskRepository, CustomerRepository customerRepository, EntityManager entityManager) {
         this.taskRepository = taskRepository;
+        this.customerRepository = customerRepository;
         this.entityManager = entityManager;
     }
 
@@ -65,8 +67,12 @@ public class TaskService {
         }
     }
 
-    public ResponseEntity<?> getTasksByCustomerId(@PathVariable Long customerId) {
-        Iterable<Task> tasks = this.taskRepository.findAllByCustomerId(customerId);
+    public ResponseEntity<?> getTasksByAccountId(@PathVariable Long accountId) {
+        Customer customer = this.customerRepository.findByAccount_Id(accountId).get();
+        Long customerId = customer.getId();
+        List<Task> tasks = this.taskRepository.findAllByCustomerId(customerId);
+
+        System.out.println("task: " + tasks.size());
 
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }

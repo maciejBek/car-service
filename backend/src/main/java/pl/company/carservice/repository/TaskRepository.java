@@ -10,6 +10,7 @@ import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.model.Task;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     Optional<Task> findById(Long id);
 
-    Iterable<Task> findAllByCustomerId(Long customerId);
+    List<Task> findAllByCustomerId(Long customerId);
 
     void deleteById(Long id);
 

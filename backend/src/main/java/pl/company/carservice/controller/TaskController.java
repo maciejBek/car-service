@@ -34,9 +34,9 @@ public class TaskController {
         return this.taskService.getTasks(pageNo, pageSize, sortBy);
     }
 
-    @GetMapping(value = "/tasks/customer/{id}", produces = "application/json")
-    public ResponseEntity<?> getTasksByCustomerId(@PathVariable Long customerId) {
-        return taskService.getTask(customerId);
+    @GetMapping(value = "/tasks/customer/{accountId}", produces = "application/json")
+    public ResponseEntity<?> getTasksByAccountId(@PathVariable Long accountId) {
+        return taskService.getTasksByAccountId(accountId);
     }
 
     @PostMapping("/tasks")
