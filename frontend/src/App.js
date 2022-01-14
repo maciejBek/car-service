@@ -18,6 +18,8 @@ import Additem2 from './components/Additem2';
 import Removecar from './components/Removecar';
 import Urlop from './components/Urlop';
 import Customerhistory from './components/Customerhistory';
+import Reklamacja from './components/Reklamacja';
+import Reklamacja2 from './components/Reklamacja2';
 
 
 
@@ -43,6 +45,9 @@ function App() {
         <Route path="/pracownik/urlop" element={<Urlop/>}></Route>
         <Route path="/klient/customerhistory" element={<Customerhistory/>}></Route>
         <Route path="/klient/harmonogram" element={<Harmonogram/>}></Route>
+        <Route path="/klient/reklamacja" element={<Reklamacja/>}></Route>
+        <Route path="/klient/reklamacja/reklamacja2" element={<Reklamacja2/>}></Route>
+
         
         
         
