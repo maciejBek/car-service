@@ -70,11 +70,10 @@ public class TaskService {
     public ResponseEntity<?> getTasksByAccountId(@PathVariable Long accountId) {
         Customer customer = this.customerRepository.findByAccount_Id(accountId).get();
         Long customerId = customer.getId();
-        List<Task> tasks = this.taskRepository.findAllByCustomerId(customerId);
 
-        System.out.println("task: " + tasks.size());
+        List<CarCustomerServiceTaskDto> taskDtoList = taskRepository.findAllDtoByCustomerId(customerId);
 
-        return new ResponseEntity<>(tasks, HttpStatus.OK);
+        return new ResponseEntity<>(taskDtoList, HttpStatus.OK);
     }
 
     //TODO: validation

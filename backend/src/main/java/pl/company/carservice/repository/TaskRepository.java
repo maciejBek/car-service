@@ -38,6 +38,17 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
             "INNER JOIN task.service as service")
     Page<CarCustomerServiceTaskDto> findAllDto(Pageable pageable);
 
+    @Query("SELECT new pl.company.carservice.dto.CarCustomerServiceTaskDto(" +
+            "car.brand, car.model, " +
+            "customer.name, customer.surname," +
+            "service.name," +
+            "task.id, task.acceptanceDate, task.completionDate, task.serviceDescription, task.problemDescription) FROM Task AS task " +
+            "INNER JOIN task.car AS car " +
+            "INNER JOIN task.customer AS customer " +
+            "INNER JOIN task.service AS service " +
+            "WHERE customer.id  = ?1")
+    List<CarCustomerServiceTaskDto> findAllDtoByCustomerId(Long customerId);
+
     @Transactional
     @Modifying
     @Query("UPDATE Task task SET task.completionDate = ?2 WHERE task.id = ?1")
