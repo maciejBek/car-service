@@ -15,6 +15,7 @@ import pl.company.carservice.model.NeededTaskParts;
 import pl.company.carservice.model.Part;
 import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.NeededTaskPartsRepository;
+import pl.company.carservice.repository.PartRepository;
 
 import javax.persistence.EntityManager;
 import java.util.Map;
@@ -23,13 +24,13 @@ import java.util.Map;
 public class NeededTaskPartsService {
 
     private NeededTaskPartsRepository neededTaskPartsRepository;
-    private PartService partService;
+    private PartRepository partRepository;
     private EntityManager entityManager;
 
     @Autowired
-    public NeededTaskPartsService(NeededTaskPartsRepository neededTaskPartsRepository, PartService partService, EntityManager entityManager) {
+    public NeededTaskPartsService(NeededTaskPartsRepository neededTaskPartsRepository, PartRepository partRepository, EntityManager entityManager) {
         this.neededTaskPartsRepository = neededTaskPartsRepository;
-        this.partService = partService;
+        this.partRepository = partRepository;
         this.entityManager = entityManager;
     }
 
@@ -48,7 +49,7 @@ public class NeededTaskPartsService {
         String partSerialNumber = neededTaskPartsDto.partSerialNumber();
         String carBrand = neededTaskPartsDto.carBrand();
         String carModel = neededTaskPartsDto.carModel();
-        Integer taskId = neededTaskPartsDto.taskId();
+        Long taskId = neededTaskPartsDto.taskId().longValue();
         Integer partsAmount = neededTaskPartsDto.partsAmount();
 
         // checking if part exists
@@ -60,8 +61,9 @@ public class NeededTaskPartsService {
 
         // adding part
         Part part = new Part(partName, partNumbering, partSerialNumber, carBrand, carModel);
-        part = (Part) this.partService.addPart(part).getBody();
+        part = this.partRepository.save(part);
 
+        System.out.println("taskId: " + taskId);
         Task task = entityManager.getReference(Task.class, taskId);
         NeededTaskParts neededTaskParts = new NeededTaskParts(part, task, partsAmount);
 
