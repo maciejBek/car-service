@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom"
 
 const HARMONOGRAM_REST_API_URL = 'http://localhost:8080/api/tasks';
 
@@ -63,11 +64,17 @@ class Reklamacja extends React.Component {
         
     }
 
+    dalej(idtask){
+        console.log("przechodze")
+        sessionStorage.setItem("idtask", idtask);
+        document.getElementById('reklamacjalink').click();
+    }
+
     render() {
         return (
             <div id="contenerharmonogram">
                 <div id="harmonogramtekst1">
-               Oznacz zadanie które zostało wykonane:
+               Wybierz zlecenie przy którym chcesz zgłosić reklamacja:
                </div>
                <div id="contenerharmonogramid1">
                     <Poleharmonogram
@@ -96,7 +103,7 @@ class Reklamacja extends React.Component {
                     tekst="Data przyjęcia"/>
                     <Poleharmonogram
                     id="dataukharmonogram"
-                    tekst="Oznacz jako wykonane"/>
+                    tekst="Reklamacja"/>
 
                </div>
                {this.state.harmonogram.map(el =>(
@@ -133,7 +140,7 @@ class Reklamacja extends React.Component {
                    </div>
                 ))}
                
-
+               <Link to="reklamacja2" id="reklamacjalink"/>
 
             </div>
         ); 

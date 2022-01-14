@@ -39,7 +39,7 @@ class Customerhistory extends React.Component {
 
         const a = axios({
             method: "get",
-            url: urll,
+            url: urll
             
         })
 
