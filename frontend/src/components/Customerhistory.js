@@ -46,18 +46,15 @@ class Customerhistory extends React.Component {
             const b = a.then(response => {
                 console.log(response.data)
                 
-                var obj2 = []
                 var obj = response.data
-                for(var i=0; i<=(obj.length-1); i++){
-                    if(obj[i].completionDate == null){
-                        obj2[i]=obj[i]
-                    }
-                }
+                // for(var i=0; i<=(obj.length-1); i++){
+                //     obj[i].completionDate = obj[i].completionDate.slice(1,10)
+                //     obj[i].acceptanceDate = obj[i].acceptanceDate.slice(1,10)
+                // }
+            
+                this.setState({harmonogram: obj }) 
+                console.log(this.state.harmonogram)
 
-                console.log(obj2)
-                
-
-                this.setState({harmonogram: obj2 }) 
             })
             a.catch(function (response) {
                 console.log(response)       
@@ -99,7 +96,7 @@ class Customerhistory extends React.Component {
                     tekst="Data przyjęcia"/>
                     <Poleharmonogram
                     id="dataukharmonogram"
-                    tekst="Oznacz jako wykonane"/>
+                    tekst="Data wykonania"/>
 
                </div>
                {this.state.harmonogram.map(el =>(

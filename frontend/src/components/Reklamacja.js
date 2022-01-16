@@ -66,7 +66,7 @@ class Reklamacja extends React.Component {
 
     dalej(idtask){
         console.log("przechodze")
-        sessionStorage.setItem("idtask", idtask);
+        sessionStorage.setItem("id", idtask);
         document.getElementById('reklamacjalink').click();
     }
 

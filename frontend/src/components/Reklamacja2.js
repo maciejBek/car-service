@@ -4,7 +4,7 @@ import axios from 'axios';
 import './Reklamacja2.css';
 
 
-const NEEDED_REST_API_URL = 'http://localhost:8080/api/needed-task-parts';
+const COMPLAINTS_REST_API_URL = 'http://localhost:8080/api/complaints';
 
 const Tytul = (values) =>{
     return(
@@ -50,44 +50,30 @@ class Reklamacja2 extends React.Component {
             numberOfGuests: 2
         };
 
-        this.handleInputChange = this.handleInputChange.bind(this);
+        this.wyslij = this.wyslij.bind(this);
 
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
+    wyslij(event) {
         // getting data from form and putting to json string to body array
-        let rere = document.getElementById('rejestracja2');
-        let formData = new FormData(rere);
+        var id = sessionStorage.getItem("id")
+        var opis = document.getElementById("tekstreklamacja2").value
 
-        var data = {};
-        formData.forEach(function(value, key){
-            data[key] = value;
-        });
+        
 
-
-        data.taskId = sessionStorage.getItem("idtask")
-        console.log(data);
+        var pojemnik = {}
+        pojemnik.taskId = parseInt(id)
+        pojemnik.description = opis
 
 
-        data.taskId = parseInt(data.taskId)
-        data.partsAmount = parseInt(data.partsAmount)
-        let body = JSON.stringify(data);
+        let body = JSON.stringify(pojemnik);
         console.log(body);
 
         // add car to database with post method
         axios({
             method: "post",
-            url: NEEDED_REST_API_URL,
+            url: COMPLAINTS_REST_API_URL,
             data: body,
             headers: { "Content-Type": "application/JSON" },
         })
@@ -122,7 +108,7 @@ class Reklamacja2 extends React.Component {
                     </div>
                 
                 <div id="taskbutton">
-                <input id="przycisk2" type="submit" value="Wyślij"  />
+                <input id="przycisk2" type="submit" value="Wyślij" onClick={this.wyslij} />
                 </div>
                 
 

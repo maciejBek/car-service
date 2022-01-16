@@ -74,6 +74,9 @@ class Form extends React.Component {
         formData.forEach(function(value, key){
             data[key] = value;
         });
+        data.emailAddress = sessionStorage.getItem("emailAddress")
+        data.username = sessionStorage.getItem("username")
+        data.password = sessionStorage.getItem("password")
 
         console.log(data);
         
@@ -111,7 +114,7 @@ class Form extends React.Component {
             .catch(function (response) {
                 //handle error
                 console.log(response);
-                sessionStorage.clear();
+                
             });
 
         event.preventDefault();
@@ -154,8 +157,9 @@ class Form extends React.Component {
                 dom = "Nr Domu"
                 idk = "Nrdomu"/>
                 </div>
-               
-                <input  type="submit" value="Dalej" />
+                <div id="guzikrejestracja">
+                <input id="przycisk2" type="submit" value="Zarejestruj" />
+                </div>
                 </form>
 
             

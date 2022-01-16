@@ -202,7 +202,7 @@ class Task extends React.Component {
                     <div id="teksttask1">
                     Opis usługi:
                     </div>
-                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis usługi..." >
+                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis problemu..." >
                     
                 </textarea>
                 </div>
