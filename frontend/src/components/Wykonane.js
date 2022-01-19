@@ -71,7 +71,7 @@ class Wykonane extends React.Component {
 
         var urll = 'http://localhost:8080/api/tasks/'+idtask
         console.log(urll)
-
+        sessionStorage.setItem("taskid", idtask)
         var data = {};
         var day = new Date(); 
         data.completionDate = day.toISOString()
@@ -89,6 +89,7 @@ class Wykonane extends React.Component {
                 console.log(response)
                 this.componentDidMount()
                 document.getElementById('zaplac').click();
+                ;
             })
             a.catch(function (response) {
                 console.log(response)       
@@ -160,7 +161,7 @@ class Wykonane extends React.Component {
                         tekst={el.serviceDescription}/>
                         <Poleharmonogram
                         id="dataprzharmonogram"
-                        tekst={el.acceptanceDate}/>
+                        tekst={el.acceptanceDate.slice(0,10)}/>
                         
                         <div id="wykonanepole">
                         <input id="przycisk2" type="submit" onClick={()=> {this.wyslij(el.taskId)}} value="Wykonane"  />

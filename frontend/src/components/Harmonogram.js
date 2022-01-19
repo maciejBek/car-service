@@ -118,10 +118,11 @@ class Harmonogram extends React.Component {
                         tekst={el.serviceDescription}/>
                         <Poleharmonogram
                         id="dataprzharmonogram"
-                        tekst={el.acceptanceDate}/>
+                        tekst={el.acceptanceDate.slice(0,10)}/>
                         <Poleharmonogram
                         id="dataukharmonogram"
-                        tekst={el.completionDate}/>
+                        tekst={el.completionDate != null ? el.completionDate.slice(0,10) : el.completionDate}/>
+                        
     
                    </div>
                 ))}

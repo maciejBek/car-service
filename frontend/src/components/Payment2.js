@@ -14,20 +14,27 @@ const Tytul = (values) =>{
     )
 }
 
-const Tekst = (values) =>{
+const Tranzakcja1 = (values) =>{
     return(
-        <div id="tekst" >
-            {values.tekst}
-        </div>
+                <div>
+                    wybierz typ transakcji
+                    <select id="transakcja" name="carId">
+                        <option value="Blik" >BLIK</option>
+                        <option value="Przelew" >Przelew</option>
+                        <option value="Gotówka" >Przelewy 24</option>
+                    </select>
+                </div>
     )
 }
 
-const Wstaw = (values) =>{
+const Tranzakcja2 = (values) =>{
     return(
-        <div id="inputrr">
-        {values.tekst}
-        <input type="text" className="inputr" placeholder={values.dom} id="power" name={values.idk} />
-        </div>
+                <div>
+                    wybierz typ transakcji
+                    <select id="transakcja" name="carId">
+                        <option value="Gotówka" >Gotówka</option>
+                    </select>
+                </div>
     )
 }
 
@@ -42,15 +49,17 @@ const Przycisk = (values) =>{
 
 
 
-class Zaplac extends React.Component {
+class Payment2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            pokaz: true,
             isGoing: true,
             numberOfGuests: 2
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.wybor = this.wybor.bind(this);
 
     }
 
@@ -105,6 +114,31 @@ class Zaplac extends React.Component {
         event.preventDefault();
     }
 
+    wybor(){
+        var wartosc
+        wartosc = document.getElementById("platnosc").value
+        console.log(wartosc)
+
+
+        if(document.getElementById("platnosc").value == "Przelew"){
+            this.setState({pokaz: true })
+        }else{
+            this.setState({pokaz: false})
+        }
+        console.log(this.state.pokaz)
+
+        
+    }
+
+    componentDidMount(){
+        
+       console.log("działa")
+       var taskId
+       taskId = sessionStorage.getItem("id")
+       console.log(taskId)
+        
+    }
+
 
 
     render() {
@@ -112,20 +146,19 @@ class Zaplac extends React.Component {
 
                 <div id="glownyzaplac">
                 <Tytul
-                tekst="Wprowadź cene wykonanej usługi:"/>
+                tekst="Do zapłaty:"/>
                 
-                <form id="rejestracja2" onSubmit={this.handleSubmit}>
-                <div id = "inputy">
-                <Wstaw
-                tekst="Podaj cene:"
-                dom = "Cena"
-                idk = "amount"/>
-                
+                <div>
+                    wybierz metode płatności
+                    <select id="platnosc" name="carId" onInput={this.wybor}>
+                        <option value="Przelew" >Przelew</option>
+                        <option value="Gotówka" >Gotówka</option>
+                    </select>
                 </div>
-                <div id="taskbutton">
-                <input id="przycisk2" type="submit" value="Wyślij"  />
-                </div>
-                </form>
+
+                { this.state.pokaz == true ? <Tranzakcja1/> : <Tranzakcja2/> }
+
+                <Przycisk/>
 
             
 
@@ -138,4 +171,4 @@ class Zaplac extends React.Component {
     }
 }
 
-export default Zaplac;
+export default Payment2;

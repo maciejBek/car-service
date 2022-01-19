@@ -131,7 +131,7 @@ class Reklamacja extends React.Component {
                         tekst={el.serviceDescription}/>
                         <Poleharmonogram
                         id="dataprzharmonogram"
-                        tekst={el.acceptanceDate}/>
+                        tekst={el.acceptanceDate.slice(0,10)}/>
                         <div id="wykonanepole">
                         <input id="przycisk2" type="submit" onClick={()=> {this.dalej(el.taskId)}} value="Dodaj"  />
                         
