@@ -33,4 +33,9 @@ public class BillController {
     public ResponseEntity<?> deleteBill(@PathVariable Long id) {
         return this.billService.deleteBill(id);
     }
+
+    @GetMapping("/bills/{id}/price")
+    public ResponseEntity<?> getBillPriceByTaskId(@PathVariable Long taskId) {
+        return this.billService.getBillPriceByTaskId(taskId);
+    }
 }

@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import pl.company.carservice.StringToJson;
 import pl.company.carservice.dto.BillAdditionDto;
 import pl.company.carservice.model.Bill;
+import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.BillRepository;
 import pl.company.carservice.repository.TaskRepository;
 
+import javax.persistence.EntityManager;
 import java.util.Map;
 import java.util.Optional;
 
@@ -18,11 +22,13 @@ public class BillService {
 
     private BillRepository billRepository;
     private TaskRepository taskRepository;
+    private EntityManager entityManager;
 
     @Autowired
-    public BillService(BillRepository billRepository, TaskRepository taskRepository) {
+    public BillService(BillRepository billRepository, TaskRepository taskRepository, EntityManager entityManager) {
         this.billRepository = billRepository;
         this.taskRepository = taskRepository;
+        this.entityManager = entityManager;
     }
 
     public ResponseEntity<?> getBill(Long id) {
@@ -61,5 +67,12 @@ public class BillService {
             String errorResponse = StringToJson.parse("error", "bill-does-not-exist");
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
+    }
+
+    public ResponseEntity<?> getBillPriceByTaskId(Long id) {
+        Long billId = this.entityManager.getReference(Task.class, id).getBill().getId();
+        Double amount = this.entityManager.getReference(Bill.class, billId).getAmount();
+
+        return new ResponseEntity<>(Map.of("amount", amount), HttpStatus.OK);
     }
 }
