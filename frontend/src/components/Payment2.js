@@ -148,9 +148,10 @@ class Payment2 extends React.Component {
        urll = 'http://localhost:8080/api/bills/price'
 
        const a = axios({
-        method: "get",
+        method: "post",
         url: urll,
-        data: body
+        data: body,
+        headers: {"Content-Type": "application/JSON"},
         
         })
         const b = a.then(response => {
