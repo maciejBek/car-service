@@ -73,19 +73,22 @@ class Addtask extends React.Component {
     }
 
     componentDidMount(){
-        
+        var id
+        id = sessionStorage.getItem("id")
+        console.log(id)
+        var ulrr 
+        ulrr= "http://localhost:8080/cars/account/"+id
+        console.log(ulrr)
+
         const a = axios({
             method: "get",
-            url: CUSTOMER_REST_API_URL,
-            params: {
-                pageSize: 100,
-                pageNo: 0,
-                sortBy: "acceptanceDate"
-              }
+            url: ulrr,
+            
         })
 
             const b = a.then(response => {
-                this.setState({obj: response.data }) 
+                console.log(response.data)
+                this.setState({cars: response.data }) 
                 
             })
             a.catch(function (response) {
@@ -165,7 +168,7 @@ class Addtask extends React.Component {
                 <div id="teksttask1">
                 Wybierz samochód:
                 </div>
-                <select id="cars" name="carId" onInput={this.serwis}>
+                <select id="cars" name="carId" >
                 <option value="" disabled selected>Samochody</option>
                     {this.state.cars.map(el =>(
                         <option value={el.id}>{el.brand}{" "}{el.model}</option>

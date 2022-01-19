@@ -42,7 +42,7 @@ const Przycisk = (values) =>{
 
 
 
-class Zaplac extends React.Component {
+class Payment extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -150,4 +150,4 @@ class Zaplac extends React.Component {
     }
 }
 
-export default Zaplac;
+export default Payment;
