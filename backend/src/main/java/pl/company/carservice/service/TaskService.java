@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.dto.CompletionDateDto;
@@ -76,11 +78,12 @@ public class TaskService {
         return new ResponseEntity<>(taskDtoList, HttpStatus.OK);
     }
 
-    //TODO: validation
-    public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
+    // TODO: correct accountId/CustomerId
+    @PostMapping("/tasks")
+    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionDto taskAdditionDto) {
         Long serviceId = taskAdditionDto.serviceId();
         Long carId = taskAdditionDto.carId();
-        Long customerId = taskAdditionDto.customerId();
+        Long accountId = taskAdditionDto.customerId();
 
         // incompatible data formats javascript <-> java ('Z' at the end of data)
         // deleting 'Z'
@@ -92,6 +95,10 @@ public class TaskService {
         LocalDateTime acceptanceDate = LocalDateTime.parse(acceptanceDateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         String serviceDescription = taskAdditionDto.serviceDescription();
         String problemDescription = taskAdditionDto.problemDescription();
+
+        // TODO check Optional
+        // get customerId by accountId
+        Long customerId = this.customerRepository.findByAccount_Id(accountId).get().getId();
 
         ServiceEntity service = entityManager.getReference(ServiceEntity.class, serviceId);
         Car car = entityManager.getReference(Car.class, carId);
@@ -126,5 +133,32 @@ public class TaskService {
             ErrorResponse errorResponse = new ErrorResponse("task-does-not-exist");
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
+    }
+
+    //TODO: validation
+    public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
+        Long serviceId = taskAdditionDto.serviceId();
+        Long carId = taskAdditionDto.carId();
+        Long customerId = taskAdditionDto.customerId();
+
+        // incompatible data formats javascript <-> java ('Z' at the end of data)
+        // deleting 'Z'
+        String acceptanceDateString = taskAdditionDto.acceptanceDate();
+        StringBuffer stringBuffer = new StringBuffer(acceptanceDateString);
+        stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+        acceptanceDateString = stringBuffer.toString();
+
+        LocalDateTime acceptanceDate = LocalDateTime.parse(acceptanceDateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String serviceDescription = taskAdditionDto.serviceDescription();
+        String problemDescription = taskAdditionDto.problemDescription();
+
+        ServiceEntity service = entityManager.getReference(ServiceEntity.class, serviceId);
+        Car car = entityManager.getReference(Car.class, carId);
+        Customer customer = entityManager.getReference(Customer.class, customerId);
+
+        Task task = new Task(service, car, customer, acceptanceDate, serviceDescription, problemDescription);
+        this.taskRepository.save(task);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

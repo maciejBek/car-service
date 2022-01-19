@@ -41,7 +41,7 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionDto taskAdditionDto) {
-        return this.taskService.addTask(taskAdditionDto);
+        return this.taskService.addTaskByAccountId(taskAdditionDto);
     }
 
     @PatchMapping("/tasks/{id}")
