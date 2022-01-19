@@ -35,7 +35,7 @@ public class BillController {
         return this.billService.deleteBill(id);
     }
 
-    @GetMapping("/bills/price")
+    @PostMapping("/bills/price")
     public ResponseEntity<?> getBillPriceByTaskId(@RequestBody TaskIdDto taskIdDto) {
         return this.billService.getBillPriceByTaskId(taskIdDto);
     }
