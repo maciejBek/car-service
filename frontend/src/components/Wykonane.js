@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom"
 import './Wykonane.css';
 
 const HARMONOGRAM_REST_API_URL = 'http://localhost:8080/api/tasks';
@@ -87,6 +88,7 @@ class Wykonane extends React.Component {
             const b = a.then(response => {
                 console.log(response)
                 this.componentDidMount()
+                document.getElementById('zaplac').click();
             })
             a.catch(function (response) {
                 console.log(response)       
@@ -162,6 +164,7 @@ class Wykonane extends React.Component {
                         
                         <div id="wykonanepole">
                         <input id="przycisk2" type="submit" onClick={()=> {this.wyslij(el.taskId)}} value="Wykonane"  />
+                        <Link to="zaplac" id="zaplac"/>
                         </div>
     
                    </div>

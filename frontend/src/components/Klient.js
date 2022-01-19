@@ -41,6 +41,11 @@ class Pracownik extends React.Component {
                     zdj="visit"
                     tekst="Umówienie wizyty"
                     uuu="addtask"/>
+                <Kratka
+                    id="opcja5"
+                    zdj="pay"
+                    tekst="Zaplać"
+                    uuu="payment"/>
             </div>
         );
     }
