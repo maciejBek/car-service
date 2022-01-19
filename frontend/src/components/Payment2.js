@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
-import './Zaplac.css';
+import './Payment2.css';
 
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/bills';
@@ -144,8 +144,7 @@ class Payment2 extends React.Component {
         method: "get",
         url: urll
         
-    })
-
+        })
         const b = a.then(response => {
             console.log(response.data)
         })
@@ -160,7 +159,7 @@ class Payment2 extends React.Component {
     render() {
         return (
 
-                <div id="glownyzaplac">
+                <div id="glownypayment2">
                 <Tytul
                 tekst="Do zapłaty:"/>
                 
