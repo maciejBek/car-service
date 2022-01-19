@@ -137,12 +137,20 @@ class Payment2 extends React.Component {
        taskId = sessionStorage.getItem("id")
        console.log(taskId)
 
+       var data = {}
+       data.taskId = parseInt(taskId)
+
+       let body = JSON.stringify(data);
+
+       console.log(body)
+
        var urll 
-       urll = 'http://localhost:8080/api/bills/'+taskId+'/price'
+       urll = 'http://localhost:8080/api/bills/price'
 
        const a = axios({
         method: "get",
-        url: urll
+        url: urll,
+        data: body
         
         })
         const b = a.then(response => {
