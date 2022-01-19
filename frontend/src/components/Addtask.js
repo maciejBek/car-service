@@ -77,7 +77,7 @@ class Addtask extends React.Component {
         id = sessionStorage.getItem("id")
         console.log(id)
         var ulrr 
-        ulrr= "http://localhost:8080/cars/account/"+id
+        ulrr= "http://localhost:8080/api/cars/account/"+id
         console.log(ulrr)
 
         const a = axios({
@@ -109,6 +109,9 @@ class Addtask extends React.Component {
     }
 
     handleSubmit(event) {
+        var id
+        id = sessionStorage.getItem("id")
+        console.log(id)
         // getting data from form and putting to json string to body array
         let usluga = document.getElementById('usluga');
         let formData = new FormData(usluga);
@@ -117,15 +120,13 @@ class Addtask extends React.Component {
         formData.forEach(function(value, key){
             data[key] = value;
         });
-
-        var m = document.getElementById("select").value
         var i = document.getElementById("cars").value
         var f = document.getElementById("service").value
 
 
-        data.customerId = parseInt(m)
         data.carId = parseInt(i)
         data.serviceId = parseInt(f)
+        data.accountId = parseInt(id)
 
         var day = new Date();
         
@@ -168,7 +169,7 @@ class Addtask extends React.Component {
                 <div id="teksttask1">
                 Wybierz samochód:
                 </div>
-                <select id="cars" name="carId" >
+                <select id="cars" name="carId" onInput={this.serwis}>
                 <option value="" disabled selected>Samochody</option>
                     {this.state.cars.map(el =>(
                         <option value={el.id}>{el.brand}{" "}{el.model}</option>
