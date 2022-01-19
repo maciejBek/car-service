@@ -3,10 +3,13 @@ package pl.company.carservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.company.carservice.dto.BillAdditionDto;
 import pl.company.carservice.model.Bill;
 import pl.company.carservice.service.BillService;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/api")
 public class BillController {
 
     private BillService billService;
@@ -22,8 +25,8 @@ public class BillController {
     }
 
     @PostMapping("/bills")
-    public ResponseEntity<?> addBill(@RequestBody Bill bill) {
-        return this.billService.addBill(bill);
+    public ResponseEntity<?> addBill(@RequestBody BillAdditionDto billAdditionDto) {
+        return this.billService.addBill(billAdditionDto);
     }
 
     @DeleteMapping("/bills/{id}")

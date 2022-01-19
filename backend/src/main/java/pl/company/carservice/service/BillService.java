@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.company.carservice.StringToJson;
+import pl.company.carservice.dto.BillAdditionDto;
 import pl.company.carservice.model.Bill;
 import pl.company.carservice.repository.BillRepository;
+import pl.company.carservice.repository.TaskRepository;
 
 import java.util.Map;
 import java.util.Optional;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class BillService {
 
     private BillRepository billRepository;
+    private TaskRepository taskRepository;
 
     @Autowired
-    public BillService(BillRepository billRepository) {
-        this.billRepository = billRepository;;
+    public BillService(BillRepository billRepository, TaskRepository taskRepository) {
+        this.billRepository = billRepository;
+        this.taskRepository = taskRepository;
     }
 
     public ResponseEntity<?> getBill(Long id) {
@@ -33,10 +37,20 @@ public class BillService {
         }
     }
 
-    public ResponseEntity<?> addBill(Bill bill) {
-        Long addedPartId = this.billRepository.save(bill).getId();
+    public ResponseEntity<?> addBill(BillAdditionDto billAdditionDto) {
+        Long taskId = billAdditionDto.taskId();
+        Double amount = billAdditionDto.amount();
 
-        return new ResponseEntity<>(Map.of("id", addedPartId), HttpStatus.OK);
+        Bill bill = new Bill();
+        bill.setAmount(amount);
+
+        // adding Bill
+        Long addedBillId = this.billRepository.save(bill).getId();
+
+        // updating Bill id
+        this.taskRepository.updateBillId(taskId, addedBillId);
+
+        return new ResponseEntity<>(Map.of("id", addedBillId), HttpStatus.OK);
     }
 
     public ResponseEntity<?> deleteBill(Long id) {

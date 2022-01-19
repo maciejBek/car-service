@@ -49,6 +49,12 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
             "WHERE customer.id  = ?1")
     List<CarCustomerServiceTaskDto> findAllDtoByCustomerId(Long customerId);
 
+    // insert addedBillId WHERE task.id = taskId
+    @Transactional
+    @Modifying
+    @Query("UPDATE Task task SET task.bill.id = ?2 WHERE task.id = ?1")
+    void updateBillId(Long taskId, Long billId);
+
     @Transactional
     @Modifying
     @Query("UPDATE Task task SET task.completionDate = ?2 WHERE task.id = ?1")
