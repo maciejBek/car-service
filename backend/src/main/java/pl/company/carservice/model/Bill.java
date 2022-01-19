@@ -36,6 +36,11 @@ public class Bill {
 
     }
 
+    public Bill(Double amount) {
+        this.amount = amount;
+//        this.isPaid = false;
+    }
+
     public Long getId() {
         return id;
     }
