@@ -40,7 +40,7 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public ResponseEntity<?> addTask(@RequestBody TaskAdditionDto taskAdditionDto) {
+    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionDto taskAdditionDto) {
         return this.taskService.addTask(taskAdditionDto);
     }
 

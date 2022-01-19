@@ -8,6 +8,7 @@ import pl.company.carservice.controller.*;
 import pl.company.carservice.dto.*;
 import pl.company.carservice.model.*;
 import pl.company.carservice.repository.*;
+import pl.company.carservice.service.TaskService;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -27,10 +28,10 @@ public class TestData {
     private PartRepository partRepository;
     private RegistrationController registrationController;
     private ServiceRepository serviceRepository;
-    private TaskController taskController;
+    private TaskService taskService;
 
     @Autowired
-    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, ServiceRepository serviceRepository, TaskController taskController) {
+    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, ServiceRepository serviceRepository, TaskService taskService) {
         this.accountRepository = accountRepository;
         this.accountKindRepository = accountKindRepository;
         this.carController = carController;
@@ -41,7 +42,7 @@ public class TestData {
         this.partRepository = partRepository;
         this.registrationController = registrationController;
         this.serviceRepository = serviceRepository;
-        this.taskController = taskController;
+        this.taskService = taskService;
     }
 
     @EventListener(classes = ApplicationStartedEvent.class)
@@ -167,20 +168,20 @@ public class TestData {
         TaskAdditionDto taskAdditionDto14 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate14.toString(), "opis", "opis2");
         TaskAdditionDto taskAdditionDto15 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate15.toString(), "opis", "opis2");
 
-        this.taskController.addTask(taskAdditionDto1);
-        this.taskController.addTask(taskAdditionDto2);
-        this.taskController.addTask(taskAdditionDto3);
-        this.taskController.addTask(taskAdditionDto4);
-        this.taskController.addTask(taskAdditionDto5);
-        this.taskController.addTask(taskAdditionDto6);
-        this.taskController.addTask(taskAdditionDto7);
-        this.taskController.addTask(taskAdditionDto8);
-        this.taskController.addTask(taskAdditionDto9);
-        this.taskController.addTask(taskAdditionDto10);
-        this.taskController.addTask(taskAdditionDto11);
-        this.taskController.addTask(taskAdditionDto12);
-        this.taskController.addTask(taskAdditionDto13);
-        this.taskController.addTask(taskAdditionDto14);
-        this.taskController.addTask(taskAdditionDto15);
+        this.taskService.addTask(taskAdditionDto1);
+        this.taskService.addTask(taskAdditionDto2);
+        this.taskService.addTask(taskAdditionDto3);
+        this.taskService.addTask(taskAdditionDto4);
+        this.taskService.addTask(taskAdditionDto5);
+        this.taskService.addTask(taskAdditionDto6);
+        this.taskService.addTask(taskAdditionDto7);
+        this.taskService.addTask(taskAdditionDto8);
+        this.taskService.addTask(taskAdditionDto9);
+        this.taskService.addTask(taskAdditionDto10);
+        this.taskService.addTask(taskAdditionDto11);
+        this.taskService.addTask(taskAdditionDto12);
+        this.taskService.addTask(taskAdditionDto13);
+        this.taskService.addTask(taskAdditionDto14);
+        this.taskService.addTask(taskAdditionDto15);
     }
 }
