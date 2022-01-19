@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.dto.CompletionDateDto;
+import pl.company.carservice.dto.TaskAdditionByAccountIdDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.model.*;
 import pl.company.carservice.repository.AccountRepository;
@@ -80,21 +81,21 @@ public class TaskService {
 
     // TODO: correct accountId/CustomerId
     @PostMapping("/tasks")
-    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionDto taskAdditionDto) {
-        Long serviceId = taskAdditionDto.serviceId();
-        Long carId = taskAdditionDto.carId();
-        Long accountId = taskAdditionDto.customerId();
+    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionByAccountIdDto taskAdditionByAccountIdDto) {
+        Long serviceId = taskAdditionByAccountIdDto.serviceId();
+        Long carId = taskAdditionByAccountIdDto.carId();
+        Long accountId = taskAdditionByAccountIdDto.accountId();
 
         // incompatible data formats javascript <-> java ('Z' at the end of data)
         // deleting 'Z'
-        String acceptanceDateString = taskAdditionDto.acceptanceDate();
+        String acceptanceDateString = taskAdditionByAccountIdDto.acceptanceDate();
         StringBuffer stringBuffer = new StringBuffer(acceptanceDateString);
         stringBuffer.deleteCharAt(stringBuffer.length() - 1);
         acceptanceDateString = stringBuffer.toString();
 
         LocalDateTime acceptanceDate = LocalDateTime.parse(acceptanceDateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        String serviceDescription = taskAdditionDto.serviceDescription();
-        String problemDescription = taskAdditionDto.problemDescription();
+        String serviceDescription = taskAdditionByAccountIdDto.serviceDescription();
+        String problemDescription = taskAdditionByAccountIdDto.problemDescription();
 
         // TODO check Optional
         // get customerId by accountId

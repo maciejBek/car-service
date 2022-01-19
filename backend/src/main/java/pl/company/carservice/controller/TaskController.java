@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.CompletionDateDto;
+import pl.company.carservice.dto.TaskAdditionByAccountIdDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.service.TaskService;
 
@@ -40,8 +41,8 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionDto taskAdditionDto) {
-        return this.taskService.addTaskByAccountId(taskAdditionDto);
+    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionByAccountIdDto taskAdditionByAccountIdDto) {
+        return this.taskService.addTaskByAccountId(taskAdditionByAccountIdDto);
     }
 
     @PatchMapping("/tasks/{id}")
