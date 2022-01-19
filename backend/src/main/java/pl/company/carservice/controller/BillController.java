@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.BillAdditionDto;
+import pl.company.carservice.dto.TaskIdDto;
 import pl.company.carservice.model.Bill;
 import pl.company.carservice.service.BillService;
 
@@ -34,8 +35,8 @@ public class BillController {
         return this.billService.deleteBill(id);
     }
 
-    @GetMapping("/bills/{id}/price")
-    public ResponseEntity<?> getBillPriceByTaskId(@PathVariable Long taskId) {
-        return this.billService.getBillPriceByTaskId(taskId);
+    @GetMapping("/bills/price")
+    public ResponseEntity<?> getBillPriceByTaskId(@RequestBody TaskIdDto taskIdDto) {
+        return this.billService.getBillPriceByTaskId(taskIdDto);
     }
 }

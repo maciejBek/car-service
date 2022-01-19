@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.company.carservice.StringToJson;
 import pl.company.carservice.dto.BillAdditionDto;
+import pl.company.carservice.dto.TaskIdDto;
 import pl.company.carservice.model.Bill;
 import pl.company.carservice.model.Task;
 import pl.company.carservice.repository.BillRepository;
@@ -69,8 +70,11 @@ public class BillService {
         }
     }
 
-    public ResponseEntity<?> getBillPriceByTaskId(Long id) {
-        Long billId = this.entityManager.getReference(Task.class, id).getBill().getId();
+    public ResponseEntity<?> getBillPriceByTaskId(TaskIdDto taskIdDto) {
+        Long taskId = taskIdDto.taskId();
+        System.out.println("taskid:" + taskId);
+        Long billId = this.entityManager.getReference(Task.class, taskId).getBill().getId();
+        System.out.println("billId: " + billId);
         Double amount = this.entityManager.getReference(Bill.class, billId).getAmount();
 
         return new ResponseEntity<>(Map.of("amount", amount), HttpStatus.OK);

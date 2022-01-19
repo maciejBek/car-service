@@ -8,6 +8,7 @@ import pl.company.carservice.controller.*;
 import pl.company.carservice.dto.*;
 import pl.company.carservice.model.*;
 import pl.company.carservice.repository.*;
+import pl.company.carservice.service.BillService;
 import pl.company.carservice.service.TaskService;
 
 import java.sql.Date;
@@ -29,9 +30,14 @@ public class TestData {
     private RegistrationController registrationController;
     private ServiceRepository serviceRepository;
     private TaskService taskService;
+    private BillRepository billRepository;
 
     @Autowired
-    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, ServiceRepository serviceRepository, TaskService taskService) {
+    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository,
+                    CarController carController, CarRepository carRepository, CustomerController customerController,
+                    CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository,
+                    RegistrationController registrationController, ServiceRepository serviceRepository, TaskService taskService,
+                    BillRepository billRepository) {
         this.accountRepository = accountRepository;
         this.accountKindRepository = accountKindRepository;
         this.carController = carController;
@@ -43,6 +49,7 @@ public class TestData {
         this.registrationController = registrationController;
         this.serviceRepository = serviceRepository;
         this.taskService = taskService;
+        this.billRepository = billRepository;
     }
 
     @EventListener(classes = ApplicationStartedEvent.class)
@@ -183,5 +190,11 @@ public class TestData {
         this.taskService.addTask(taskAdditionDto13);
         this.taskService.addTask(taskAdditionDto14);
         this.taskService.addTask(taskAdditionDto15);
+
+        // add Bill x3
+        Bill bill1 = new Bill(125.0);
+        Bill bill2 = new Bill(222.0);
+        this.billRepository.save(bill1);
+        this.billRepository.save(bill2);
     }
 }
