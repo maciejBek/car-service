@@ -104,7 +104,7 @@ class Reklamacja extends React.Component {
                     tekst="Data przyjęcia"/>
                     <Poleharmonogram
                     id="dataukharmonogram"
-                    tekst="Reklamacja"/>
+                    tekst="Opłata"/>
 
                </div>
                {this.state.harmonogram.map(el =>(

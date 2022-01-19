@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
-import './Zaplac.css';
+import './Payment2.css';
 
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/bills';
@@ -137,15 +137,22 @@ class Payment2 extends React.Component {
        taskId = sessionStorage.getItem("id")
        console.log(taskId)
 
+       var data = {}
+       data.taskId = parseInt(taskId)
+
+       let body = JSON.stringify(data);
+
+       console.log(body)
+
        var urll 
-       urll = 'http://localhost:8080/api/bills/'+taskId+'/price'
+       urll = 'http://localhost:8080/api/bills/price'
 
        const a = axios({
         method: "get",
-        url: urll
+        url: urll,
+        data: body
         
-    })
-
+        })
         const b = a.then(response => {
             console.log(response.data)
         })
@@ -160,7 +167,7 @@ class Payment2 extends React.Component {
     render() {
         return (
 
-                <div id="glownyzaplac">
+                <div id="glownypayment2">
                 <Tytul
                 tekst="Do zapłaty:"/>
                 
