@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import pl.company.carservice.dto.CarIdBrandModelDto;
 import pl.company.carservice.model.Car;
 
+import java.util.List;
+
 public interface CarRepository extends CrudRepository<Car, Long> {
 
     Long removeById(Long id);
@@ -15,5 +17,7 @@ public interface CarRepository extends CrudRepository<Car, Long> {
     Page<CarIdBrandModelDto> findAllById(Long id, Pageable pageable);
 
     Page<CarIdBrandModelDto> findAllDtoBy(Pageable pageable);
+
+    List<CarIdBrandModelDto> findAllDtoByCustomerId(Long customerId);
 
 }

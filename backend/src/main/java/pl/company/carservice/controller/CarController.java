@@ -33,6 +33,11 @@ public class CarController {
         return this.carService.getCars(pageNo, pageSize, sortBy, customerId);
     }
 
+    @GetMapping(value = "/cars/account/{accountId}", produces = "application/json")
+    public ResponseEntity<?> getCarsByAccountId(@PathVariable Long accountId) {
+        return this.carService.getCarsByAccountId(accountId);
+    }
+
 
     @PostMapping("/cars")
     public ResponseEntity<?> addCar(@RequestBody CarCustomerIdDto carCustomerIdDto) {
