@@ -20,6 +20,8 @@ import Urlop from './components/Urlop';
 import Customerhistory from './components/Customerhistory';
 import Reklamacja from './components/Reklamacja';
 import Reklamacja2 from './components/Reklamacja2';
+import Addtask from './components/Addtask';
+import Zaplac from './components/Zaplac';
 
 
 
@@ -47,6 +49,8 @@ function App() {
         <Route path="/klient/harmonogram" element={<Harmonogram/>}></Route>
         <Route path="/klient/reklamacja" element={<Reklamacja/>}></Route>
         <Route path="/klient/reklamacja/reklamacja2" element={<Reklamacja2/>}></Route>
+        <Route path="/klient/addtask" element={<Addtask/>}></Route>
+        <Route path="/klient/wykonane/zaplac" element={<Zaplac/>}></Route>
 
         
         

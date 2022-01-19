@@ -80,12 +80,10 @@ class Reklamacja2 extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
-                sessionStorage.clear();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
-                sessionStorage.clear();
             });
 
         event.preventDefault();

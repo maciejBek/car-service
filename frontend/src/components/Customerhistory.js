@@ -67,7 +67,7 @@ class Customerhistory extends React.Component {
         return (
             <div id="contenerharmonogram">
                 <div id="harmonogramtekst1">
-               Oznacz zadanie które zostało wykonane:
+               Zlecenia które zostały wykonane:
                </div>
                <div id="contenerharmonogramid1">
                     <Poleharmonogram

@@ -40,7 +40,7 @@ class Pracownik extends React.Component {
                     id="opcja4"
                     zdj="visit"
                     tekst="Umówienie wizyty"
-                    uuu="customerhistory"/>
+                    uuu="addtask"/>
             </div>
         );
     }
