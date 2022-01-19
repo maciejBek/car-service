@@ -23,6 +23,7 @@ import Reklamacja2 from './components/Reklamacja2';
 import Addtask from './components/Addtask';
 import Zaplac from './components/Zaplac';
 import Payment from './components/Payment';
+import Payment2 from './components/Payment2';
 
 
 
@@ -53,6 +54,7 @@ function App() {
         <Route path="/klient/addtask" element={<Addtask/>}></Route>
         <Route path="/pracownik/wykonane/zaplac" element={<Zaplac/>}></Route>
         <Route path="/klient/payment" element={<Payment/>}></Route>
+        <Route path="/klient/payment/payment2" element={<Payment2/>}></Route>
 
         
         

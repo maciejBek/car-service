@@ -21,7 +21,6 @@ class Addtask extends React.Component {
             numberOfGuests: 2
         };
 
-        this.samochody = this.samochody.bind(this)
         this.serwis = this.serwis.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this);
 
@@ -48,29 +47,7 @@ class Addtask extends React.Component {
 
     }
 
-    samochody() {
-        var id = document.getElementById("select").value
-
-        const c = axios({
-            method: "get",
-            url: CARS_REST_API_URL,
-            params: {
-                pageSize: 100,
-                pageNo: 0,
-                sortBy: "brand",
-                customerId: id
-              }
-        })
-
-            const d = c.then(response => {
-                this.setState({cars: response.data }) 
-                
-            })
-            c.catch(function (response) {
-                console.log(response)       
-            })
-
-    }
+    
 
     componentDidMount(){
         var id
@@ -194,7 +171,7 @@ class Addtask extends React.Component {
                     <div id="teksttask1">
                     Opis usługi:
                     </div>
-                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis problemu..." >
+                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis usługi..." >
                     
                 </textarea>
                 </div>
