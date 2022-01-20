@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom"
+ import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
 import './Rejestracja2.css';
@@ -110,10 +110,12 @@ class Form extends React.Component {
                 //handle success
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('logowanielink').click();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
+                document.getElementById('logowanielink').click();
                 
             });
 
@@ -161,7 +163,7 @@ class Form extends React.Component {
                 <input id="przycisk2" type="submit" value="Zarejestruj" />
                 </div>
                 </form>
-
+                <Link to="/" id="logowanielink"/>
             
 
 

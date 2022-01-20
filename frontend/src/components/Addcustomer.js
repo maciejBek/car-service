@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import './Addcustomer.css';
+import { Link } from "react-router-dom"
 
 
 const CAR_REST_API_URL = 'http://localhost:8080/api/register';
@@ -107,6 +108,7 @@ class Form extends React.Component {
                 //handle success
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             })
             .catch(function (response) {
                 //handle error
@@ -170,7 +172,7 @@ class Form extends React.Component {
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
-
+                <Link to="/pracownik" id="pracowniklink"/>
             
 
 

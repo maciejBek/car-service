@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import './Removecar.css';
+import { Link } from "react-router-dom"
 
 const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
 const CARS_REST_API_URL = 'http://localhost:8080/api/cars';
@@ -90,6 +91,7 @@ class Removecar extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
+                document.getElementById('pracowniklink').click();
             })
             .catch(function (response) {
                 //handle error
@@ -140,6 +142,7 @@ class Removecar extends React.Component {
                 <div id="taskbutton">
                 <input id="przycisk2" onClick={this.usun} type="submit" value="Usuń"  />
                 </div>
+                <Link to="/pracownik" id="pracowniklink"/>
 
             </div>
         ); 

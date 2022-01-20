@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+ import { Link } from "react-router-dom"
 import './Task.css';
 
 const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
@@ -142,10 +143,12 @@ class Task extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
+                document.getElementById('pracowniklink').click();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
+                document.getElementById('pracowniklink').click();
             });
 
         event.preventDefault();
@@ -218,7 +221,7 @@ class Task extends React.Component {
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
-
+                <Link to="/pracownik" id="pracowniklink"/>
             </div>
         ); 
     }

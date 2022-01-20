@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import './Additem2.css';
+import { Link } from "react-router-dom"
 
 
 const NEEDED_REST_API_URL = 'http://localhost:8080/api/needed-task-parts';
@@ -95,11 +96,13 @@ class Additem2 extends React.Component {
                 //handle success
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             });
 
         event.preventDefault();
@@ -146,6 +149,7 @@ class Additem2 extends React.Component {
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
+                <Link to="/pracownik" id="pracowniklink"/>
 
             
 

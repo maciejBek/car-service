@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom"
 import './Addcar.css';
 
 const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
@@ -96,6 +97,7 @@ class Addcar extends React.Component {
                 //handle success
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             })
             .catch(function (response) {
                 //handle error
@@ -175,6 +177,7 @@ class Addcar extends React.Component {
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
+                <Link to="/pracownik" id="pracowniklink"/>
             </div>
         ); 
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import './Urlop.css';
+import { Link } from "react-router-dom"
 
 const VACATIONS_REST_API_URL = 'http://localhost:8080/api/vacations';
 
@@ -42,11 +43,13 @@ class Urlop extends React.Component {
                 //handle success
                 console.log(response);
                 //sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
                 //sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             });
 
 
@@ -81,6 +84,7 @@ class Urlop extends React.Component {
                 <div id="taskbutton">
                 <input id="przycisk2" onClick={this.urlop} type="submit" value="Wyślij"  />
                 </div>
+                <Link to="/pracownik" id="pracowniklink"/>
 
             </div>
         ); 
