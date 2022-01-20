@@ -89,10 +89,10 @@ class Form extends React.Component {
         pojemnik.customer.name = data.Imie;
         pojemnik.customer.surname = data.Nazwisko;
         pojemnik.customer.phoneNumber = data.nrTel;
-        pojemnik.customer.address = {};
-        pojemnik.customer.address.street = data.Ulica;
-        pojemnik.customer.address.number = data.Nrdomu;
-        pojemnik.customer.address.town = data.Miejscowosc;
+        pojemnik.address = {};
+        pojemnik.address.street = data.Ulica;
+        pojemnik.address.number = data.Nrdomu;
+        pojemnik.address.town = data.Miejscowosc;
         console.log(pojemnik);
         
 
