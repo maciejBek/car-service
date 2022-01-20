@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom"
+ import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
 import './Payment2.css';
@@ -9,14 +9,14 @@ const CAR_REST_API_URL = 'http://localhost:8080/api/bills';
 const Tytul = (values) =>{
     return(
         <div id="Tytul" >
-            {values.tekst}
+            {values.tekst} {values.cena} zł
         </div>
     )
 }
 
 const Tranzakcja1 = (values) =>{
     return(
-                <div>
+                <div id="pierwszy">
                     wybierz typ transakcji
                     <select id="transakcja" name="carId">
                         <option value="Blik" >BLIK</option>
@@ -29,7 +29,7 @@ const Tranzakcja1 = (values) =>{
 
 const Tranzakcja2 = (values) =>{
     return(
-                <div>
+                <div id="pierwszy">
                     wybierz typ transakcji
                     <select id="transakcja" name="carId">
                         <option value="Gotówka" >Gotówka</option>
@@ -38,13 +38,7 @@ const Tranzakcja2 = (values) =>{
     )
 }
 
-const Przycisk = (values) =>{
-    return(
-        <div id="przycisk">
-            <input id="przycisk2" type="submit" value="Dalej" />
-        </div>
-    )
-}
+
 
 
 
@@ -53,6 +47,7 @@ class Payment2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            cena: 0,
             pokaz: true,
             isGoing: true,
             numberOfGuests: 2
@@ -60,6 +55,7 @@ class Payment2 extends React.Component {
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.wybor = this.wybor.bind(this);
+        this.dalej = this.dalej.bind(this);
 
     }
 
@@ -156,11 +152,16 @@ class Payment2 extends React.Component {
         })
         const b = a.then(response => {
             console.log(response.data)
+            this.setState({cena: response.data.amount })
         })
         a.catch(function (response) {
             console.log(response)       
         })
         
+    }
+
+    dalej(){
+        document.getElementById('klientlink').click();
     }
 
 
@@ -170,9 +171,10 @@ class Payment2 extends React.Component {
 
                 <div id="glownypayment2">
                 <Tytul
-                tekst="Do zapłaty:"/>
+                tekst="Do zapłaty:"
+                cena = {this.state.cena} /> 
                 
-                <div>
+                <div id="pierwszy">
                     wybierz metode płatności
                     <select id="platnosc" name="carId" onInput={this.wybor}>
                         <option value="Przelew" >Przelew</option>
@@ -182,7 +184,12 @@ class Payment2 extends React.Component {
 
                 { this.state.pokaz == true ? <Tranzakcja1/> : <Tranzakcja2/> }
 
-                <Przycisk/>
+                
+                <div id="przyciskpayment2">
+                    <input id="przycisk2" type="submit" value="Dalej" onClick={this.dalej}/>
+                </div>
+
+                <Link to="/klient" id="klientlink"/>
 
             
 

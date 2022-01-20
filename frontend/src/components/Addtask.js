@@ -1,9 +1,9 @@
 import React from 'react';
 import axios from "axios";
 import './Addtask.css';
+import { Link } from "react-router-dom"
 
-const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
-const CARS_REST_API_URL = 'http://localhost:8080/api/cars';
+
 const SERVICES_REST_API_URL = 'http://localhost:8080/api/services';
 const TASKS_REST_API_URL = 'http://localhost:8080/api/tasks';
 
@@ -123,6 +123,7 @@ class Addtask extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
+                document.getElementById('klientlink').click();
             })
             .catch(function (response) {
                 //handle error
@@ -187,7 +188,7 @@ class Addtask extends React.Component {
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
-
+                <Link to="/klient" id="klientlink"/>
             </div>
         ); 
     }

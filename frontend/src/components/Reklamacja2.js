@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
 import './Reklamacja2.css';
@@ -80,6 +80,7 @@ class Reklamacja2 extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
+                document.getElementById('klientlink').click();
             })
             .catch(function (response) {
                 //handle error
@@ -108,6 +109,7 @@ class Reklamacja2 extends React.Component {
                 <div id="taskbutton">
                 <input id="przycisk2" type="submit" value="Wyślij" onClick={this.wyslij} />
                 </div>
+                <Link to="/klient" id="klientlink"/>
                 
 
             
