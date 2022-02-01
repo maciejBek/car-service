@@ -1,11 +1,15 @@
 package pl.company.carservice.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class RegularCustomer {
 
     @Id
@@ -18,28 +22,8 @@ public class RegularCustomer {
 
     private int performedServicesNumber;
 
-    public RegularCustomer() {
-
-    }
-
     public RegularCustomer(Customer customer, int performedServicesNumber) {
         this.customer = customer;
-        this.performedServicesNumber = performedServicesNumber;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public int getPerformedServicesNumber() {
-        return performedServicesNumber;
-    }
-
-    public void setPerformedServicesNumber(int performedServicesNumber) {
         this.performedServicesNumber = performedServicesNumber;
     }
 }

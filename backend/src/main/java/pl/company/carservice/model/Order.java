@@ -1,5 +1,7 @@
 package pl.company.carservice.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,6 +12,8 @@ import java.util.Set;
 
 @Entity
 @Table(name = "order_table")
+@Data
+@NoArgsConstructor
 public class Order {
 
     @Id
@@ -41,10 +45,6 @@ public class Order {
     private LocalDateTime date;
     private int totalPrice;
 
-    public Order() {
-
-    }
-
     public Order(LocalDateTime assignmentDate, LocalDateTime date, int totalPrice) {
         this.assignmentDate = assignmentDate;
         this.date = date;
@@ -56,54 +56,6 @@ public class Order {
         this.magazine = magazine;
         this.assignmentDate = assignmentDate;
         this.date = date;
-        this.totalPrice = totalPrice;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
-    public Magazine getMagazine() {
-        return magazine;
-    }
-
-    public void setMagazine(Magazine magazine) {
-        this.magazine = magazine;
-    }
-
-    public LocalDateTime getAssignmentDate() {
-        return assignmentDate;
-    }
-
-    public void setAssignmentDate(LocalDateTime assignmentDate) {
-        this.assignmentDate = assignmentDate;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public int getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 }
