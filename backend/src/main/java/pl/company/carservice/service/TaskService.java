@@ -10,14 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import pl.company.carservice.controller.error.ErrorResponse;
 import pl.company.carservice.dto.CarCustomerServiceTaskDto;
 import pl.company.carservice.dto.CompletionDateDto;
+import pl.company.carservice.dto.TaskAdditionByAccountIdDto;
 import pl.company.carservice.dto.TaskAdditionDto;
-import pl.company.carservice.model.Car;
-import pl.company.carservice.model.Customer;
-import pl.company.carservice.model.ServiceEntity;
-import pl.company.carservice.model.Task;
+import pl.company.carservice.model.*;
+import pl.company.carservice.repository.AccountRepository;
+import pl.company.carservice.repository.CustomerRepository;
 import pl.company.carservice.repository.TaskRepository;
 
 import javax.persistence.EntityManager;
@@ -25,6 +26,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -32,11 +34,13 @@ import java.util.Optional;
 public class TaskService {
 
     private TaskRepository taskRepository;
+    private CustomerRepository customerRepository;
     private EntityManager entityManager;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, EntityManager entityManager) {
+    public TaskService(TaskRepository taskRepository, CustomerRepository customerRepository, EntityManager entityManager) {
         this.taskRepository = taskRepository;
+        this.customerRepository = customerRepository;
         this.entityManager = entityManager;
     }
 
@@ -66,22 +70,36 @@ public class TaskService {
         }
     }
 
-    //TODO: validation
-    public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
-        Long serviceId = taskAdditionDto.serviceId();
-        Long carId = taskAdditionDto.carId();
-        Long customerId = taskAdditionDto.customerId();
+    public ResponseEntity<?> getTasksByAccountId(@PathVariable Long accountId) {
+        Customer customer = this.customerRepository.findByAccount_Id(accountId).get();
+        Long customerId = customer.getId();
+
+        List<CarCustomerServiceTaskDto> taskDtoList = taskRepository.findAllDtoByCustomerId(customerId);
+
+        return new ResponseEntity<>(taskDtoList, HttpStatus.OK);
+    }
+
+    // TODO: correct accountId/CustomerId
+    @PostMapping("/tasks")
+    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionByAccountIdDto taskAdditionByAccountIdDto) {
+        Long serviceId = taskAdditionByAccountIdDto.serviceId();
+        Long carId = taskAdditionByAccountIdDto.carId();
+        Long accountId = taskAdditionByAccountIdDto.accountId();
 
         // incompatible data formats javascript <-> java ('Z' at the end of data)
         // deleting 'Z'
-        String acceptanceDateString = taskAdditionDto.acceptanceDate();
+        String acceptanceDateString = taskAdditionByAccountIdDto.acceptanceDate();
         StringBuffer stringBuffer = new StringBuffer(acceptanceDateString);
         stringBuffer.deleteCharAt(stringBuffer.length() - 1);
         acceptanceDateString = stringBuffer.toString();
 
         LocalDateTime acceptanceDate = LocalDateTime.parse(acceptanceDateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        String serviceDescription = taskAdditionDto.serviceDescription();
-        String problemDescription = taskAdditionDto.problemDescription();
+        String serviceDescription = taskAdditionByAccountIdDto.serviceDescription();
+        String problemDescription = taskAdditionByAccountIdDto.problemDescription();
+
+        // TODO check Optional
+        // get customerId by accountId
+        Long customerId = this.customerRepository.findByAccount_Id(accountId).get().getId();
 
         ServiceEntity service = entityManager.getReference(ServiceEntity.class, serviceId);
         Car car = entityManager.getReference(Car.class, carId);
@@ -89,7 +107,6 @@ public class TaskService {
 
         Task task = new Task(service, car, customer, acceptanceDate, serviceDescription, problemDescription);
         this.taskRepository.save(task);
-
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -117,5 +134,32 @@ public class TaskService {
             ErrorResponse errorResponse = new ErrorResponse("task-does-not-exist");
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
+    }
+
+    //TODO: validation
+    public ResponseEntity<?> addTask(TaskAdditionDto taskAdditionDto) {
+        Long serviceId = taskAdditionDto.serviceId();
+        Long carId = taskAdditionDto.carId();
+        Long customerId = taskAdditionDto.customerId();
+
+        // incompatible data formats javascript <-> java ('Z' at the end of data)
+        // deleting 'Z'
+        String acceptanceDateString = taskAdditionDto.acceptanceDate();
+        StringBuffer stringBuffer = new StringBuffer(acceptanceDateString);
+        stringBuffer.deleteCharAt(stringBuffer.length() - 1);
+        acceptanceDateString = stringBuffer.toString();
+
+        LocalDateTime acceptanceDate = LocalDateTime.parse(acceptanceDateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String serviceDescription = taskAdditionDto.serviceDescription();
+        String problemDescription = taskAdditionDto.problemDescription();
+
+        ServiceEntity service = entityManager.getReference(ServiceEntity.class, serviceId);
+        Car car = entityManager.getReference(Car.class, carId);
+        Customer customer = entityManager.getReference(Customer.class, customerId);
+
+        Task task = new Task(service, car, customer, acceptanceDate, serviceDescription, problemDescription);
+        this.taskRepository.save(task);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

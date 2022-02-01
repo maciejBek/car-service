@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from "axios";
+import { Link } from "react-router-dom"
 import './Wykonane.css';
 
 const HARMONOGRAM_REST_API_URL = 'http://localhost:8080/api/tasks';
@@ -70,7 +71,7 @@ class Wykonane extends React.Component {
 
         var urll = 'http://localhost:8080/api/tasks/'+idtask
         console.log(urll)
-
+        sessionStorage.setItem("taskid", idtask)
         var data = {};
         var day = new Date(); 
         data.completionDate = day.toISOString()
@@ -87,6 +88,8 @@ class Wykonane extends React.Component {
             const b = a.then(response => {
                 console.log(response)
                 this.componentDidMount()
+                document.getElementById('zaplac').click();
+                ;
             })
             a.catch(function (response) {
                 console.log(response)       
@@ -158,10 +161,11 @@ class Wykonane extends React.Component {
                         tekst={el.serviceDescription}/>
                         <Poleharmonogram
                         id="dataprzharmonogram"
-                        tekst={el.acceptanceDate}/>
+                        tekst={el.acceptanceDate.slice(0,10)}/>
                         
                         <div id="wykonanepole">
                         <input id="przycisk2" type="submit" onClick={()=> {this.wyslij(el.taskId)}} value="Wykonane"  />
+                        <Link to="zaplac" id="zaplac"/>
                         </div>
     
                    </div>

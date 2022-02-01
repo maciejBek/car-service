@@ -1,11 +1,11 @@
 // import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
-import './Addcustomer.css';
+import './Additem2.css';
 import { Link } from "react-router-dom"
 
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/register';
+const NEEDED_REST_API_URL = 'http://localhost:8080/api/needed-task-parts';
 
 const Tytul = (values) =>{
     return(
@@ -43,7 +43,7 @@ const Przycisk = (values) =>{
 
 
 
-class Form extends React.Component {
+class Additem2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -75,32 +75,20 @@ class Form extends React.Component {
             data[key] = value;
         });
 
-        console.log(data);
-        
-        var pojemnik = {};
-        console.log(pojemnik);
-        pojemnik.account = {};
-        pojemnik.account.username = data.username
-        pojemnik.account.password = data.password
-        pojemnik.account.emailAddress = data.emailAddress
-        pojemnik.customer = {};
-        pojemnik.customer.name = data.name;
-        pojemnik.customer.surname = data.surname;
-        pojemnik.customer.phoneNumber = data.phoneNumber;
-        pojemnik.address = {};
-        pojemnik.address.street = data.street;
-        pojemnik.address.number = data.number;
-        pojemnik.address.town = data.town;
-        console.log(pojemnik);
-        
 
-        let body = JSON.stringify(pojemnik);
+        data.taskId = sessionStorage.getItem("idtask")
+        console.log(data);
+
+
+        data.taskId = parseInt(data.taskId)
+        data.partsAmount = parseInt(data.partsAmount)
+        let body = JSON.stringify(data);
         console.log(body);
 
         // add car to database with post method
         axios({
             method: "post",
-            url: CAR_REST_API_URL,
+            url: NEEDED_REST_API_URL,
             data: body,
             headers: { "Content-Type": "application/JSON" },
         })
@@ -114,6 +102,7 @@ class Form extends React.Component {
                 //handle error
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('pracowniklink').click();
             });
 
         event.preventDefault();
@@ -124,55 +113,44 @@ class Form extends React.Component {
     render() {
         return (
 
-                <div id="glownyaddcustomer">
+                <div id="glownyadditem2">
                 <Tytul
-                tekst="Opcja dodanie Klienta pozwoli utworzyć nowe konto klienta oraz przypisać mu dane:"/>
+                tekst="Wpisz przedmiot oraz ilość który jest niezbędny do zakończenia zlecenia"/>
                 <Tekst
-                tekst="aby dodać nowego klienta proszę uzupełnić poniższe pola:"/>
+                tekst="aby dodać potrzebną część proszę uzupełnić poniższe pola:"/>
                 <form id="rejestracja2" onSubmit={this.handleSubmit}>
                 <div id = "inputy">
                 <Wstaw
-                tekst="Podaj login"
-                dom = "Login"
-                idk = "username"/>
+                tekst="Podaj nazwę cześci"
+                dom = "Nazwa"
+                idk = "partName"/>
                 <Wstaw
-                tekst="Podaj E-mail"
-                dom = "E-mail"
-                idk = "emailAddress"/>
+                tekst="Podaj Oznaczenie"
+                dom = "oznaczenie"
+                idk = "partNumbering"/>
                 <Wstaw
-                tekst="Podaj Hasło"
-                dom = "Hasło"
-                idk = "password"/>
+                tekst="Podaj nr seryjny"
+                dom = "Nr seryjny"
+                idk = "partSerialNumber"/>
                 <Wstaw
-                tekst="Podaj swoje imię"
-                dom = "Imię"
-                idk = "name"/>
+                tekst="Podaj Model"
+                dom = "Model"
+                idk = "carBrand"/>
                 <Wstaw
-                tekst="Podaj swoje Nazwisko"
-                dom = "Nazwisko"
-                idk = "surname"/>
+                tekst="Podaj Marke"
+                dom = "Marka"
+                idk = "carModel"/>
                 <Wstaw
-                tekst="Podaj nr telefonu"
-                dom = "Nr telefonu"
-                idk = "phoneNumber"/>
-                <Wstaw
-                tekst="Miejscowość"
-                dom = "Miejscowość"
-                idk = "town"/>
-                <Wstaw
-                tekst="Ulica"
-                dom = "Ulica"
-                idk = "street"/>
-                <Wstaw
-                tekst="Nr Domu"
-                dom = "Nr Domu"
-                idk = "number"/>
+                tekst="Podaj Ilość"
+                dom = "Ilość"
+                idk = "partsAmount"/>
                 </div>
                 <div id="taskbutton">
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
                 <Link to="/pracownik" id="pracowniklink"/>
+
             
 
 
@@ -184,4 +162,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default Additem2;

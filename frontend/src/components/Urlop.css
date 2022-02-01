@@ -1,0 +1,28 @@
+#urlopcont{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 80px;
+    width: 600px;
+    margin-bottom: 50px;
+}
+
+#daterozp{
+    float: left;
+}
+
+#daterozppole{
+    margin-left: 40px;
+
+    margin-top: 20px;
+}
+
+#datezak{
+    float: right;
+}
+
+#datezakpole{
+    margin-left: 40px;
+
+    margin-top: 20px;
+}

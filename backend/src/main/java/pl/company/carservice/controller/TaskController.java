@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.company.carservice.dto.CompletionDateDto;
+import pl.company.carservice.dto.TaskAdditionByAccountIdDto;
 import pl.company.carservice.dto.TaskAdditionDto;
 import pl.company.carservice.service.TaskService;
-
-import java.time.LocalDateTime;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -36,9 +35,14 @@ public class TaskController {
         return this.taskService.getTasks(pageNo, pageSize, sortBy);
     }
 
+    @GetMapping(value = "/tasks/customer/{accountId}", produces = "application/json")
+    public ResponseEntity<?> getTasksByAccountId(@PathVariable Long accountId) {
+        return taskService.getTasksByAccountId(accountId);
+    }
+
     @PostMapping("/tasks")
-    public ResponseEntity<?> addTask(@RequestBody TaskAdditionDto taskAdditionDto) {
-        return this.taskService.addTask(taskAdditionDto);
+    public ResponseEntity<?> addTaskByAccountId(@RequestBody TaskAdditionByAccountIdDto taskAdditionByAccountIdDto) {
+        return this.taskService.addTaskByAccountId(taskAdditionByAccountIdDto);
     }
 
     @PatchMapping("/tasks/{id}")

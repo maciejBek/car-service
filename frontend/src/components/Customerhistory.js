@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from "axios";
-import './Harmonogram.css';
 
-const HARMONOGRAM_REST_API_URL = 'http://localhost:8080/api/tasks';
+const HARMONOGRAM_REST_API_URL = 'http://localhost:8080/api/tasks/customer/';
 
 
 const Poleharmonogram = (values) =>{
@@ -15,7 +14,7 @@ const Poleharmonogram = (values) =>{
 
 
 
-class Harmonogram extends React.Component {
+class Customerhistory extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,25 +26,35 @@ class Harmonogram extends React.Component {
             numberOfGuests: 2
         };
 
-
     }
 
     
     componentDidMount(){
         
+        var id = sessionStorage.getItem("id")
+        console.log(id)
+
+        var urll = 'http://localhost:8080/api/tasks/customer/'+id
+        console.log(urll)
+
         const a = axios({
             method: "get",
-            url: HARMONOGRAM_REST_API_URL,
-            params: {
-                pageSize: 20,
-                pageNo: 0,
-                sortBy: "acceptanceDate"
-              }
+            url: urll
+            
         })
 
             const b = a.then(response => {
-                this.setState({harmonogram: response.data }) 
+                console.log(response.data)
+                
+                var obj = response.data
+                // for(var i=0; i<=(obj.length-1); i++){
+                //     obj[i].completionDate = obj[i].completionDate.slice(1,10)
+                //     obj[i].acceptanceDate = obj[i].acceptanceDate.slice(1,10)
+                // }
+            
+                this.setState({harmonogram: obj }) 
                 console.log(this.state.harmonogram)
+
             })
             a.catch(function (response) {
                 console.log(response)       
@@ -54,14 +63,11 @@ class Harmonogram extends React.Component {
         
     }
 
-   
-   
-
     render() {
         return (
             <div id="contenerharmonogram">
                 <div id="harmonogramtekst1">
-               Harmonogram pozwoli na zobrazownianie usług które są wykonywane:
+               Zlecenia które zostały wykonane:
                </div>
                <div id="contenerharmonogramid1">
                     <Poleharmonogram
@@ -90,11 +96,11 @@ class Harmonogram extends React.Component {
                     tekst="Data przyjęcia"/>
                     <Poleharmonogram
                     id="dataukharmonogram"
-                    tekst="Data ukończenia"/>
+                    tekst="Data wykonania"/>
 
                </div>
                {this.state.harmonogram.map(el =>(
-                        <div id={"contenerharmonogram"+el.id}>
+                        <div id={"contenerharmonogram"+el.taskId}>
                         <Poleharmonogram
                         id="imieharmonogram"
                         tekst={el.customerName}/>
@@ -123,7 +129,6 @@ class Harmonogram extends React.Component {
                         id="dataukharmonogram"
                         tekst={el.completionDate != null ? el.completionDate.slice(0,10) : el.completionDate}/>
                         
-    
                    </div>
                 ))}
                
@@ -134,4 +139,4 @@ class Harmonogram extends React.Component {
     }
 }
 
-export default Harmonogram;
+export default Customerhistory;

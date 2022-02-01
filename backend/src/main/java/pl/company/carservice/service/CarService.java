@@ -14,7 +14,9 @@ import pl.company.carservice.model.Customer;
 import pl.company.carservice.repository.CarRepository;
 import pl.company.carservice.repository.CustomerRepository;
 
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,11 +25,13 @@ public class CarService {
 
     private CarRepository carRepository;
     private CustomerRepository customerRepository;
+    private EntityManager entityManager;
 
     @Autowired
-    public CarService(CarRepository carRepository, CustomerRepository customerRepository) {
+    public CarService(CarRepository carRepository, CustomerRepository customerRepository, EntityManager entityManager) {
         this.carRepository = carRepository;
         this.customerRepository = customerRepository;
+        this.entityManager = entityManager;
     }
 
     public ResponseEntity<?> getCar(Long id) {
@@ -62,6 +66,21 @@ public class CarService {
         } else {
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
         }
+    }
+
+    // TODO: chech optional
+    public ResponseEntity<?> getCarsByAccountId(Long accountId) {
+        Optional<Customer> customer = this.customerRepository.findByAccount_Id(accountId);
+        if (customer.isPresent()) {
+            Long customerId = customer.get().getId();
+
+            List<CarIdBrandModelDto> cars = this.carRepository.findAllDtoByCustomerId(customerId);
+
+            return new ResponseEntity<>(cars, HttpStatus.OK);
+        }
+
+        ErrorResponse errorResponse = new ErrorResponse("does-not-exist");
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<?> addCar(CarCustomerIdDto carCustomerIdDto) {

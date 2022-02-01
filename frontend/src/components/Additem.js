@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import './Harmonogram.css';
+import { Link } from "react-router-dom"
 
 const HARMONOGRAM_REST_API_URL = 'http://localhost:8080/api/tasks';
 
@@ -15,7 +15,7 @@ const Poleharmonogram = (values) =>{
 
 
 
-class Harmonogram extends React.Component {
+class Additem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ class Harmonogram extends React.Component {
             numberOfGuests: 2
         };
 
-
+        this.dalej = this.dalej.bind(this);
     }
 
     
@@ -44,14 +44,31 @@ class Harmonogram extends React.Component {
         })
 
             const b = a.then(response => {
-                this.setState({harmonogram: response.data }) 
-                console.log(this.state.harmonogram)
+                
+                var obj2 = []
+                var obj = response.data
+                for(var i=0; i<=(obj.length-1); i++){
+                    if(obj[i].completionDate == null){
+                        obj2[i]=obj[i]
+                    }
+                }
+
+                console.log(obj2)
+                
+
+                this.setState({harmonogram: obj2 }) 
             })
             a.catch(function (response) {
                 console.log(response)       
             })
 
         
+    }
+
+    dalej(idtask){
+        console.log("przechodze")
+        sessionStorage.setItem("idtask", idtask);
+        document.getElementById('additemlink').click();
     }
 
    
@@ -61,7 +78,7 @@ class Harmonogram extends React.Component {
         return (
             <div id="contenerharmonogram">
                 <div id="harmonogramtekst1">
-               Harmonogram pozwoli na zobrazownianie usług które są wykonywane:
+               Wybierz zlecenie które wymaga niezbędnej części:
                </div>
                <div id="contenerharmonogramid1">
                     <Poleharmonogram
@@ -90,11 +107,11 @@ class Harmonogram extends React.Component {
                     tekst="Data przyjęcia"/>
                     <Poleharmonogram
                     id="dataukharmonogram"
-                    tekst="Data ukończenia"/>
+                    tekst="Wybierz"/>
 
                </div>
                {this.state.harmonogram.map(el =>(
-                        <div id={"contenerharmonogram"+el.id}>
+                        <div id={"contenerharmonogram"+el.taskId}>
                         <Poleharmonogram
                         id="imieharmonogram"
                         tekst={el.customerName}/>
@@ -119,13 +136,15 @@ class Harmonogram extends React.Component {
                         <Poleharmonogram
                         id="dataprzharmonogram"
                         tekst={el.acceptanceDate.slice(0,10)}/>
-                        <Poleharmonogram
-                        id="dataukharmonogram"
-                        tekst={el.completionDate != null ? el.completionDate.slice(0,10) : el.completionDate}/>
                         
-    
+                        <div id="wykonanepole">
+                        <input id="przycisk2" type="submit" onClick={()=> {this.dalej(el.taskId)}} value="Dodaj"  />
+                        
+                        </div>
                    </div>
                 ))}
+                <Link to="additem2" id="additemlink"/>
+
                
 
 
@@ -134,4 +153,4 @@ class Harmonogram extends React.Component {
     }
 }
 
-export default Harmonogram;
+export default Additem;

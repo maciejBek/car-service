@@ -1,16 +1,15 @@
 import React from 'react';
 import axios from "axios";
- import { Link } from "react-router-dom"
-import './Task.css';
+import './Addtask.css';
+import { Link } from "react-router-dom"
 
-const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
-const CARS_REST_API_URL = 'http://localhost:8080/api/cars';
+
 const SERVICES_REST_API_URL = 'http://localhost:8080/api/services';
 const TASKS_REST_API_URL = 'http://localhost:8080/api/tasks';
 
 
 
-class Task extends React.Component {
+class Addtask extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,7 +21,6 @@ class Task extends React.Component {
             numberOfGuests: 2
         };
 
-        this.samochody = this.samochody.bind(this)
         this.serwis = this.serwis.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this);
 
@@ -49,44 +47,25 @@ class Task extends React.Component {
 
     }
 
-    samochody() {
-        var id = document.getElementById("select").value
-
-        const c = axios({
-            method: "get",
-            url: CARS_REST_API_URL,
-            params: {
-                pageSize: 100,
-                pageNo: 0,
-                sortBy: "brand",
-                customerId: id
-              }
-        })
-
-            const d = c.then(response => {
-                this.setState({cars: response.data }) 
-                
-            })
-            c.catch(function (response) {
-                console.log(response)       
-            })
-
-    }
+    
 
     componentDidMount(){
-        
+        var id
+        id = sessionStorage.getItem("id")
+        console.log(id)
+        var ulrr 
+        ulrr= "http://localhost:8080/api/cars/account/"+id
+        console.log(ulrr)
+
         const a = axios({
             method: "get",
-            url: CUSTOMER_REST_API_URL,
-            params: {
-                pageSize: 100,
-                pageNo: 0,
-                sortBy: "acceptanceDate"
-              }
+            url: ulrr,
+            
         })
 
             const b = a.then(response => {
-                this.setState({obj: response.data }) 
+                console.log(response.data)
+                this.setState({cars: response.data }) 
                 
             })
             a.catch(function (response) {
@@ -107,6 +86,9 @@ class Task extends React.Component {
     }
 
     handleSubmit(event) {
+        var id
+        id = sessionStorage.getItem("id")
+        console.log(id)
         // getting data from form and putting to json string to body array
         let usluga = document.getElementById('usluga');
         let formData = new FormData(usluga);
@@ -115,15 +97,13 @@ class Task extends React.Component {
         formData.forEach(function(value, key){
             data[key] = value;
         });
-
-        var m = document.getElementById("select").value
         var i = document.getElementById("cars").value
         var f = document.getElementById("service").value
 
 
-        data.customerId = parseInt(m)
         data.carId = parseInt(i)
         data.serviceId = parseInt(f)
+        data.accountId = parseInt(id)
 
         var day = new Date();
         
@@ -143,12 +123,11 @@ class Task extends React.Component {
             .then(function (response) {
                 //handle success
                 console.log(response);
-                document.getElementById('pracowniklink').click();
+                document.getElementById('klientlink').click();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
-                document.getElementById('pracowniklink').click();
             });
 
         event.preventDefault();
@@ -164,19 +143,7 @@ class Task extends React.Component {
                 </div>
 
                 <div id="wyborytask">
-                <div id="customercont">
-                <div id="teksttask1">
-                Wybierz klienta:
-                </div>
-                
-                <select id="select" name="customerId" onInput={this.samochody}>
-                <option value="" disabled selected>Klenci</option>
-                    {this.state.obj.map(el =>(
-                        <option value={el.id}>{el.name}{" "}{el.surname}</option>
-                    ))}
-                </select>
-                </div>
-                <div id="customercont">
+                <div id="customertask">
                 <div id="teksttask1">
                 Wybierz samochód:
                 </div>
@@ -205,7 +172,7 @@ class Task extends React.Component {
                     <div id="teksttask1">
                     Opis usługi:
                     </div>
-                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis problemu..." >
+                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis usługi..." >
                     
                 </textarea>
                 </div>
@@ -221,10 +188,10 @@ class Task extends React.Component {
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
-                <Link to="/pracownik" id="pracowniklink"/>
+                <Link to="/klient" id="klientlink"/>
             </div>
         ); 
     }
 }
 
-export default Task;
+export default Addtask;

@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom"
+ import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
 import './Rejestracja2.css';
@@ -74,6 +74,9 @@ class Form extends React.Component {
         formData.forEach(function(value, key){
             data[key] = value;
         });
+        data.emailAddress = sessionStorage.getItem("emailAddress")
+        data.username = sessionStorage.getItem("username")
+        data.password = sessionStorage.getItem("password")
 
         console.log(data);
         
@@ -86,10 +89,10 @@ class Form extends React.Component {
         pojemnik.customer.name = data.Imie;
         pojemnik.customer.surname = data.Nazwisko;
         pojemnik.customer.phoneNumber = data.nrTel;
-        pojemnik.customer.address = {};
-        pojemnik.customer.address.street = data.Ulica;
-        pojemnik.customer.address.number = data.Nrdomu;
-        pojemnik.customer.address.town = data.Miejscowosc;
+        pojemnik.address = {};
+        pojemnik.address.street = data.Ulica;
+        pojemnik.address.number = data.Nrdomu;
+        pojemnik.address.town = data.Miejscowosc;
         console.log(pojemnik);
         
 
@@ -107,11 +110,13 @@ class Form extends React.Component {
                 //handle success
                 console.log(response);
                 sessionStorage.clear();
+                document.getElementById('logowanielink').click();
             })
             .catch(function (response) {
                 //handle error
                 console.log(response);
-                sessionStorage.clear();
+                document.getElementById('logowanielink').click();
+                
             });
 
         event.preventDefault();
@@ -154,10 +159,11 @@ class Form extends React.Component {
                 dom = "Nr Domu"
                 idk = "Nrdomu"/>
                 </div>
-               
-                <input  type="submit" value="Dalej" />
+                <div id="guzikrejestracja">
+                <input id="przycisk2" type="submit" value="Zarejestruj" />
+                </div>
                 </form>
-
+                <Link to="/" id="logowanielink"/>
             
 
 

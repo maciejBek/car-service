@@ -1,11 +1,11 @@
 // import { Link } from "react-router-dom"
 import React from 'react';
 import axios from 'axios';
-import './Addcustomer.css';
+import './Zaplac.css';
 import { Link } from "react-router-dom"
 
 
-const CAR_REST_API_URL = 'http://localhost:8080/api/register';
+const CAR_REST_API_URL = 'http://localhost:8080/api/bills';
 
 const Tytul = (values) =>{
     return(
@@ -43,7 +43,7 @@ const Przycisk = (values) =>{
 
 
 
-class Form extends React.Component {
+class Zaplac extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,6 +66,9 @@ class Form extends React.Component {
     }
 
     handleSubmit(event) {
+        var id
+        id = sessionStorage.getItem("taskid")
+        console.log(id)
         // getting data from form and putting to json string to body array
         let rere = document.getElementById('rejestracja2');
         let formData = new FormData(rere);
@@ -75,27 +78,12 @@ class Form extends React.Component {
             data[key] = value;
         });
 
-        console.log(data);
+        data.taskId = parseInt(id)
+        data.amount = parseInt(data.amount)
         
-        var pojemnik = {};
-        console.log(pojemnik);
-        pojemnik.account = {};
-        pojemnik.account.username = data.username
-        pojemnik.account.password = data.password
-        pojemnik.account.emailAddress = data.emailAddress
-        pojemnik.customer = {};
-        pojemnik.customer.name = data.name;
-        pojemnik.customer.surname = data.surname;
-        pojemnik.customer.phoneNumber = data.phoneNumber;
-        pojemnik.address = {};
-        pojemnik.address.street = data.street;
-        pojemnik.address.number = data.number;
-        pojemnik.address.town = data.town;
-        console.log(pojemnik);
-        
-
-        let body = JSON.stringify(pojemnik);
+        let body = JSON.stringify(data);
         console.log(body);
+        
 
         // add car to database with post method
         axios({
@@ -124,55 +112,24 @@ class Form extends React.Component {
     render() {
         return (
 
-                <div id="glownyaddcustomer">
+                <div id="glownyzaplac">
                 <Tytul
-                tekst="Opcja dodanie Klienta pozwoli utworzyć nowe konto klienta oraz przypisać mu dane:"/>
-                <Tekst
-                tekst="aby dodać nowego klienta proszę uzupełnić poniższe pola:"/>
+                tekst="Wprowadź cene wykonanej usługi:"/>
+                
                 <form id="rejestracja2" onSubmit={this.handleSubmit}>
                 <div id = "inputy">
                 <Wstaw
-                tekst="Podaj login"
-                dom = "Login"
-                idk = "username"/>
-                <Wstaw
-                tekst="Podaj E-mail"
-                dom = "E-mail"
-                idk = "emailAddress"/>
-                <Wstaw
-                tekst="Podaj Hasło"
-                dom = "Hasło"
-                idk = "password"/>
-                <Wstaw
-                tekst="Podaj swoje imię"
-                dom = "Imię"
-                idk = "name"/>
-                <Wstaw
-                tekst="Podaj swoje Nazwisko"
-                dom = "Nazwisko"
-                idk = "surname"/>
-                <Wstaw
-                tekst="Podaj nr telefonu"
-                dom = "Nr telefonu"
-                idk = "phoneNumber"/>
-                <Wstaw
-                tekst="Miejscowość"
-                dom = "Miejscowość"
-                idk = "town"/>
-                <Wstaw
-                tekst="Ulica"
-                dom = "Ulica"
-                idk = "street"/>
-                <Wstaw
-                tekst="Nr Domu"
-                dom = "Nr Domu"
-                idk = "number"/>
+                tekst="Podaj cene:"
+                dom = "Cena"
+                idk = "amount"/>
+                
                 </div>
                 <div id="taskbutton">
                 <input id="przycisk2" type="submit" value="Wyślij"  />
                 </div>
                 </form>
                 <Link to="/pracownik" id="pracowniklink"/>
+
             
 
 
@@ -184,4 +141,4 @@ class Form extends React.Component {
     }
 }
 
-export default Form;
+export default Zaplac;

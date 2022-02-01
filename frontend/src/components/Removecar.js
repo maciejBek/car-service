@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
- import { Link } from "react-router-dom"
-import './Task.css';
+import './Removecar.css';
+import { Link } from "react-router-dom"
 
 const CUSTOMER_REST_API_URL = 'http://localhost:8080/api/customers';
 const CARS_REST_API_URL = 'http://localhost:8080/api/cars';
@@ -10,42 +10,19 @@ const TASKS_REST_API_URL = 'http://localhost:8080/api/tasks';
 
 
 
-class Task extends React.Component {
+class Removecar extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             obj: [],
             cars: [],
-            service: [],
             isGoing: true,
             numberOfGuests: 2
         };
 
         this.samochody = this.samochody.bind(this)
-        this.serwis = this.serwis.bind(this)
-        this.handleInputChange = this.handleInputChange.bind(this);
-
-    }
-
-    serwis() {
-
-        const e = axios({
-            method: "get",
-            url: SERVICES_REST_API_URL,
-            params: {
-                pageSize: 100,
-                pageNo: 0
-              }
-        })
-
-            const f = e.then(response => {
-                this.setState({service: response.data }) 
-                
-            })
-            e.catch(function (response) {
-                console.log(response)       
-            })
+        this.usun = this.usun.bind(this);
 
     }
 
@@ -96,48 +73,19 @@ class Task extends React.Component {
         
     }
 
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
-    }
-
-    handleSubmit(event) {
+    usun(event) {
         // getting data from form and putting to json string to body array
-        let usluga = document.getElementById('usluga');
-        let formData = new FormData(usluga);
-
-        var data = {};
-        formData.forEach(function(value, key){
-            data[key] = value;
-        });
-
-        var m = document.getElementById("select").value
-        var i = document.getElementById("cars").value
-        var f = document.getElementById("service").value
 
 
-        data.customerId = parseInt(m)
-        data.carId = parseInt(i)
-        data.serviceId = parseInt(f)
+        var carId = document.getElementById("cars").value
 
-        var day = new Date();
-        
-       
-        
-        data.acceptanceDate = day.toISOString()
-        // add car to database with post method
-        let body = JSON.stringify(data);
-        console.log(data)
-        console.log(body)
+        var urll = 'http://localhost:8080/api/cars/'+carId
+        console.log(urll)
+
         axios({
-            method: "post",
-            url: TASKS_REST_API_URL,
-            data: body,
+            method: "delete",
+            url: urll,
             headers: { "Content-Type": "application/JSON" },
         })
             .then(function (response) {
@@ -148,7 +96,6 @@ class Task extends React.Component {
             .catch(function (response) {
                 //handle error
                 console.log(response);
-                document.getElementById('pracowniklink').click();
             });
 
         event.preventDefault();
@@ -158,9 +105,9 @@ class Task extends React.Component {
 
     render() {
         return (
-            <div id="contener">
+            <div id="contenerremovecar">
                 <div id="teksttask">
-                Aby dodać nowe zlecenie należy wypełnić poniższe pola:
+                Wybierz pojazd który ma zostać usunięty:
                 </div>
 
                 <div id="wyborytask">
@@ -188,43 +135,18 @@ class Task extends React.Component {
                 </select>
                 </div>
                 </div>
-                <div id="taskcont">
-                    <div id="teksttask2">
-                Wybierz Usługę która ma zostać wykonana:
-                    </div>
-                <select id="service" name="serviceId">
-                <option value="" disabled selected>Usługi</option>
-                    {this.state.service.map(el =>(
-                        <option value={el.id}>{el.name}</option>
-                    ))}
-                </select>
-                </div>
                 
-                <form id="usluga" onSubmit={this.handleSubmit}>
-                <div id="uslugacont1">
-                    <div id="teksttask1">
-                    Opis usługi:
-                    </div>
-                <textarea id="tekstarea1" name="serviceDescription" rows="5" cols="33" placeholder="Opis problemu..." >
-                    
-                </textarea>
-                </div>
-                <div id="uslugacont2">
-                    <div id="teksttask1">
-                        Opis problemu:
-                    </div>
-                <textarea id="tekstarea2" name="problemDescription" rows="5" cols="33" placeholder="Opis problemu...">
-                    
-                </textarea>
-                </div>
+                
+                
+                
                 <div id="taskbutton">
-                <input id="przycisk2" type="submit" value="Wyślij"  />
+                <input id="przycisk2" onClick={this.usun} type="submit" value="Usuń"  />
                 </div>
-                </form>
                 <Link to="/pracownik" id="pracowniklink"/>
+
             </div>
         ); 
     }
 }
 
-export default Task;
+export default Removecar;

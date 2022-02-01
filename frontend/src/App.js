@@ -13,6 +13,17 @@ import Harmonogram from './components/Harmonogram';
 import Addcustomer from './components/Addcustomer';
 import Addcar from './components/Addcar';
 import Wykonane from './components/Wykonane';
+import Additem from './components/Additem';
+import Additem2 from './components/Additem2';
+import Removecar from './components/Removecar';
+import Urlop from './components/Urlop';
+import Customerhistory from './components/Customerhistory';
+import Reklamacja from './components/Reklamacja';
+import Reklamacja2 from './components/Reklamacja2';
+import Addtask from './components/Addtask';
+import Zaplac from './components/Zaplac';
+import Payment from './components/Payment';
+import Payment2 from './components/Payment2';
 
 
 
@@ -32,6 +43,19 @@ function App() {
         <Route path="/pracownik/addcustomer" element={<Addcustomer/>}></Route>
         <Route path="/pracownik/addcar" element={<Addcar></Addcar>}></Route>
         <Route path="/pracownik/wykonane" element={<Wykonane/>}></Route>
+        <Route path="/pracownik/additem" element={<Additem/>}></Route>
+        <Route path="/pracownik/additem/additem2" element={<Additem2/>}></Route>
+        <Route path="/pracownik/removecar" element={<Removecar/>}></Route>
+        <Route path="/pracownik/urlop" element={<Urlop/>}></Route>
+        <Route path="/klient/customerhistory" element={<Customerhistory/>}></Route>
+        <Route path="/klient/harmonogram" element={<Harmonogram/>}></Route>
+        <Route path="/klient/reklamacja" element={<Reklamacja/>}></Route>
+        <Route path="/klient/reklamacja/reklamacja2" element={<Reklamacja2/>}></Route>
+        <Route path="/klient/addtask" element={<Addtask/>}></Route>
+        <Route path="/pracownik/wykonane/zaplac" element={<Zaplac/>}></Route>
+        <Route path="/klient/payment" element={<Payment/>}></Route>
+        <Route path="/klient/payment/payment2" element={<Payment2/>}></Route>
+
         
         
         

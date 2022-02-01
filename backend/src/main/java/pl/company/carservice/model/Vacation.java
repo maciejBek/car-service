@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,17 +20,18 @@ public class Vacation {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Employee employee;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime startDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate startDate;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDateTime endDate;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate endDate;
 
     public Vacation() {
 
     }
 
-    public Vacation(LocalDateTime startDate, LocalDateTime endDate) {
+    public Vacation(Employee employee, LocalDate startDate, LocalDate endDate) {
+        this.employee = employee;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -42,19 +44,19 @@ public class Vacation {
         this.id = id;
     }
 
-    public LocalDateTime getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDateTime startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDateTime endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

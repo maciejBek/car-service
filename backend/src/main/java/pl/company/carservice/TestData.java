@@ -8,6 +8,8 @@ import pl.company.carservice.controller.*;
 import pl.company.carservice.dto.*;
 import pl.company.carservice.model.*;
 import pl.company.carservice.repository.*;
+import pl.company.carservice.service.BillService;
+import pl.company.carservice.service.TaskService;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -27,10 +29,15 @@ public class TestData {
     private PartRepository partRepository;
     private RegistrationController registrationController;
     private ServiceRepository serviceRepository;
-    private TaskController taskController;
+    private TaskService taskService;
+    private BillRepository billRepository;
 
     @Autowired
-    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository, CarController carController, CarRepository carRepository, CustomerController customerController, CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository, RegistrationController registrationController, ServiceRepository serviceRepository, TaskController taskController) {
+    public TestData(AccountRepository accountRepository, AccountKindRepository accountKindRepository,
+                    CarController carController, CarRepository carRepository, CustomerController customerController,
+                    CustomerRepository customerRepository, OrderRepository orderRepository, PartRepository partRepository,
+                    RegistrationController registrationController, ServiceRepository serviceRepository, TaskService taskService,
+                    BillRepository billRepository) {
         this.accountRepository = accountRepository;
         this.accountKindRepository = accountKindRepository;
         this.carController = carController;
@@ -41,16 +48,17 @@ public class TestData {
         this.partRepository = partRepository;
         this.registrationController = registrationController;
         this.serviceRepository = serviceRepository;
-        this.taskController = taskController;
+        this.taskService = taskService;
+        this.billRepository = billRepository;
     }
 
     @EventListener(classes = ApplicationStartedEvent.class)
     public void addData(ApplicationStartedEvent event) {
 
         // Part 4x
-        Part part1 = new Part("Tarcza sprzęgła", "0035672", "21 20 7 526 516", "BMW", "M3", "E92", 2011, 2);
-        Part part2 = new Part("Tarcza hamulcowa, wentylowana, przednia, prawa", "0008672", "34 11 2 283 802", "BMW", "M3", " E92", 2011, 1);
-        Part part3 = new Part("Panewka oporowa", "0155672", "11 21 1 706 831", "BMW", "Seria 3", " E36", 1997, 12);
+        Part part1 = new Part("Tarcza sprzęgła", "0035672", "21 20 7 526 516", "BMW", "M3");
+        Part part2 = new Part("Tarcza hamulcowa, wentylowana, przednia, prawa", "0008672", "34 11 2 283 802", "BMW", "M3");
+        Part part3 = new Part("Panewka oporowa", "0155672", "11 21 1 706 831", "BMW", "Seria 3");
         this.partRepository.save(part1);
         this.partRepository.save(part2);
         this.partRepository.save(part3);
@@ -167,20 +175,26 @@ public class TestData {
         TaskAdditionDto taskAdditionDto14 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate14.toString(), "opis", "opis2");
         TaskAdditionDto taskAdditionDto15 = new TaskAdditionDto(1L, 1L, 1L, acceptationDate15.toString(), "opis", "opis2");
 
-        this.taskController.addTask(taskAdditionDto1);
-        this.taskController.addTask(taskAdditionDto2);
-        this.taskController.addTask(taskAdditionDto3);
-        this.taskController.addTask(taskAdditionDto4);
-        this.taskController.addTask(taskAdditionDto5);
-        this.taskController.addTask(taskAdditionDto6);
-        this.taskController.addTask(taskAdditionDto7);
-        this.taskController.addTask(taskAdditionDto8);
-        this.taskController.addTask(taskAdditionDto9);
-        this.taskController.addTask(taskAdditionDto10);
-        this.taskController.addTask(taskAdditionDto11);
-        this.taskController.addTask(taskAdditionDto12);
-        this.taskController.addTask(taskAdditionDto13);
-        this.taskController.addTask(taskAdditionDto14);
-        this.taskController.addTask(taskAdditionDto15);
+        this.taskService.addTask(taskAdditionDto1);
+        this.taskService.addTask(taskAdditionDto2);
+        this.taskService.addTask(taskAdditionDto3);
+        this.taskService.addTask(taskAdditionDto4);
+        this.taskService.addTask(taskAdditionDto5);
+        this.taskService.addTask(taskAdditionDto6);
+        this.taskService.addTask(taskAdditionDto7);
+        this.taskService.addTask(taskAdditionDto8);
+        this.taskService.addTask(taskAdditionDto9);
+        this.taskService.addTask(taskAdditionDto10);
+        this.taskService.addTask(taskAdditionDto11);
+        this.taskService.addTask(taskAdditionDto12);
+        this.taskService.addTask(taskAdditionDto13);
+        this.taskService.addTask(taskAdditionDto14);
+        this.taskService.addTask(taskAdditionDto15);
+
+        // add Bill x3
+        Bill bill1 = new Bill(125.0);
+        Bill bill2 = new Bill(222.0);
+        this.billRepository.save(bill1);
+        this.billRepository.save(bill2);
     }
 }

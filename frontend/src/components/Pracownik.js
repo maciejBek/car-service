@@ -51,17 +51,17 @@ class Pracownik extends React.Component {
                     id="opcja6"
                     zdj="urlop"
                     tekst="Urlop"
-                    uuu="task"/>
+                    uuu="urlop"/>
                 <Kratka
                     id="opcja7"
                     zdj="add2"
                     tekst="Dodanie przedmiotu"
-                    uuu="task"/>
+                    uuu="additem"/>
                 <Kratka
                     id="opcja8"
                     zdj="remove"
                     tekst="Usunięcie pojazdu"
-                    uuu="task"/>
+                    uuu="removecar"/>
             </div>
         );
     }

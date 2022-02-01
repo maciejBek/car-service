@@ -79,16 +79,18 @@ class Logowanie extends React.Component {
                 })
 
                     .then(function (response) {
+                        console.log(response.data)
                         const data =(response.data);
+                        sessionStorage.setItem("id", response.data.id);
                         console.log(data.accountKind)
                         document.getElementById('dobrzel').style.display = "inline";
                         if(data.accountKind == "admin"){
                             document.getElementById('admin').click();
                         }
-                        if(data.accountKind == "customer"){
+                        if(data.accountKind == "employee"){
                             document.getElementById('pracownik').click();
                         }
-                        if(data.accountKind == "employee"){
+                        if(data.accountKind == "customer"){
                             document.getElementById('klient').click();
                         }
                         
