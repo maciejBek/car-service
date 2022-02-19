@@ -35,6 +35,7 @@ public class BillController {
         return this.billService.deleteBill(id);
     }
 
+    //TODO: change to GET method, add @PathVariable
     @PostMapping("/bills/price")
     public ResponseEntity<?> getBillPriceByTaskId(@RequestBody TaskIdDto taskIdDto) {
         return this.billService.getBillPriceByTaskId(taskIdDto);

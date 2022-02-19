@@ -5,5 +5,5 @@ import pl.company.carservice.model.Employee;
 
 public record AccountEmployeeDto(
         Account account,
-        Employee employee) implements AccountUserDtoInterface {
+        Employee employee) {
 }
