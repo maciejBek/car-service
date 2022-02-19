@@ -1,11 +1,15 @@
 package pl.company.carservice.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class NeededTaskParts {
 
     @Id
@@ -22,45 +26,9 @@ public class NeededTaskParts {
 
     private int amount;
 
-    public NeededTaskParts() {
-
-    }
-
     public NeededTaskParts(Part part, Task task, int amount) {
         this.part = part;
         this.task = task;
-        this.amount = amount;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Part getPart() {
-        return part;
-    }
-
-    public void setPart(Part part) {
-        this.part = part;
-    }
-
-    public Task getTask() {
-        return task;
-    }
-
-    public void setTask(Task task) {
-        this.task = task;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

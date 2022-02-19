@@ -1,9 +1,13 @@
 package pl.company.carservice.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class AccountKind {
 
     public enum PermissionLevel {
@@ -17,10 +21,6 @@ public class AccountKind {
     @Enumerated(EnumType.STRING)
     private PermissionLevel permissionLevel;
 
-    public AccountKind() {
-
-    }
-
     public AccountKind(PermissionLevel permissionLevel) {
         this.permissionLevel = permissionLevel;
     }
@@ -29,21 +29,4 @@ public class AccountKind {
         this.id = id;
         this.permissionLevel = permissionLevel;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public PermissionLevel getPermissionLevel() {
-        return permissionLevel;
-    }
-
-    public void setPermissionLevel(PermissionLevel permissionLevel) {
-        this.permissionLevel = permissionLevel;
-    }
-
 }

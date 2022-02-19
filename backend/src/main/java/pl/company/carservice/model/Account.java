@@ -1,8 +1,13 @@
 package pl.company.carservice.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Data
+@NoArgsConstructor
 public class Account {
 
     @Id
@@ -19,10 +24,6 @@ public class Account {
     @ManyToOne
     private AccountKind accountKind;
 
-    public Account() {
-
-    }
-
     public Account(String username, String password, String emailAddress) {
         this.username = username;
         this.password = password;
@@ -33,46 +34,6 @@ public class Account {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
-        this.accountKind = accountKind;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public AccountKind getAccountKind() {
-        return accountKind;
-    }
-
-    public void setAccountKind(AccountKind accountKind) {
         this.accountKind = accountKind;
     }
 }
