@@ -27,7 +27,6 @@ public class CarService {
     private CustomerRepository customerRepository;
     private EntityManager entityManager;
 
-    @Autowired
     public CarService(CarRepository carRepository, CustomerRepository customerRepository, EntityManager entityManager) {
         this.carRepository = carRepository;
         this.customerRepository = customerRepository;

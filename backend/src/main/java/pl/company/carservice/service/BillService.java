@@ -25,7 +25,6 @@ public class BillService {
     private TaskRepository taskRepository;
     private EntityManager entityManager;
 
-    @Autowired
     public BillService(BillRepository billRepository, TaskRepository taskRepository, EntityManager entityManager) {
         this.billRepository = billRepository;
         this.taskRepository = taskRepository;

@@ -27,7 +27,6 @@ public class NeededTaskPartsService {
     private PartRepository partRepository;
     private EntityManager entityManager;
 
-    @Autowired
     public NeededTaskPartsService(NeededTaskPartsRepository neededTaskPartsRepository, PartRepository partRepository, EntityManager entityManager) {
         this.neededTaskPartsRepository = neededTaskPartsRepository;
         this.partRepository = partRepository;

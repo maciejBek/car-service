@@ -37,7 +37,6 @@ public class TaskService {
     private CustomerRepository customerRepository;
     private EntityManager entityManager;
 
-    @Autowired
     public TaskService(TaskRepository taskRepository, CustomerRepository customerRepository, EntityManager entityManager) {
         this.taskRepository = taskRepository;
         this.customerRepository = customerRepository;

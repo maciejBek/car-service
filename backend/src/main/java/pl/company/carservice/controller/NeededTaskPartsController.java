@@ -16,7 +16,6 @@ public class NeededTaskPartsController {
 
     private NeededTaskPartsService neededTaskPartsService;
 
-    @Autowired
     public NeededTaskPartsController(NeededTaskPartsService neededTaskPartsService) {
         this.neededTaskPartsService = neededTaskPartsService;
     }

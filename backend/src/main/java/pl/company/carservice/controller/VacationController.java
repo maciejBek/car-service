@@ -13,8 +13,7 @@ public class VacationController {
 
     private VacationService vacationService;
 
-    @Autowired
-    public VacationController(VacationService vacationService) {
+     public VacationController(VacationService vacationService) {
         this.vacationService = vacationService;
     }
 

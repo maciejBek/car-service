@@ -21,7 +21,6 @@ public class AccountService {
 
     private AccountRepository accountRepository;
 
-    @Autowired
     public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }

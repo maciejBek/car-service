@@ -13,7 +13,6 @@ public class AddressController {
 
     private AddressService addressService;
 
-    @Autowired
     public AddressController(AddressService addressService) {
         this.addressService = addressService;
     }

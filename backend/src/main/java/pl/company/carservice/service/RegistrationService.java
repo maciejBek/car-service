@@ -26,7 +26,6 @@ public class RegistrationService {
 
     private AccountService accountService;
 
-    @Autowired
     public RegistrationService(AddressRepository addressRepository, AccountRepository accountRepository, CustomerRepository customerRepository, EmployeeRepository employeeRepository, AccountService accountService) {
         this.addressRepository = addressRepository;
         this.accountRepository = accountRepository;

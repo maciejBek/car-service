@@ -16,7 +16,6 @@ public class PartService {
 
     private PartRepository partRepository;
 
-    @Autowired
     public PartService(PartRepository partRepository) {
         this.partRepository = partRepository;
     }

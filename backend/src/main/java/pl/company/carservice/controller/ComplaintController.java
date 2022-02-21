@@ -17,7 +17,6 @@ public class ComplaintController {
 
     private ComplaintService complaintService;
 
-    @Autowired
     public ComplaintController(ComplaintService complaintService) {
         this.complaintService = complaintService;
     }

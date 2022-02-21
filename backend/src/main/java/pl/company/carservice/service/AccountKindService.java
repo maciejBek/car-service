@@ -13,7 +13,6 @@ public class AccountKindService {
 
     private AccountKindRepository accountKindRepository;
 
-    @Autowired
     public AccountKindService(AccountKindRepository accountKindRepository) {
         this.accountKindRepository = accountKindRepository;
     }

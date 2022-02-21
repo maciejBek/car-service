@@ -15,7 +15,6 @@ public class ServiceController {
 
     private ServiceService serviceService;
 
-    @Autowired
     public ServiceController(ServiceService serviceService) {
         this.serviceService = serviceService;
     }

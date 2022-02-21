@@ -22,7 +22,6 @@ public class ServiceService {
 
     private ServiceRepository serviceRepository;
 
-    @Autowired
     public ServiceService(ServiceRepository serviceRepository) {
         this.serviceRepository = serviceRepository;
     }

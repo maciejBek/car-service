@@ -20,7 +20,6 @@ public class ComplaintService {
     private ComplaintRepository complaintRepository;
     private EntityManager entityManager;
 
-    @Autowired
     public ComplaintService(ComplaintRepository complaintRepository, EntityManager entityManager) {
         this.complaintRepository = complaintRepository;
         this.entityManager = entityManager;

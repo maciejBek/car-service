@@ -26,7 +26,6 @@ public class VacationService {
     private VacationRepository vacationRepository;
     private EmployeeRepository employeeRepository;
 
-    @Autowired
     public VacationService(VacationRepository vacationRepository, EmployeeRepository employeeRepository) {
         this.vacationRepository = vacationRepository;
         this.employeeRepository = employeeRepository;
